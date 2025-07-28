@@ -1,0 +1,60 @@
+enum PXR_NS::ArchMemAdvice; [unscoped,, ArchMemAdviceNormal,, 0,, ArchMemAdviceWillNeed,, 1,, ArchMemAdviceDontNeed,, 2,, ArchMemAdviceRandomAccess,, 3];
+
+enum PXR_NS::TfType::LegacyFlags; [unscoped,, ABSTRACT,, 1,, CONCRETE,, 2,, MANUFACTURABLE,, 8];
+enum PXR_NS::TfMallocTag::CallTree::PrintSetting; [unscoped,, TREE,, 0,, CALLSITES,, 1,, BOTH,, 2];
+
+enum PXR_NS::GfCamera::Projection; [unscoped,, Perspective,, 0,, Orthographic,, 1];
+
+enum PXR_NS::JsValue::Type; [unscoped,, ObjectType,, 0,, ArrayType,, 1,, StringType,, 2,, BoolType,, 3,, IntType,, 4,, RealType,, 5,, NullType,, 6];
+
+enum PXR_NS::TsInterpMode; [unscoped,, TsInterpValueBlock,, 0,, TsInterpHeld,, 1,, TsInterpLinear,, 2,, TsInterpCurve,, 3];
+
+enum PXR_NS::SdfSpecifier; [unscoped,, SdfSpecifierDef,, 0,, SdfSpecifierOver,, 1,, SdfSpecifierClass,, 2,, SdfNumSpecifiers,, 3];
+
+enum PXR_NS::NdrVersionFilter; [unscoped,, NdrVersionFilterDefaultOnly,, 0,, NdrVersionFilterAllVersions,, 1,, NdrNumVersionFilters,, 2];
+
+enum PXR_NS::PcpDependencyType; [unscoped,, PcpDependencyTypeNone,, 0,, PcpDependencyTypeRoot,, 1,, PcpDependencyTypePurelyDirect,, 2,, PcpDependencyTypePartlyDirect,, 4,, PcpDependencyTypeAncestral,, 8,, PcpDependencyTypeVirtual,, 16,, PcpDependencyTypeNonVirtual,, 32,, PcpDependencyTypeDirect,, 6,, PcpDependencyTypeAnyNonVirtual,, 47,, PcpDependencyTypeAnyIncludingVirtual,, 63];
+enum PXR_NS::PcpErrorInvalidConflictingRelocation::ConflictReason; [scoped,, TargetIsConflictSource,, 0,, SourceIsConflictTarget,, 1,, TargetIsConflictSourceDescendant,, 2,, SourceIsConflictSourceDescendant,, 3];
+
+enum PXR_NS::UsdLoadPolicy; [unscoped,, UsdLoadWithDescendants,, 0,, UsdLoadWithoutDescendants,, 1];
+enum PXR_NS::Usd_PrimFlags; [unscoped,, Usd_PrimActiveFlag,, 0,, Usd_PrimLoadedFlag,, 1,, Usd_PrimModelFlag,, 2,, Usd_PrimGroupFlag,, 3,, Usd_PrimComponentFlag,, 4,, Usd_PrimAbstractFlag,, 5,, Usd_PrimDefinedFlag,, 6,, Usd_PrimHasDefiningSpecifierFlag,, 7,, Usd_PrimInstanceFlag,, 8,, Usd_PrimHasPayloadFlag,, 9,, Usd_PrimClipsFlag,, 10,, Usd_PrimDeadFlag,, 11,, Usd_PrimPrototypeFlag,, 12,, Usd_PrimInstanceProxyFlag,, 13,, Usd_PrimPseudoRootFlag,, 14,, Usd_PrimNumFlags,, 15];
+enum PXR_NS::UsdPrimCompositionQuery::DependencyTypeFilter; [scoped,, All,, 0,, Direct,, 1,, Ancestral,, 2];
+
+enum PXR_NS::UsdGeomXformOp::Type; [unscoped,, TypeInvalid,, 0,, TypeTranslateX,, 1,, TypeTranslateY,, 2,, TypeTranslateZ,, 3,, TypeTranslate,, 4,, TypeScaleX,, 5,, TypeScaleY,, 6,, TypeScaleZ,, 7,, TypeScale,, 8,, TypeRotateX,, 9,, TypeRotateY,, 10,, TypeRotateZ,, 11,, TypeRotateXYZ,, 12,, TypeRotateXZY,, 13,, TypeRotateYXZ,, 14,, TypeRotateYZX,, 15,, TypeRotateZXY,, 16,, TypeRotateZYX,, 17,, TypeOrient,, 18,, TypeTransform,, 19];
+enum PXR_NS::UsdGeomXformCommonAPI::OpFlags; [unscoped,, OpNone,, 0,, OpTranslate,, 1,, OpPivot,, 2,, OpRotate,, 4,, OpScale,, 8];
+
+enum PXR_NS::UsdShadeAttributeType; [scoped,, Invalid,, 0,, Input,, 1,, Output,, 2];
+
+enum PXR_NS::UsdLuxLightListAPI::ComputeMode; [unscoped,, ComputeModeConsultModelHierarchyCache,, 0,, ComputeModeIgnoreCache,, 1];
+
+enum PXR_NS::UsdSkelBakeSkinningParms::DeformationFlags; [unscoped,, DeformPointsWithSkinning,, 1,, DeformNormalsWithSkinning,, 2,, DeformXformWithSkinning,, 4,, DeformPointsWithBlendShapes,, 8,, DeformNormalsWithBlendShapes,, 16,, DeformWithSkinning,, 7,, DeformWithBlendShapes,, 24,, DeformAll,, 31,, ModifiesPoints,, 9,, ModifiesNormals,, 18,, ModifiesXform,, 4];
+
+enum PXR_NS::UsdUtilsRegisteredVariantSet::SelectionExportPolicy; [scoped,, Never,, 0,, IfAuthored,, 1,, Always,, 2];
+
+enum PXR_NS::GarchGLDebugWindow::Buttons; [unscoped,, MyButton1,, 0,, MyButton2,, 1,, MyButton3,, 2];
+
+enum PXR_NS::HioFormat; [unscoped,, HioFormatInvalid,, -1,, HioFormatUNorm8,, 0,, HioFormatUNorm8Vec2,, 1,, HioFormatUNorm8Vec3,, 2,, HioFormatUNorm8Vec4,, 3,, HioFormatSNorm8,, 4,, HioFormatSNorm8Vec2,, 5,, HioFormatSNorm8Vec3,, 6,, HioFormatSNorm8Vec4,, 7,, HioFormatFloat16,, 8,, HioFormatFloat16Vec2,, 9,, HioFormatFloat16Vec3,, 10,, HioFormatFloat16Vec4,, 11,, HioFormatFloat32,, 12,, HioFormatFloat32Vec2,, 13,, HioFormatFloat32Vec3,, 14,, HioFormatFloat32Vec4,, 15,, HioFormatDouble64,, 16,, HioFormatDouble64Vec2,, 17,, HioFormatDouble64Vec3,, 18,, HioFormatDouble64Vec4,, 19,, HioFormatUInt16,, 20,, HioFormatUInt16Vec2,, 21,, HioFormatUInt16Vec3,, 22,, HioFormatUInt16Vec4,, 23,, HioFormatInt16,, 24,, HioFormatInt16Vec2,, 25,, HioFormatInt16Vec3,, 26,, HioFormatInt16Vec4,, 27,, HioFormatUInt32,, 28,, HioFormatUInt32Vec2,, 29,, HioFormatUInt32Vec3,, 30,, HioFormatUInt32Vec4,, 31,, HioFormatInt32,, 32,, HioFormatInt32Vec2,, 33,, HioFormatInt32Vec3,, 34,, HioFormatInt32Vec4,, 35,, HioFormatUNorm8srgb,, 36,, HioFormatUNorm8Vec2srgb,, 37,, HioFormatUNorm8Vec3srgb,, 38,, HioFormatUNorm8Vec4srgb,, 39,, HioFormatBC6FloatVec3,, 40,, HioFormatBC6UFloatVec3,, 41,, HioFormatBC7UNorm8Vec4,, 42,, HioFormatBC7UNorm8Vec4srgb,, 43,, HioFormatBC1UNorm8Vec4,, 44,, HioFormatBC3UNorm8Vec4,, 45,, HioFormatCount,, 46];
+
+enum PXR_NS::CameraUtilConformWindowPolicy; [unscoped,, CameraUtilMatchVertically,, 0,, CameraUtilMatchHorizontally,, 1,, CameraUtilFit,, 2,, CameraUtilCrop,, 3,, CameraUtilDontConform,, 4];
+
+enum PXR_NS::PxOsdMeshTopologyValidation::Code; [scoped,, InvalidScheme,, 0,, InvalidOrientation,, 1,, InvalidTriangleSubdivision,, 2,, InvalidVertexInterpolationRule,, 3,, InvalidFaceVaryingInterpolationRule,, 4,, InvalidCreaseMethod,, 5,, InvalidCreaseLengthElement,, 6,, InvalidCreaseIndicesSize,, 7,, InvalidCreaseIndicesElement,, 8,, InvalidCreaseWeightsSize,, 9,, NegativeCreaseWeights,, 10,, InvalidCornerIndicesElement,, 11,, NegativeCornerWeights,, 12,, InvalidCornerWeightsSize,, 13,, InvalidHoleIndicesElement,, 14,, InvalidFaceVertexCountsElement,, 15,, InvalidFaceVertexIndicesElement,, 16,, InvalidFaceVertexIndicesSize,, 17];
+
+enum PXR_NS::HgiDeviceCapabilitiesBits; [unscoped,, HgiDeviceCapabilitiesBitsPresentation,, 1,, HgiDeviceCapabilitiesBitsBindlessBuffers,, 2,, HgiDeviceCapabilitiesBitsConcurrentDispatch,, 4,, HgiDeviceCapabilitiesBitsUnifiedMemory,, 8,, HgiDeviceCapabilitiesBitsBuiltinBarycentrics,, 16,, HgiDeviceCapabilitiesBitsShaderDrawParameters,, 32,, HgiDeviceCapabilitiesBitsMultiDrawIndirect,, 64,, HgiDeviceCapabilitiesBitsBindlessTextures,, 128,, HgiDeviceCapabilitiesBitsShaderDoublePrecision,, 256,, HgiDeviceCapabilitiesBitsDepthRangeMinusOnetoOne,, 512,, HgiDeviceCapabilitiesBitsCppShaderPadding,, 1024,, HgiDeviceCapabilitiesBitsConservativeRaster,, 2048,, HgiDeviceCapabilitiesBitsStencilReadback,, 4096,, HgiDeviceCapabilitiesBitsCustomDepthRange,, 8192,, HgiDeviceCapabilitiesBitsMetalTessellation,, 16384,, HgiDeviceCapabilitiesBitsBasePrimitiveOffset,, 32768,, HgiDeviceCapabilitiesBitsPrimitiveIdEmulation,, 65536,, HgiDeviceCapabilitiesBitsIndirectCommandBuffers,, 131072,, HgiDeviceCapabilitiesBitsRoundPoints,, 262144];
+enum PXR_NS::HgiSampleCount; [unscoped,, HgiSampleCount1,, 1,, HgiSampleCount2,, 2,, HgiSampleCount4,, 4,, HgiSampleCount8,, 8,, HgiSampleCount16,, 16,, HgiSampleCountEnd,, 17];
+
+enum PXR_NS::HgiMetalArgumentIndex; [unscoped,, HgiMetalArgumentIndexICB,, 26,, HgiMetalArgumentIndexConstants,, 27,, HgiMetalArgumentIndexSamplers,, 28,, HgiMetalArgumentIndexTextures,, 29,, HgiMetalArgumentIndexBuffers,, 30];
+enum PXR_NS::HgiMetalArgumentOffset; [unscoped,, HgiMetalArgumentOffsetBufferVS,, 0,, HgiMetalArgumentOffsetBufferFS,, 512,, HgiMetalArgumentOffsetSamplerVS,, 1024,, HgiMetalArgumentOffsetSamplerFS,, 1536,, HgiMetalArgumentOffsetTextureVS,, 2048,, HgiMetalArgumentOffsetTextureFS,, 2560,, HgiMetalArgumentOffsetBufferCS,, 0,, HgiMetalArgumentOffsetSamplerCS,, 1024,, HgiMetalArgumentOffsetTextureCS,, 2048,, HgiMetalArgumentOffsetConstants,, 3072,, HgiMetalArgumentOffsetSize,, 4096];
+
+enum PXR_NS::HdMagFilter; [unscoped,, HdMagFilterNearest,, 0,, HdMagFilterLinear,, 1];
+enum PXR_NS::HdGeomSubset::Type; [unscoped,, TypeFaceSet,, 0];
+enum PXR_NS::HdCamera::DirtyBits; [unscoped,, Clean,, 0,, DirtyTransform,, 1,, DirtyParams,, 2,, DirtyClipPlanes,, 4,, DirtyWindowPolicy,, 8,, AllDirty,, 15];
+enum PXR_NS::HdLight::DirtyBits; [unscoped,, Clean,, 0,, DirtyTransform,, 1,, DirtyParams,, 2,, DirtyShadowParams,, 4,, DirtyCollection,, 8,, DirtyResource,, 16,, DirtyInstancer,, 65536,, AllDirty,, 65567];
+
+enum PXR_NS::HdGpGenerativeProcedural::AsyncState; [unscoped,, Continuing,, 0,, Finished,, 1,, ContinuingWithNewChanges,, 2,, FinishedWithNewChanges,, 3];
+
+enum PXR_NS::HdStBinding::Location; [unscoped,, NOT_EXIST,, 65535];
+
+enum PXR_NS::UsdImagingPropertyInvalidationType; [scoped,, Update,, 0,, Resync,, 1];
+
+enum PXR_NS::UsdImagingGLCullStyle; [scoped,, CULL_STYLE_NO_OPINION,, 0,, CULL_STYLE_NOTHING,, 1,, CULL_STYLE_BACK,, 2,, CULL_STYLE_FRONT,, 3,, CULL_STYLE_BACK_UNLESS_DOUBLE_SIDED,, 4,, CULL_STYLE_COUNT,, 5];
+enum PXR_NS::UsdImagingGLRendererSetting::Type; [unscoped,, TYPE_FLAG,, 0,, TYPE_INT,, 1,, TYPE_FLOAT,, 2,, TYPE_STRING,, 3];

@@ -1,0 +1,273 @@
+class PXR_NS::TfError;
+class PXR_NS::TfHash;
+class PXR_NS::TfNotice;
+class PXR_NS::TfRefBase;
+template <class T> class PXR_NS::TfRefPtr;
+class PXR_NS::TfRefPtr<class PXR_NS::SdfLayer>;
+class PXR_NS::TfRefPtr<class PXR_NS::UsdStage>;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdGeomTokensType>;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdMtlxTokensType>;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdShadeTokensType>;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdHydraTokensType>;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdLuxTokensType>;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdMediaTokensType>;
+class PXR_NS::TfToken;
+class PXR_NS::TfType;
+class PXR_NS::TfWeakBase;
+class PXR_NS::TfWeakPtr<class PXR_NS::SdfLayer>;
+class PXR_NS::TfWeakPtr<class PXR_NS::UsdStage>;
+template <class T, class Factory> class PXR_NS::TfStaticData;
+template <class T> class PXR_NS::TfSingleton;
+const class PXR_NS::TfType & PXR_NS::TfType::FindDerivedByName(const std::string & name) const;
+template <typename BASE> static const class PXR_NS::TfType & PXR_NS::TfType::FindDerivedByName(const std::string & name);
+const std::string & PXR_NS::TfToken::operator const std::string &() const;
+_Bool PXR_NS::TfToken::operator==(const class PXR_NS::TfToken & o) const;
+_Bool PXR_NS::TfToken::operator==(const std::string & o) const;
+
+
+_Bool PXR_NS::UsdPayloads::AddPayload(const class PXR_NS::SdfPayload & payload, enum PXR_NS::UsdListPosition position);
+_Bool PXR_NS::UsdPayloads::AddPayload(const std::string & identifier, const class PXR_NS::SdfPath & primPath, const class PXR_NS::SdfLayerOffset & layerOffset, enum PXR_NS::UsdListPosition position);
+_Bool PXR_NS::UsdPayloads::AddPayload(const std::string & identifier, const class PXR_NS::SdfLayerOffset & layerOffset, enum PXR_NS::UsdListPosition position);
+_Bool PXR_NS::UsdPayloads::AddInternalPayload(const class PXR_NS::SdfPath & primPath, const class PXR_NS::SdfLayerOffset & layerOffset, enum PXR_NS::UsdListPosition position);
+_Bool PXR_NS::UsdPayloads::RemovePayload(const class PXR_NS::SdfPayload & ref);
+_Bool PXR_NS::UsdPayloads::ClearPayloads();
+_Bool PXR_NS::UsdPayloads::SetPayloads(const class std::vector<class PXR_NS::SdfPayload> & items);
+_Bool PXR_NS::UsdReferences::AddReference(const class PXR_NS::SdfReference & ref, enum PXR_NS::UsdListPosition position);
+_Bool PXR_NS::UsdReferences::AddReference(const std::string & identifier, const class PXR_NS::SdfPath & primPath, const class PXR_NS::SdfLayerOffset & layerOffset, enum PXR_NS::UsdListPosition position);
+_Bool PXR_NS::UsdReferences::AddReference(const std::string & identifier, const class PXR_NS::SdfLayerOffset & layerOffset, enum PXR_NS::UsdListPosition position);
+_Bool PXR_NS::UsdReferences::AddInternalReference(const class PXR_NS::SdfPath & primPath, const class PXR_NS::SdfLayerOffset & layerOffset, enum PXR_NS::UsdListPosition position);
+_Bool PXR_NS::UsdReferences::RemoveReference(const class PXR_NS::SdfReference & ref);
+_Bool PXR_NS::UsdReferences::ClearReferences();
+_Bool PXR_NS::UsdReferences::SetReferences(const class std::vector<class PXR_NS::SdfReference> & items);
+explicit _Bool PXR_NS::UsdPayloads::operator bool();
+
+class PXR_NS::GfBBox3d;
+class PXR_NS::GfCamera;
+class PXR_NS::GfFrustum;
+class PXR_NS::pxr_half::half;
+class PXR_NS::GfMatrix2d;
+class PXR_NS::GfMatrix2f;
+class PXR_NS::GfMatrix3f;
+class PXR_NS::GfMatrix3d;
+class PXR_NS::GfMatrix4f;
+class PXR_NS::GfMatrix4d;
+class PXR_NS::GfQuatd;
+class PXR_NS::GfQuatf;
+class PXR_NS::GfQuath;
+class PXR_NS::GfQuaternion;
+class PXR_NS::GfRange1d;
+class PXR_NS::GfRange1f;
+class PXR_NS::GfRange2d;
+class PXR_NS::GfRange2f;
+class PXR_NS::GfRange3d;
+class PXR_NS::GfRange3f;
+class PXR_NS::GfRect2i;
+class PXR_NS::GfVec2d;
+class PXR_NS::GfVec2f;
+class PXR_NS::GfVec2h;
+class PXR_NS::GfVec2i;
+class PXR_NS::GfVec3d;
+class PXR_NS::GfVec3f;
+class PXR_NS::GfVec3h;
+class PXR_NS::GfVec3i;
+class PXR_NS::GfVec4d;
+class PXR_NS::GfVec4f;
+class PXR_NS::GfVec4h;
+class PXR_NS::GfVec4i;
+
+class PXR_NS::PlugRegistry;
+
+class PXR_NS::VtArray<TfToken>;
+class PXR_NS::VtArray<int>;
+class PXR_NS::VtArray<GfVec3f>;
+class PXR_NS::VtArray<GfVec4d>;
+class PXR_NS::VtArray<class PXR_NS::SdfPath>;
+class PXR_NS::VtArray<float>;
+class PXR_NS::VtArray<double>;
+class PXR_NS::VtArray<GfVec2d>;
+class PXR_NS::VtArray<GfVec3d>;
+class PXR_NS::VtArray<class PXR_NS::SdfAssetPath>;
+class PXR_NS::VtArray<GfVec4f>;
+class PXR_NS::VtArray<GfVec2f>;
+class PXR_NS::VtArray<GfVec4i>;
+class PXR_NS::VtArray<GfVec3i>;
+class PXR_NS::VtArray<GfVec2i>;
+class PXR_NS::VtArray<GfVec4h>;
+class PXR_NS::VtArray<GfVec3h>;
+class PXR_NS::VtArray<GfVec2h>;
+class PXR_NS::VtArray<GfMatrix4f>;
+class PXR_NS::VtArray<GfMatrix3f>;
+class PXR_NS::VtArray<GfMatrix2f>;
+class PXR_NS::VtArray<GfMatrix4d>;
+class PXR_NS::VtArray<GfMatrix3d>;
+class PXR_NS::VtArray<GfMatrix2d>;
+class PXR_NS::VtArray<GfRange3f>;
+class PXR_NS::VtArray<GfRange3d>;
+class PXR_NS::VtArray<GfRange2f>;
+class PXR_NS::VtArray<GfRange2d>;
+class PXR_NS::VtArray<GfRange1f>;
+class PXR_NS::VtArray<GfRange1d>;
+class PXR_NS::VtArray<GfInterval>;
+class PXR_NS::VtArray<GfRect2i>;
+class PXR_NS::VtArray<GfQuath>;
+class PXR_NS::VtArray<GfQuatf>;
+class PXR_NS::VtArray<GfQuatd>;
+class PXR_NS::VtArray<GfQuaternion>;
+class PXR_NS::VtArray<GfDualQuath>;
+class PXR_NS::VtArray<GfDualQuatf>;
+class PXR_NS::VtArray<GfDualQuatd>;
+class PXR_NS::VtArray<char>;
+class PXR_NS::VtArray<unsigned char>;
+class PXR_NS::VtArray<short>;
+class PXR_NS::VtArray<unsigned short>;
+class PXR_NS::VtArray<unsigned int>;
+class PXR_NS::VtArray<int64_t>;
+class PXR_NS::VtArray<uint64_t>;
+class PXR_NS::VtArray<GfHalf>;
+class PXR_NS::VtArray<std::string>;
+
+
+class PXR_NS::VtDictionary;
+class PXR_NS::VtValue;
+void PXR_NS::VtArray<int>::push_back(const int & element);
+template <class T> type-parameter-0-0 PXR_NS::VtValue::Get() &&;
+float PXR_NS::VtValue::Get() &&;
+class PXR_NS::VtValue PXR_NS::VtValue::Get() &&;
+
+class PXR_NS::KindRegistry;
+
+class PXR_NS::SdfAssetPath;
+class PXR_NS::SdfLayer;
+class PXR_NS::SdfLayerOffset;
+class PXR_NS::SdfPath;
+class PXR_NS::SdfPrimSpec;
+class PXR_NS::SdfReference;
+class PXR_NS::SdfValueTypeName;
+static const class PXR_NS::SdfPath & PXR_NS::SdfPath::EmptyPath();
+static const class PXR_NS::SdfPath & PXR_NS::SdfPath::AbsoluteRootPath();
+static const class PXR_NS::SdfPath & PXR_NS::SdfPath::ReflexiveRelativePath();
+
+
+class PXR_NS::UsdAPISchemaBase;
+class PXR_NS::UsdAttribute;
+class PXR_NS::UsdEditContext;
+class PXR_NS::UsdEditTarget;
+class PXR_NS::UsdInherits;
+class PXR_NS::UsdNotice;
+class PXR_NS::UsdObject;
+class PXR_NS::UsdPayloads;
+class PXR_NS::UsdPrim;
+class PXR_NS::UsdPrimRange;
+class PXR_NS::UsdProperty;
+class PXR_NS::UsdReferences;
+class PXR_NS::UsdRelationship;
+class PXR_NS::UsdSchemaBase;
+class PXR_NS::UsdSpecializes;
+class PXR_NS::UsdStage;
+class PXR_NS::UsdTimeCode;
+enum PXR_NS::SdfVariability PXR_NS::UsdAttribute::GetVariability() const;
+_Bool PXR_NS::UsdAttribute::GetTimeSamples(class std::vector<double> * times) const;
+_Bool PXR_NS::UsdAttribute::GetTimeSamplesInInterval(const class PXR_NS::GfInterval & interval, class std::vector<double> * times) const;
+_Bool PXR_NS::UsdAttribute::Get(class PXR_NS::VtValue * value, class PXR_NS::UsdTimeCode time) const;
+class PXR_NS::UsdPrim PXR_NS::UsdObject::GetPrim() const;
+
+class PXR_NS::UsdGeomBBoxCache;
+class PXR_NS::UsdGeomBasisCurves;
+class PXR_NS::UsdGeomBoundable;
+class PXR_NS::UsdGeomCamera;
+class PXR_NS::UsdGeomCapsule;
+class PXR_NS::UsdGeomCapsule_1;
+class PXR_NS::UsdGeomCone;
+class PXR_NS::UsdGeomCube;
+class PXR_NS::UsdGeomCurves;
+class PXR_NS::UsdGeomCylinder;
+class PXR_NS::UsdGeomCylinder_1;
+class PXR_NS::UsdGeomHermiteCurves;
+class PXR_NS::UsdGeomImageable;
+class PXR_NS::UsdGeomGprim;
+class PXR_NS::UsdGeomMesh;
+class PXR_NS::UsdGeomModelAPI;
+class PXR_NS::UsdGeomPlane;
+class PXR_NS::UsdGeomPointBased;
+class PXR_NS::UsdGeomPointInstancer;
+class PXR_NS::UsdGeomPoints;
+class PXR_NS::UsdGeomPrimvar;
+class PXR_NS::UsdGeomScope;
+class PXR_NS::UsdGeomSphere;
+class PXR_NS::UsdGeomSubset;
+class PXR_NS::UsdGeomTetMesh;
+class PXR_NS::UsdGeomVisibilityAPI;
+class PXR_NS::UsdGeomXform;
+class PXR_NS::UsdGeomXformable;
+class PXR_NS::UsdGeomXformOp;
+class PXR_NS::UsdGeomXformCommonAPI;
+
+class PXR_NS::UsdVolVolume;
+
+class PXR_NS::UsdMediaSpatialAudio;
+
+class PXR_NS::UsdShadeConnectableAPI;
+class PXR_NS::UsdShadeInput;
+class PXR_NS::UsdShadeMaterial;
+class PXR_NS::UsdShadeMaterialBindingAPI;
+class PXR_NS::UsdShadeNodeDefAPI;
+class PXR_NS::UsdShadeOutput;
+class PXR_NS::UsdShadeShader;
+class PXR_NS::UsdShadeNodeGraph;
+
+class PXR_NS::UsdLuxBoundableLightBase;
+class PXR_NS::UsdLuxCylinderLight;
+class PXR_NS::UsdLuxDiskLight;
+class PXR_NS::UsdLuxDomeLight;
+class PXR_NS::UsdLuxGeometryLight;
+class PXR_NS::UsdLuxLightAPI;
+class PXR_NS::UsdLuxLightFilter;
+class PXR_NS::UsdLuxLightListAPI;
+class PXR_NS::UsdLuxListAPI;
+class PXR_NS::UsdLuxMeshLightAPI;
+class PXR_NS::UsdLuxShadowAPI;
+
+class PXR_NS::UsdProcGenerativeProcedural;
+
+class PXR_NS::UsdRenderSettings;
+
+class PXR_NS::UsdHydraGenerativeProceduralAPI;
+
+class PXR_NS::UsdRiMaterialAPI;
+
+class PXR_NS::UsdSkelAnimation;
+class PXR_NS::UsdSkelBindingAPI;
+class PXR_NS::UsdSkelBlendShape;
+class PXR_NS::UsdSkelRoot;
+class PXR_NS::UsdSkelSkeleton;
+class PXR_NS::UsdSkelBinding;
+
+class PXR_NS::UsdUINodeGraphNodeAPI;
+
+class PXR_NS::UsdPhysicsCollisionAPI;
+class PXR_NS::UsdPhysicsLimitAPI;
+class PXR_NS::UsdPhysicsMassAPI;
+class PXR_NS::UsdPhysicsMaterialAPI;
+class PXR_NS::UsdPhysicsMeshCollisionAPI;
+class PXR_NS::UsdPhysicsRigidBodyAPI;
+class PXR_NS::UsdPhysicsScene;
+
+class PXR_NS::HioImage;
+enum PXR_NS::HioImage::ImageOriginLocation;
+enum PXR_NS::HioImage::SourceColorSpace;
+class PXR_NS::HioImage::StorageSpec;
+enum PXR_NS::CameraUtilConformWindowPolicy;
+
+class PXR_NS::GlfSimpleLight;
+
+class PXR_NS::HgiBuffer;
+class PXR_NS::HgiCmds;
+class PXR_NS::Hgi;
+class PXR_NS::HgiTexture;
+
+class PXR_NS::HgiMetalBuffer;
+class PXR_NS::HgiMetal;
+class PXR_NS::HgiMetalIndirectCommandEncoder;
+class PXR_NS::HgiMetalTexture;
+
+class PXR_NS::UsdImagingGLEngine;

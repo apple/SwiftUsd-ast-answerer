@@ -1,0 +1,399 @@
+std::string; importedAsValue;
+class std::map<class PXR_NS::TfToken, class PXR_NS::VtValue, struct PXR_NS::TfDictionaryLessThan>; importedAsValue;
+class std::map<int, double>; importedAsValue;
+class std::set<int>; importedAsValue;
+class std::unordered_set<int>; importedAsValue;
+class std::multimap<class PXR_NS::SdfPath, class PXR_NS::SdfPath>; importedAsValue;
+class std::unordered_multimap<class PXR_NS::SdfPath, class PXR_NS::SdfPath, struct PXR_NS::SdfPath::Hash>; importedAsValue;
+class std::list<class PXR_NS::SdfPath>; importedAsValue;
+
+class std::vector<class PXR_NS::TfToken>; importedAsValue;
+class std::vector<class PXR_NS::SdfPath>; importedAsValue;
+class std::vector<class PXR_NS::SdfLayerOffset>; importedAsValue;
+
+class PXR_NS::TfAnyWeakPtr; importedAsValue;
+class PXR_NS::TfEnum; importedAsValue;
+class PXR_NS::TfDebug; importedAsValue;
+class PXR_NS::TfDiagnosticBase; importedAsValue;
+class PXR_NS::TfError; importedAsValue;
+class PXR_NS::TfErrorMark; blockedByInaccessibleMove;
+class PXR_NS::TfHash; importedAsValue;
+class PXR_NS::TfNotice; importedAsValue;
+class PXR_NS::TfNotice::Key; importedAsValue;
+class PXR_NS::TfRefBase; importedAsSharedReference;
+class PXR_NS::TfRefPtr<class PXR_NS::SdfLayer>; importedAsValue;
+class PXR_NS::TfRefPtr<class PXR_NS::UsdStage>; importedAsValue;
+class PXR_NS::TfRefPtr<class PXR_NS::SdfData>; importedAsValue;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdGeomTokensType>; blockedByInaccessibleMove;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdMtlxTokensType>; blockedByInaccessibleMove;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdShadeTokensType>; blockedByInaccessibleMove;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdHydraTokensType>; blockedByInaccessibleMove;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdLuxTokensType>; blockedByInaccessibleMove;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdMediaTokensType>; blockedByInaccessibleMove;
+class PXR_NS::TfWeakPtrFacade<PXR_NS::TfWeakPtr, class PXR_NS::SdfLayer>; importedAsValue;
+class PXR_NS::Tf_Remnant; importedAsSharedReference;
+class PXR_NS::TfSimpleRefBase; importedAsSharedReference;
+
+class PXR_NS::TfToken; importedAsValue;
+class std::vector<class PXR_NS::TfToken>; importedAsValue;
+class PXR_NS::TfType; importedAsValue;
+class PXR_NS::TfWeakBase; blockedByInaccessibleMove;
+class PXR_NS::TfWeakPtr<class PXR_NS::SdfLayer>; importedAsValue;
+class PXR_NS::TfWeakPtr<class PXR_NS::UsdStage>; importedAsValue;
+class PXR_NS::TfWeakPtr<class PXR_NS::PlugPlugin>; importedAsValue;
+
+class PXR_NS::GfBBox3d; importedAsValue;
+class PXR_NS::GfCamera; importedAsValue;
+class PXR_NS::GfFrustum; importedAsValue;
+class PXR_NS::pxr_half::half; importedAsValue;
+class PXR_NS::GfMatrix2d; importedAsValue;
+class PXR_NS::GfMatrix2f; importedAsValue;
+class PXR_NS::GfMatrix3f; importedAsValue;
+class PXR_NS::GfMatrix3d; importedAsValue;
+class PXR_NS::GfMatrix4f; importedAsValue;
+class PXR_NS::GfMatrix4d; importedAsValue;
+class PXR_NS::GfQuatd; importedAsValue;
+class PXR_NS::GfQuatf; importedAsValue;
+class PXR_NS::GfQuath; importedAsValue;
+class PXR_NS::GfQuaternion; importedAsValue;
+class PXR_NS::GfRange1d; importedAsValue;
+class PXR_NS::GfRange1f; importedAsValue;
+class PXR_NS::GfRange2d; importedAsValue;
+class PXR_NS::GfRange2f; importedAsValue;
+class PXR_NS::GfRange3d; importedAsValue;
+class PXR_NS::GfRange3f; importedAsValue;
+class PXR_NS::GfRect2i; importedAsValue;
+class PXR_NS::GfVec2d; importedAsValue;
+class PXR_NS::GfVec2f; importedAsValue;
+class PXR_NS::GfVec2h; importedAsValue;
+class PXR_NS::GfVec2i; importedAsValue;
+class PXR_NS::GfVec3d; importedAsValue;
+class PXR_NS::GfVec3f; importedAsValue;
+class PXR_NS::GfVec3h; importedAsValue;
+class PXR_NS::GfVec3i; importedAsValue;
+class PXR_NS::GfVec4d; importedAsValue;
+class PXR_NS::GfVec4f; importedAsValue;
+class PXR_NS::GfVec4h; importedAsValue;
+class PXR_NS::GfVec4i; importedAsValue;
+
+class PXR_NS::TraceAggregateTree; importedAsSharedReference;
+class PXR_NS::TraceAggregateNode; importedAsSharedReference;
+class PXR_NS::TraceEventNode; importedAsSharedReference;
+class PXR_NS::TraceEventTree; importedAsSharedReference;
+class PXR_NS::TraceReporterBase; importedAsSharedReference;
+class PXR_NS::TraceReporter; importedAsSharedReference;
+
+class PXR_NS::PlugRegistry; importedAsImmortalReference;
+class PXR_NS::Plug_RegistrationMetadata; blockedByNonPublicHeaderDefinition;
+
+class PXR_NS::Vt_ArrayBase; importedAsValue;
+class PXR_NS::VtArray<TfToken>; importedAsValue;
+class PXR_NS::VtArray<int>; importedAsValue;
+class PXR_NS::VtArray<GfVec3f>; importedAsValue;
+class PXR_NS::VtArray<GfVec4d>; importedAsValue;
+class PXR_NS::VtArray<class PXR_NS::SdfPath>; importedAsValue;
+class PXR_NS::VtArray<float>; importedAsValue;
+class PXR_NS::VtArray<double>; importedAsValue;
+class PXR_NS::VtArray<GfVec2d>; importedAsValue;
+class PXR_NS::VtArray<GfVec3d>; importedAsValue;
+class PXR_NS::VtArray<class PXR_NS::SdfAssetPath>; importedAsValue;
+class PXR_NS::VtArray<GfVec4f>; importedAsValue;
+class PXR_NS::VtArray<GfVec2f>; importedAsValue;
+class PXR_NS::VtArray<GfVec4i>; importedAsValue;
+class PXR_NS::VtArray<GfVec3i>; importedAsValue;
+class PXR_NS::VtArray<GfVec2i>; importedAsValue;
+class PXR_NS::VtArray<GfVec4h>; importedAsValue;
+class PXR_NS::VtArray<GfVec3h>; importedAsValue;
+class PXR_NS::VtArray<GfVec2h>; importedAsValue;
+class PXR_NS::VtArray<GfMatrix4f>; importedAsValue;
+class PXR_NS::VtArray<GfMatrix3f>; importedAsValue;
+class PXR_NS::VtArray<GfMatrix2f>; importedAsValue;
+class PXR_NS::VtArray<GfMatrix4d>; importedAsValue;
+class PXR_NS::VtArray<GfMatrix3d>; importedAsValue;
+class PXR_NS::VtArray<GfMatrix2d>; importedAsValue;
+class PXR_NS::VtArray<GfRange3f>; importedAsValue;
+class PXR_NS::VtArray<GfRange3d>; importedAsValue;
+class PXR_NS::VtArray<GfRange2f>; importedAsValue;
+class PXR_NS::VtArray<GfRange2d>; importedAsValue;
+class PXR_NS::VtArray<GfRange1f>; importedAsValue;
+class PXR_NS::VtArray<GfRange1d>; importedAsValue;
+class PXR_NS::VtArray<GfInterval>; importedAsValue;
+class PXR_NS::VtArray<GfRect2i>; importedAsValue;
+class PXR_NS::VtArray<GfQuath>; importedAsValue;
+class PXR_NS::VtArray<GfQuatf>; importedAsValue;
+class PXR_NS::VtArray<GfQuatd>; importedAsValue;
+class PXR_NS::VtArray<GfQuaternion>; importedAsValue;
+class PXR_NS::VtArray<GfDualQuath>; importedAsValue;
+class PXR_NS::VtArray<GfDualQuatf>; importedAsValue;
+class PXR_NS::VtArray<GfDualQuatd>; importedAsValue;
+class PXR_NS::VtArray<char>; importedAsValue;
+class PXR_NS::VtArray<unsigned char>; importedAsValue;
+class PXR_NS::VtArray<short>; importedAsValue;
+class PXR_NS::VtArray<unsigned short>; importedAsValue;
+class PXR_NS::VtArray<unsigned int>; importedAsValue;
+class PXR_NS::VtArray<int64_t>; importedAsValue;
+class PXR_NS::VtArray<uint64_t>; importedAsValue;
+class PXR_NS::VtArray<GfHalf>; importedAsValue;
+class PXR_NS::VtArray<std::string>; importedAsValue;
+class PXR_NS::VtDictionary; importedAsValue;
+class PXR_NS::VtDictionary::Iterator<class std::map<std::string, class PXR_NS::VtValue, struct std::less<void> > *, class std::__map_iterator<class std::__tree_iterator<struct std::__value_type<std::string, class PXR_NS::VtValue>, class std::__tree_node<struct std::__value_type<std::string, class PXR_NS::VtValue>, void *> *, long> > >; importedAsValue;
+class PXR_NS::VtValue; importedAsValue;
+
+class PXR_NS::KindRegistry; importedAsImmortalReference;
+
+class PXR_NS::SdfAbstractData; importedAsSharedReference;
+class PXR_NS::SdfData; importedAsSharedReference;
+class PXR_NS::SdfFileFormat; importedAsSharedReference;
+class PXR_NS::SdfTextFileFormat; importedAsSharedReference;
+class PXR_NS::SdfLayerStateDelegateBase; importedAsSharedReference;
+class PXR_NS::SdfLayerTree; importedAsSharedReference;
+class PXR_NS::SdfSpec; importedAsValue;
+class PXR_NS::SdfRelationshipSpec; importedAsValue;
+class PXR_NS::SdfHandle<class PXR_NS::SdfSpec>; importedAsValue;
+class PXR_NS::SdfHandle<class PXR_NS::SdfPrimSpec>; importedAsValue;
+enum PXR_NS::SdfSpecType; importedAsValue;
+class PXR_NS::Sdf_ValueTypeNamesType; blockedByInaccessibleMove;
+class PXR_NS::SdfHandle<class PXR_NS::SdfPropertySpec>; importedAsValue;
+class PXR_NS::SdfAssetPath; importedAsValue;
+class PXR_NS::SdfLayer; importedAsSharedReference;
+class PXR_NS::SdfLayerOffset; importedAsValue;
+class PXR_NS::SdfPath; importedAsValue;
+class PXR_NS::SdfPrimSpec; importedAsValue;
+class PXR_NS::SdfReference; importedAsValue;
+class PXR_NS::SdfValueTypeName; importedAsValue;
+
+class PXR_NS::NdrDiscoveryPluginContext; importedAsSharedReference;
+class PXR_NS::NdrDiscoveryPlugin; importedAsSharedReference;
+class PXR_NS::_NdrFilesystemDiscoveryPlugin; importedAsSharedReference;
+
+class PXR_NS::PcpLayerStack; importedAsSharedReference;
+
+class PXR_NS::UsdUsdFileFormat; importedAsSharedReference;
+class PXR_NS::UsdUsdaFileFormat; importedAsSharedReference;
+class PXR_NS::UsdUsdcFileFormat; importedAsSharedReference;
+class PXR_NS::UsdUsdzFileFormat; importedAsSharedReference;
+class PXR_NS::UsdAPISchemaBase; importedAsValue;
+class PXR_NS::UsdAttribute; importedAsValue;
+class PXR_NS::UsdEditContext; blockedByInaccessibleMove;
+class PXR_NS::UsdEditTarget; importedAsValue;
+class PXR_NS::UsdInherits; importedAsValue;
+class PXR_NS::UsdNotice; importedAsValue;
+class PXR_NS::UsdObject; importedAsValue;
+class PXR_NS::UsdPayloads; importedAsValue;
+class PXR_NS::UsdPrim; importedAsValue;
+class PXR_NS::UsdPrimRange; importedAsValue;
+class PXR_NS::UsdProperty; importedAsValue;
+class PXR_NS::UsdReferences; importedAsValue;
+class PXR_NS::UsdRelationship; importedAsValue;
+class PXR_NS::UsdSchemaBase; importedAsValue;
+class PXR_NS::UsdSpecializes; importedAsValue;
+class PXR_NS::UsdStage; importedAsSharedReference;
+class PXR_NS::UsdTimeCode; importedAsValue;
+class PXR_NS::UsdZipFileWriter; importedAsNonCopyable;
+class PXR_NS::UsdPrimTypeInfo; blockedByInaccessibleMove;
+class PXR_NS::UsdPrimDefinition; blockedByInaccessibleMove;
+
+class PXR_NS::UsdGeomBBoxCache; importedAsValue;
+class PXR_NS::UsdGeomBasisCurves; importedAsValue;
+class PXR_NS::UsdGeomBoundable; importedAsValue;
+class PXR_NS::UsdGeomCamera; importedAsValue;
+class PXR_NS::UsdGeomCapsule; importedAsValue;
+class PXR_NS::UsdGeomCapsule_1; importedAsValue;
+class PXR_NS::UsdGeomCone; importedAsValue;
+class PXR_NS::UsdGeomCube; importedAsValue;
+class PXR_NS::UsdGeomCurves; importedAsValue;
+class PXR_NS::UsdGeomCylinder; importedAsValue;
+class PXR_NS::UsdGeomCylinder_1; importedAsValue;
+class PXR_NS::UsdGeomHermiteCurves; importedAsValue;
+class PXR_NS::UsdGeomImageable; importedAsValue;
+class PXR_NS::UsdGeomGprim; importedAsValue;
+class PXR_NS::UsdGeomMesh; importedAsValue;
+class PXR_NS::UsdGeomModelAPI; importedAsValue;
+class PXR_NS::UsdGeomPlane; importedAsValue;
+class PXR_NS::UsdGeomPointBased; importedAsValue;
+class PXR_NS::UsdGeomPointInstancer; importedAsValue;
+class PXR_NS::UsdGeomPoints; importedAsValue;
+class PXR_NS::UsdGeomPrimvar; importedAsValue;
+class PXR_NS::UsdGeomScope; importedAsValue;
+class PXR_NS::UsdGeomSphere; importedAsValue;
+class PXR_NS::UsdGeomSubset; importedAsValue;
+class PXR_NS::UsdGeomTetMesh; importedAsValue;
+class PXR_NS::UsdGeomVisibilityAPI; importedAsValue;
+class PXR_NS::UsdGeomXform; importedAsValue;
+class PXR_NS::UsdGeomXformable; importedAsValue;
+class PXR_NS::UsdGeomXformOp; importedAsValue;
+class PXR_NS::UsdGeomXformCommonAPI; importedAsValue;
+
+class PXR_NS::UsdVolVolume; importedAsValue;
+
+class PXR_NS::UsdMediaSpatialAudio; importedAsValue;
+
+class PXR_NS::UsdShadeConnectableAPI; importedAsValue;
+class PXR_NS::UsdShadeInput; importedAsValue;
+class PXR_NS::UsdShadeMaterial; importedAsValue;
+class PXR_NS::UsdShadeMaterialBindingAPI; importedAsValue;
+class PXR_NS::UsdShadeNodeDefAPI; importedAsValue;
+class PXR_NS::UsdShadeOutput; importedAsValue;
+class PXR_NS::UsdShadeShader; importedAsValue;
+class PXR_NS::UsdShadeNodeGraph; importedAsValue;
+
+class PXR_NS::UsdLuxBoundableLightBase; importedAsValue;
+class PXR_NS::UsdLuxCylinderLight; importedAsValue;
+class PXR_NS::UsdLuxDiskLight; importedAsValue;
+class PXR_NS::UsdLuxDomeLight; importedAsValue;
+class PXR_NS::UsdLuxGeometryLight; importedAsValue;
+class PXR_NS::UsdLuxLightAPI; importedAsValue;
+class PXR_NS::UsdLuxLightFilter; importedAsValue;
+class PXR_NS::UsdLuxLightListAPI; importedAsValue;
+class PXR_NS::UsdLuxListAPI; importedAsValue;
+class PXR_NS::UsdLuxMeshLightAPI; importedAsValue;
+class PXR_NS::UsdLuxShadowAPI; importedAsValue;
+
+class PXR_NS::UsdProcGenerativeProcedural; importedAsValue;
+
+class PXR_NS::UsdRenderSettings; importedAsValue;
+
+class PXR_NS::UsdHydraGenerativeProceduralAPI; importedAsValue;
+class PXR_NS::UsdHydraDiscoveryPlugin; importedAsSharedReference;
+
+class PXR_NS::UsdRiMaterialAPI; importedAsValue;
+
+class PXR_NS::UsdSkelAnimation; importedAsValue;
+class PXR_NS::UsdSkelBindingAPI; importedAsValue;
+class PXR_NS::UsdSkelBlendShape; importedAsValue;
+class PXR_NS::UsdSkelRoot; importedAsValue;
+class PXR_NS::UsdSkelSkeleton; importedAsValue;
+class PXR_NS::UsdSkelBinding; importedAsValue;
+
+class PXR_NS::UsdUINodeGraphNodeAPI; importedAsValue;
+
+class PXR_NS::UsdPhysicsCollisionAPI; importedAsValue;
+class PXR_NS::UsdPhysicsLimitAPI; importedAsValue;
+class PXR_NS::UsdPhysicsMassAPI; importedAsValue;
+class PXR_NS::UsdPhysicsMaterialAPI; importedAsValue;
+class PXR_NS::UsdPhysicsMeshCollisionAPI; importedAsValue;
+class PXR_NS::UsdPhysicsRigidBodyAPI; importedAsValue;
+class PXR_NS::UsdPhysicsScene; importedAsValue;
+
+class PXR_NS::UsdMtlxFileFormat; blockedByNonPublicHeaderDefinition;
+class PXR_NS::TfRefPtr<class PXR_NS::UsdMtlxFileFormat>; blockedByNonPublicHeaderDefinition;
+
+class PXR_NS::GarchGLPlatformDebugContext; importedAsSharedReference;
+
+class PXR_NS::HioImage; blockedByInaccessibleMove;
+class std::shared_ptr<class PXR_NS::HioImage>; importedAsValue;
+enum PXR_NS::HioImage::ImageOriginLocation; blockedByParent;
+enum PXR_NS::HioImage::SourceColorSpace; blockedByParent;
+class PXR_NS::HioImage::StorageSpec; blockedByParent;
+enum PXR_NS::CameraUtilConformWindowPolicy; importedAsValue;
+
+class PXR_NS::GlfSimpleLight; importedAsValue;
+class PXR_NS::GlfBindingMap; importedAsSharedReference;
+class PXR_NS::GlfDrawTarget; importedAsSharedReference;
+class PXR_NS::GlfDrawTarget::AttachmentsContainer; blockedByAccess;
+class PXR_NS::GlfTexture; importedAsSharedReference;
+class PXR_NS::GlfSimpleLightingContext; importedAsSharedReference;
+class PXR_NS::GlfSimpleShadowArray; importedAsSharedReference;
+class PXR_NS::GlfUniformBlock; importedAsSharedReference;
+
+class PXR_NS::HgiBuffer; blockedByInaccessibleMove;
+class PXR_NS::HgiHandle<class PXR_NS::HgiBuffer>; importedAsValue;
+class PXR_NS::HgiCmds; blockedByInaccessibleMove;
+// class std::unique_ptr<class PXR_NS::HgiCmds>; importedAsNonCopyable;
+class PXR_NS::Hgi; blockedByInaccessibleMove;
+class std::unique_ptr<class PXR_NS::Hgi>; importedAsNonCopyable;
+class PXR_NS::HgiTexture; blockedByInaccessibleMove;
+class PXR_NS::HgiHandle<class PXR_NS::HgiTexture>; importedAsValue;
+
+class PXR_NS::HgiMetalBuffer; blockedByInaccessibleMove;
+class PXR_NS::HgiMetal; blockedByInaccessibleMove;
+class PXR_NS::HgiMetalIndirectCommandEncoder; blockedByInaccessibleMove;
+class PXR_NS::HgiMetalTexture; blockedByInaccessibleMove;
+
+class PXR_NS::HdSceneIndexBase; importedAsSharedReference;
+class PXR_NS::HdDependencyForwardingSceneIndex; importedAsSharedReference;
+class PXR_NS::HdMergingSceneIndex; importedAsSharedReference;
+class PXR_NS::HdNoticeBatchingSceneIndex; importedAsSharedReference;
+class PXR_NS::HdRetainedSceneIndex; importedAsSharedReference;
+class PXR_NS::HdFilteringSceneIndexBase; importedAsSharedReference;
+class PXR_NS::HdFlatteningSceneIndex; importedAsSharedReference;
+class PXR_NS::HdLegacyGeomSubsetSceneIndex; importedAsSharedReference;
+class PXR_NS::HdLegacyPrimSceneIndex; importedAsSharedReference;
+class PXR_NS::HdMaterialFilteringSceneIndexBase; importedAsSharedReference;
+class PXR_NS::HdPrefixingSceneIndex; importedAsSharedReference;
+class PXR_NS::HdSingleInputFilteringSceneIndexBase; importedAsSharedReference;
+class PXR_NS::HdSceneIndexPrimView; importedAsValue;
+class PXR_NS::HdSceneIndexPrimView::const_iterator; importedAsValue;
+
+class PXR_NS::HdGpGenerativeProceduralResolvingSceneIndex; importedAsSharedReference;
+
+class PXR_NS::HdsiPrimManagingSceneIndexObserver; importedAsSharedReference;
+class PXR_NS::HdsiPrimTypeNoticeBatchingSceneIndex; importedAsSharedReference;
+class PXR_NS::HdsiLegacyDisplayStyleOverrideSceneIndex; importedAsSharedReference;
+class PXR_NS::HdsiCoordSysPrimSceneIndex; importedAsSharedReference;
+class PXR_NS::HdSiExtComputationPrimvarPruningSceneIndex; importedAsSharedReference;
+class PXR_NS::HdsiExtComputationDependencySceneIndex; importedAsSharedReference;
+class PXR_NS::HdsiImplicitSurfaceSceneIndex; importedAsSharedReference;
+class PXR_NS::HdsiLightLinkingSceneIndex; importedAsSharedReference;
+class PXR_NS::HdsiMaterialBindingResolvingSceneIndex; importedAsSharedReference;
+class PXR_NS::HdsiMaterialOverrideResolvingSceneIndex; importedAsSharedReference;
+class PXR_NS::HdsiMaterialPrimvarTransferSceneIndex; importedAsSharedReference;
+class PXR_NS::HdsiNurbsApproximatingSceneIndex; importedAsSharedReference;
+class PXR_NS::HdsiPinnedCurveExpandingSceneIndex; importedAsSharedReference;
+class PXR_NS::HdsiPrimTypeAndPathPruningSceneIndex; importedAsSharedReference;
+class PXR_NS::HdsiPrimTypePruningSceneIndex; importedAsSharedReference;
+class PXR_NS::HdsiRenderSettingsFilteringSceneIndex; importedAsSharedReference;
+class PXR_NS::HdsiSceneGlobalsSceneIndex; importedAsSharedReference;
+class PXR_NS::HdsiSwitchingSceneIndex; importedAsSharedReference;
+class PXR_NS::HdsiTetMeshConversionSceneIndex; importedAsSharedReference;
+class PXR_NS::HdsiVelocityMotionResolvingSceneIndex; importedAsSharedReference;
+
+class PXR_NS::UsdImagingDrawModeSceneIndex; importedAsSharedReference;
+class PXR_NS::UsdImagingExtentResolvingSceneIndex; importedAsSharedReference;
+class PXR_NS::UsdImagingMaterialBindingsResolvingSceneIndex; importedAsSharedReference;
+class PXR_NS::UsdImagingNiPrototypePropagatingSceneIndex; importedAsSharedReference;
+class PXR_NS::UsdImagingPiPrototypePropagatingSceneIndex; importedAsSharedReference;
+class PXR_NS::UsdImagingRenderSettingsFlatteningSceneIndex; importedAsSharedReference;
+class PXR_NS::UsdImagingRerootingSceneIndex; importedAsSharedReference;
+class PXR_NS::UsdImagingRootOverridesSceneIndex; importedAsSharedReference;
+class PXR_NS::UsdImagingSelectionSceneIndex; importedAsSharedReference;
+class PXR_NS::UsdImagingStageSceneIndex; importedAsSharedReference;
+class PXR_NS::UsdImagingUnloadedDrawModeSceneIndex; importedAsSharedReference;
+
+
+
+class PXR_NS::UsdImagingGLEngine; blockedByInaccessibleMove;
+class PXR_NS::UsdImagingGLRenderParams; importedAsValue;
+
+
+class PXR_NS::TfDiagnosticMgr; importedAsImmortalReference;
+class PXR_NS::TfRefPtrTracker; importedAsImmortalReference;
+class PXR_NS::TfRegTest; importedAsValue; // intentionally not immortal
+class PXR_NS::TraceCategory; importedAsValue; // intentionally not immortal
+class PXR_NS::TraceCollector; importedAsImmortalReference;
+class PXR_NS::SdfSchema; importedAsImmortalReference;
+class PXR_NS::UsdSchemaRegistry; importedAsImmortalReference;
+class PXR_NS::GlfContextCaps; importedAsImmortalReference;
+class PXR_NS::HdPerfLog; importedAsImmortalReference;
+class PXR_NS::UsdImagingAdapterRegistry; importedAsValue; // intentionally not immortal
+class PXR_NS::Tf_DebugSymbolRegistry; blockedByNonPublicHeaderDefinition; // TfSingleton enabled
+class PXR_NS::Tf_EnumRegistry; blockedByNonPublicHeaderDefinition; // TfSingleton enabled
+class PXR_NS::Tf_EnvSettingRegistry; blockedByNonPublicHeaderDefinition; // TfSingleton enabled
+class PXR_NS::(anonymous namespace)::Tf_RegistryManagerImpl; blockedByNonPublicHeaderDefinition; // TfSingleton enabled
+struct PXR_NS::Tf_TokenRegistry; blockedByNonPublicHeaderDefinition; // TfSingleton enabled
+class PXR_NS::Tf_TypeRegistry; blockedByNonPublicHeaderDefinition; // TfSingleton enabled
+class PXR_NS::Tf_NoticeRegistry; blockedByNonPublicHeaderDefinition; // TfSingleton enabled
+class PXR_NS::Vt_CastRegistry; blockedByNonPublicHeaderDefinition; // TfSingleton enabled
+class PXR_NS::Sdf_ChangeManager; blockedByNonPublicHeaderDefinition; // TfSingleton enabled
+class PXR_NS::SdfChangeList; importedAsValue; // intentionally not immortal
+struct PXR_NS::Sdf_SpecTypeInfo; blockedByNonPublicHeaderDefinition; // TfSingleton enabled
+class PXR_NS::Sdf_CleanupTracker; blockedByNonPublicHeaderDefinition; // TfSingleton enabled
+class PXR_NS::SdrRegistry; importedAsImmortalReference;
+class PXR_NS::(anonymous namespace)::_FunctionRegistry; blockedByNonPublicHeaderDefinition; // TfSingleton enabled
+class PXR_NS::(anonymous namespace)::_BehaviorRegistry; blockedByNonPublicHeaderDefinition; // TfSingleton enabled
+class PXR_NS::HioImageRegistry; importedAsImmortalReference;
+class PXR_NS::GlfGLContextRegistry; blockedByNonPublicHeaderDefinition; // TfSingleton enabled
+class PXR_NS::HdRendererPluginRegistry; importedAsImmortalReference;
+class PXR_NS::HdSceneIndexNameRegistry; importedAsValue; // intentionally not immortal
+class PXR_NS::HdSceneIndexPluginRegistry; importedAsImmortalReference;
+class PXR_NS::HdGpGenerativeProceduralPluginRegistry; importedAsImmortalReference;

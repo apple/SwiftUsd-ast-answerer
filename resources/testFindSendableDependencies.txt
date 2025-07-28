@@ -1,0 +1,314 @@
+class std::map<class PXR_NS::TfToken, class PXR_NS::VtValue, struct PXR_NS::TfDictionaryLessThan>; [$specialConditional class PXR_NS::TfToken,, $specialConditional class PXR_NS::VtValue];
+class std::vector<class PXR_NS::TfToken>; [$specialConditional class PXR_NS::TfToken];
+class std::vector<class PXR_NS::SdfPath>; [$specialConditional class PXR_NS::SdfPath];
+class std::vector<class PXR_NS::SdfLayerOffset>; [$specialConditional class PXR_NS::SdfLayerOffset];
+class std::unordered_map<class PXR_NS::TfToken, struct PXR_NS::KindRegistry::_KindData, struct PXR_NS::TfToken::HashFunctor>; [$specialConditional class PXR_NS::TfToken,, $specialConditional struct PXR_NS::KindRegistry::_KindData];
+
+class PXR_NS::TfDiagnosticBase; [class PXR_NS::TfCallContext _context,, std::string _commentary,, class PXR_NS::TfEnum _code,, std::string _codeString,, class std::any _info,, unsigned long _serial,, _Bool _quiet];
+class PXR_NS::TfError; [$inheritance class PXR_NS::TfDiagnosticBase];
+class PXR_NS::TfDiagnosticMgr; [$inheritance class PXR_NS::TfWeakBase,, class tbb::interface6::enumerable_thread_specific<_Bool> _reentrantGuard,, class std::vector<class PXR_NS::TfDiagnosticMgr::Delegate *> _delegates,, class tbb::spin_rw_mutex_v3 _delegatesMutex,, struct std::atomic<unsigned long> _nextSerial,, class tbb::interface6::enumerable_thread_specific<class std::list<class PXR_NS::TfError> > _errorList,, class tbb::interface6::enumerable_thread_specific<struct PXR_NS::TfDiagnosticMgr::_LogText> _logText,, class tbb::interface6::enumerable_thread_specific<unsigned long, class tbb::cache_aligned_allocator<unsigned long>, tbb::ets_key_per_instance> _errorMarkCounts,, _Bool _quiet,, $specialImportedAsReference];
+class PXR_NS::TfRefPtrTracker; [$inheritance class PXR_NS::TfWeakBase,, class std::mutex _mutex,, unsigned long _maxDepth,, class PXR_NS::TfHashMap<const class PXR_NS::TfRefBase *, unsigned long, class PXR_NS::TfHash> _watched,, class PXR_NS::TfHashMap<const void *, struct PXR_NS::TfRefPtrTracker::Trace, class PXR_NS::TfHash> _traces,, $specialImportedAsReference];
+class PXR_NS::TfHash; [];
+class PXR_NS::TfNotice; [];
+class PXR_NS::TfRefBase; [struct std::atomic<int> _refCount,, $specialImportedAsReference];
+class PXR_NS::TfRefPtr<class PXR_NS::SdfLayer>; [const class PXR_NS::TfRefBase * _refBase];
+class PXR_NS::TfRefPtr<class PXR_NS::UsdStage>; [const class PXR_NS::TfRefBase * _refBase];
+class PXR_NS::TfStaticData<struct PXR_NS::UsdGeomTokensType>; [$specialConditional struct PXR_NS::UsdGeomTokensType];
+class PXR_NS::TfStaticData<struct PXR_NS::UsdMtlxTokensType>; [$specialConditional struct PXR_NS::UsdMtlxTokensType];
+class PXR_NS::TfStaticData<struct PXR_NS::UsdShadeTokensType>; [$specialConditional struct PXR_NS::UsdShadeTokensType];
+class PXR_NS::TfStaticData<struct PXR_NS::UsdHydraTokensType>; [$specialConditional struct PXR_NS::UsdHydraTokensType];
+class PXR_NS::TfStaticData<struct PXR_NS::UsdLuxTokensType>; [$specialConditional struct PXR_NS::UsdLuxTokensType];
+class PXR_NS::TfStaticData<struct PXR_NS::UsdMediaTokensType>; [$specialConditional struct PXR_NS::UsdMediaTokensType];
+class PXR_NS::TfWeakPtrFacade<PXR_NS::TfWeakPtr, class PXR_NS::SdfLayer>; [$inheritance class PXR_NS::TfWeakPtrFacadeBase];
+class PXR_NS::TfWeakPtr<class PXR_NS::SdfLayer>; [$inheritance class PXR_NS::TfWeakPtrFacade<PXR_NS::TfWeakPtr, class PXR_NS::SdfLayer>,, class PXR_NS::SdfLayer * _rawPtr,, class PXR_NS::TfRefPtr<class PXR_NS::Tf_Remnant> _remnant];
+class PXR_NS::TfWeakPtr<class PXR_NS::UsdStage>; [$inheritance class PXR_NS::TfWeakPtrFacade<PXR_NS::TfWeakPtr, class PXR_NS::UsdStage>,, class PXR_NS::UsdStage * _rawPtr,, class PXR_NS::TfRefPtr<class PXR_NS::Tf_Remnant> _remnant];
+class PXR_NS::TfAnyWeakPtr; [struct PXR_NS::TfAnyWeakPtr::_Data _ptrStorage];
+class PXR_NS::TfNotice::Key; [class PXR_NS::TfWeakPtr<class PXR_NS::TfNotice::_DelivererBase> _deliverer];
+class PXR_NS::TfRefPtr<class PXR_NS::SdfData>; [const class PXR_NS::TfRefBase * _refBase];
+class PXR_NS::TfRefPtr<class PXR_NS::UsdMtlxFileFormat>; [const class PXR_NS::TfRefBase * _refBase];
+class PXR_NS::TfToken; [$specialAvailable];
+class PXR_NS::TfType; [struct PXR_NS::TfType::_TypeInfo * _info];
+class PXR_NS::TfWeakBase; [struct std::atomic<class PXR_NS::Tf_Remnant *> _remnantPtr];
+
+
+class PXR_NS::GfBBox3d; [class PXR_NS::GfRange3d _box,, class PXR_NS::GfMatrix4d _matrix,, class PXR_NS::GfMatrix4d _inverse,, _Bool _isDegenerate,, _Bool _hasZeroAreaPrimitives];
+class PXR_NS::GfCamera; [class PXR_NS::GfMatrix4d _transform,, enum PXR_NS::GfCamera::Projection _projection,, float _horizontalAperture,, float _verticalAperture,, float _horizontalApertureOffset,, float _verticalApertureOffset,, float _focalLength,, class PXR_NS::GfRange1f _clippingRange,, class std::vector<class PXR_NS::GfVec4f> _clippingPlanes,, float _fStop,, float _focusDistance];
+class PXR_NS::GfFrustum; [$specialAvailable];
+class PXR_NS::pxr_half::half; [unsigned short _h];
+class PXR_NS::GfMatrixData<double, 2, 2>; [double[4] _data];
+ class PXR_NS::GfMatrix2d; [class PXR_NS::GfMatrixData<double, 2, 2> _mtx];
+class PXR_NS::GfMatrix2f; [class PXR_NS::GfMatrixData<float, 2, 2> _mtx];
+class PXR_NS::GfMatrix3f; [class PXR_NS::GfMatrixData<float, 3, 3> _mtx];
+class PXR_NS::GfMatrix3d; [class PXR_NS::GfMatrixData<double, 3, 3> _mtx];
+class PXR_NS::GfMatrix4f; [class PXR_NS::GfMatrixData<float, 4, 4> _mtx];
+class PXR_NS::GfMatrix4d; [class PXR_NS::GfMatrixData<double, 4, 4> _mtx];
+class PXR_NS::GfQuatd; [class PXR_NS::GfVec3d _imaginary,, double _real];
+class PXR_NS::GfQuatf; [class PXR_NS::GfVec3f _imaginary,, float _real];
+class PXR_NS::GfQuath; [class PXR_NS::GfVec3h _imaginary,, class PXR_NS::pxr_half::half _real];
+class PXR_NS::GfQuaternion; [double _real,, class PXR_NS::GfVec3d _imaginary];
+class PXR_NS::GfRange1d; [double _min,, double _max];
+class PXR_NS::GfRange1f; [float _min,, float _max];
+class PXR_NS::GfRange2d; [class PXR_NS::GfVec2d _min,, class PXR_NS::GfVec2d _max];
+class PXR_NS::GfRange2f; [class PXR_NS::GfVec2f _min,, class PXR_NS::GfVec2f _max];
+class PXR_NS::GfRange3d; [class PXR_NS::GfVec3d _min,, class PXR_NS::GfVec3d _max];
+class PXR_NS::GfRange3f; [class PXR_NS::GfVec3f _min,, class PXR_NS::GfVec3f _max];
+class PXR_NS::GfRect2i; [class PXR_NS::GfVec2i _min,, class PXR_NS::GfVec2i _max];
+class PXR_NS::GfVec2d; [double[2] _data];
+class PXR_NS::GfVec2f; [float[2] _data];
+class PXR_NS::GfVec2h; [class PXR_NS::pxr_half::half[2] _data];
+class PXR_NS::GfVec2i; [int[2] _data];
+class PXR_NS::GfVec3d; [double[3] _data];
+class PXR_NS::GfVec3f; [float[3] _data];
+class PXR_NS::GfVec3h; [class PXR_NS::pxr_half::half[3] _data];
+class PXR_NS::GfVec3i; [int[3] _data];
+class PXR_NS::GfVec4d; [double[4] _data];
+class PXR_NS::GfVec4f; [float[4] _data];
+class PXR_NS::GfVec4h; [class PXR_NS::pxr_half::half[4] _data];
+class PXR_NS::GfVec4i; [int[4] _data];
+
+
+class PXR_NS::TraceCollector; [$inheritance class PXR_NS::TfWeakBase,, class PXR_NS::TraceConcurrentList<class PXR_NS::TraceCollector::_PerThreadData> _allPerThreadData,, std::string _label,, unsigned long long _measuredScopeOverhead,, struct std::atomic<int> _isPythonTracingEnabled,, class std::shared_ptr<class std::function<void (const struct PXR_NS::TfPyTraceInfo &)> > _pyTraceFnId,, $specialImportedAsReference];
+
+class PXR_NS::PlugRegistry; [$inheritance class PXR_NS::TfWeakBase,, class PXR_NS::TfHashSet<std::string, class PXR_NS::TfHash> _registeredPluginPaths,, class std::mutex _mutex,, $specialImportedAsReference];
+class PXR_NS::Plug_RegistrationMetadata; [enum PXR_NS::Plug_RegistrationMetadata::Type type,, std::string pluginName,, std::string pluginPath,, class std::map<std::string, class PXR_NS::JsValue> plugInfo,, std::string libraryPath,, std::string resourcePath];
+
+class PXR_NS::Vt_ArrayBase; [struct PXR_NS::Vt_ShapeData _shapeData,, class PXR_NS::Vt_ArrayForeignDataSource * _foreignSource];
+class PXR_NS::VtArray<TfToken>; [$specialConditional class PXR_NS::TfToken];
+class PXR_NS::VtArray<int>; [$specialConditional int];
+class PXR_NS::VtArray<GfVec3f>; [$specialConditional class PXR_NS::GfVec3f];
+class PXR_NS::VtArray<GfVec4d>; [$specialConditional class PXR_NS::GfVec4d];
+class PXR_NS::VtArray<class PXR_NS::SdfPath>; [$specialConditional class PXR_NS::SdfPath];
+class PXR_NS::VtArray<float>; [$specialConditional float];
+class PXR_NS::VtArray<double>; [$specialConditional double];
+class PXR_NS::VtArray<GfVec2d>; [$specialConditional class PXR_NS::GfVec2d];
+class PXR_NS::VtArray<GfVec3d>; [$specialConditional class PXR_NS::GfVec3d];
+class PXR_NS::VtArray<class PXR_NS::SdfAssetPath>; [$specialConditional class PXR_NS::SdfAssetPath];
+class PXR_NS::VtArray<GfVec4f>; [$specialConditional class PXR_NS::GfVec4f];
+class PXR_NS::VtArray<GfVec2f>; [$specialConditional class PXR_NS::GfVec2f];
+class PXR_NS::VtArray<GfVec4i>; [$specialConditional class PXR_NS::GfVec4i];
+class PXR_NS::VtArray<GfVec3i>; [$specialConditional class PXR_NS::GfVec3i];
+class PXR_NS::VtArray<GfVec2i>; [$specialConditional class PXR_NS::GfVec2i];
+class PXR_NS::VtArray<GfVec4h>; [$specialConditional class PXR_NS::GfVec4h];
+class PXR_NS::VtArray<GfVec3h>; [$specialConditional class PXR_NS::GfVec3h];
+class PXR_NS::VtArray<GfVec2h>; [$specialConditional class PXR_NS::GfVec2h];
+class PXR_NS::VtArray<GfMatrix4f>; [$specialConditional class PXR_NS::GfMatrix4f];
+class PXR_NS::VtArray<GfMatrix3f>; [$specialConditional class PXR_NS::GfMatrix3f];
+class PXR_NS::VtArray<GfMatrix2f>; [$specialConditional class PXR_NS::GfMatrix2f];
+class PXR_NS::VtArray<GfMatrix4d>; [$specialConditional class PXR_NS::GfMatrix4d];
+class PXR_NS::VtArray<GfMatrix3d>; [$specialConditional class PXR_NS::GfMatrix3d];
+class PXR_NS::VtArray<GfMatrix2d>; [$specialConditional class PXR_NS::GfMatrix2d];
+class PXR_NS::VtArray<GfRange3f>; [$specialConditional class PXR_NS::GfRange3f];
+class PXR_NS::VtArray<GfRange3d>; [$specialConditional class PXR_NS::GfRange3d];
+class PXR_NS::VtArray<GfRange2f>; [$specialConditional class PXR_NS::GfRange2f];
+class PXR_NS::VtArray<GfRange2d>; [$specialConditional class PXR_NS::GfRange2d];
+class PXR_NS::VtArray<GfRange1f>; [$specialConditional class PXR_NS::GfRange1f];
+class PXR_NS::VtArray<GfRange1d>; [$specialConditional class PXR_NS::GfRange1d];
+class PXR_NS::VtArray<GfInterval>; [$specialConditional class PXR_NS::GfInterval];
+class PXR_NS::VtArray<GfRect2i>; [$specialConditional class PXR_NS::GfRect2i];
+class PXR_NS::VtArray<GfQuath>; [$specialConditional class PXR_NS::GfQuath];
+class PXR_NS::VtArray<GfQuatf>; [$specialConditional class PXR_NS::GfQuatf];
+class PXR_NS::VtArray<GfQuatd>; [$specialConditional class PXR_NS::GfQuatd];
+class PXR_NS::VtArray<GfQuaternion>; [$specialConditional class PXR_NS::GfQuaternion];
+class PXR_NS::VtArray<GfDualQuath>; [$specialConditional class PXR_NS::GfDualQuath];
+class PXR_NS::VtArray<GfDualQuatf>; [$specialConditional class PXR_NS::GfDualQuatf];
+class PXR_NS::VtArray<GfDualQuatd>; [$specialConditional class PXR_NS::GfDualQuatd];
+class PXR_NS::VtArray<char>; [$specialConditional char];
+class PXR_NS::VtArray<unsigned char>; [$specialConditional unsigned char];
+class PXR_NS::VtArray<short>; [$specialConditional short];
+class PXR_NS::VtArray<unsigned short>; [$specialConditional unsigned short];
+class PXR_NS::VtArray<unsigned int>; [$specialConditional unsigned int];
+class PXR_NS::VtArray<int64_t>; [$specialConditional long long];
+class PXR_NS::VtArray<uint64_t>; [$specialConditional unsigned long long];
+class PXR_NS::VtArray<GfHalf>; [$specialConditional class PXR_NS::pxr_half::half];
+class PXR_NS::VtArray<std::string>; [$specialConditional std::string];
+class PXR_NS::VtDictionary; [class std::unique_ptr<class std::map<std::string, class PXR_NS::VtValue, struct std::less<void> > > _dictMap];
+class PXR_NS::VtValue; [struct std::aligned_storage<8, 8>::type _storage,, class PXR_NS::TfPointerAndBits<const struct PXR_NS::VtValue::_TypeInfo> _info];
+class PXR_NS::VtDictionary::Iterator<class std::map<std::string, class PXR_NS::VtValue, struct std::less<void> > *, class std::__map_iterator<class std::__tree_iterator<struct std::__value_type<std::string, class PXR_NS::VtValue>, class std::__tree_node<struct std::__value_type<std::string, class PXR_NS::VtValue>, void *> *, long> > >; [class std::__map_iterator<class std::__tree_iterator<struct std::__value_type<std::string, class PXR_NS::VtValue>, class std::__tree_node<struct std::__value_type<std::string, class PXR_NS::VtValue>, void *> *, long> > _underlyingIterator,, class std::map<std::string, class PXR_NS::VtValue, struct std::less<void> > * _underlyingMap];
+
+
+
+class PXR_NS::KindRegistry; [$inheritance class PXR_NS::TfWeakBase,, class std::unordered_map<class PXR_NS::TfToken, struct PXR_NS::KindRegistry::_KindData, struct PXR_NS::TfToken::HashFunctor> _kindMap,, $specialImportedAsReference];
+
+class PXR_NS::SdrRegistry; [$inheritance class PXR_NS::NdrRegistry,, $specialImportedAsReference];
+
+
+class PXR_NS::SdfAssetPath; [std::string _authoredPath,, std::string _evaluatedPath,, std::string _resolvedPath];
+class PXR_NS::SdfLayer; [$inheritance class PXR_NS::TfRefBase,, $inheritance class PXR_NS::TfWeakBase,, class PXR_NS::TfWeakPtr<class PXR_NS::SdfLayer> _self,, class PXR_NS::TfWeakPtr<const class PXR_NS::SdfFileFormat> _fileFormat,, class std::map<std::string, std::string> _fileFormatArgs,, const class PXR_NS::SdfSchemaBase & _schema,, class PXR_NS::Sdf_IdentityRegistry _idRegistry,, class PXR_NS::TfRefPtr<class PXR_NS::SdfAbstractData> _data,, class PXR_NS::TfRefPtr<class PXR_NS::SdfLayerStateDelegateBase> _stateDelegate,, class PXR_NS::WorkDispatcher _initDispatcher,, struct std::atomic<_Bool> _initializationComplete,, class std::optional<_Bool> _initializationWasSuccessful,, _Bool _lastDirtyState,, class std::unique_ptr<struct PXR_NS::Sdf_AssetInfo> _assetInfo,, class PXR_NS::VtValue _assetModificationTime,, class PXR_NS::VtDictionary _externalAssetModificationTimes,, unsigned long _mutedLayersRevisionCache,, _Bool _isMutedCache,, _Bool _permissionToEdit,, _Bool _permissionToSave,, _Bool _validateAuthoring,, class PXR_NS::SdfLayerHints _hints,, $specialImportedAsReference];
+class PXR_NS::SdfLayerOffset; [double _offset,, double _scale];
+class PXR_NS::SdfPath; [struct PXR_NS::Sdf_PathNodeHandleImpl<struct PXR_NS::Sdf_Pool<struct PXR_NS::Sdf_PathPrimTag, 24, 8>::Handle, true> _primPart,, struct PXR_NS::Sdf_PathNodeHandleImpl<struct PXR_NS::Sdf_Pool<struct PXR_NS::Sdf_PathPropTag, 24, 8>::Handle, false> _propPart];
+class PXR_NS::SdfSpec; [class PXR_NS::TfDelegatedCountPtr<class PXR_NS::Sdf_Identity> _id];
+class PXR_NS::SdfPrimSpec; [$inheritance class PXR_NS::SdfSpec];
+class PXR_NS::SdfReference; [std::string _assetPath,, class PXR_NS::SdfPath _primPath,, class PXR_NS::SdfLayerOffset _layerOffset,, class PXR_NS::VtDictionary _customData];
+class PXR_NS::SdfValueTypeName; [const class PXR_NS::Sdf_ValueTypeImpl * _impl];
+class PXR_NS::SdfRelationshipSpec; [$inheritance class PXR_NS::SdfPropertySpec];
+class PXR_NS::SdfHandle<class PXR_NS::SdfSpec>; [class PXR_NS::SdfSpec _spec];
+class PXR_NS::SdfHandle<class PXR_NS::SdfPrimSpec>; [class PXR_NS::SdfPrimSpec _spec];
+enum PXR_NS::SdfSpecType; []
+class PXR_NS::Sdf_ValueTypeNamesType; [class PXR_NS::SdfValueTypeName Bool,, class PXR_NS::SdfValueTypeName UChar,, class PXR_NS::SdfValueTypeName Int,, class PXR_NS::SdfValueTypeName UInt,, class PXR_NS::SdfValueTypeName Int64,, class PXR_NS::SdfValueTypeName UInt64,, class PXR_NS::SdfValueTypeName Half,, class PXR_NS::SdfValueTypeName Float,, class PXR_NS::SdfValueTypeName Double,, class PXR_NS::SdfValueTypeName TimeCode,, class PXR_NS::SdfValueTypeName String,, class PXR_NS::SdfValueTypeName Token,, class PXR_NS::SdfValueTypeName Asset,, class PXR_NS::SdfValueTypeName Int2,, class PXR_NS::SdfValueTypeName Int3,, class PXR_NS::SdfValueTypeName Int4,, class PXR_NS::SdfValueTypeName Half2,, class PXR_NS::SdfValueTypeName Half3,, class PXR_NS::SdfValueTypeName Half4,, class PXR_NS::SdfValueTypeName Float2,, class PXR_NS::SdfValueTypeName Float3,, class PXR_NS::SdfValueTypeName Float4,, class PXR_NS::SdfValueTypeName Double2,, class PXR_NS::SdfValueTypeName Double3,, class PXR_NS::SdfValueTypeName Double4,, class PXR_NS::SdfValueTypeName Point3h,, class PXR_NS::SdfValueTypeName Point3f,, class PXR_NS::SdfValueTypeName Point3d,, class PXR_NS::SdfValueTypeName Vector3h,, class PXR_NS::SdfValueTypeName Vector3f,, class PXR_NS::SdfValueTypeName Vector3d,, class PXR_NS::SdfValueTypeName Normal3h,, class PXR_NS::SdfValueTypeName Normal3f,, class PXR_NS::SdfValueTypeName Normal3d,, class PXR_NS::SdfValueTypeName Color3h,, class PXR_NS::SdfValueTypeName Color3f,, class PXR_NS::SdfValueTypeName Color3d,, class PXR_NS::SdfValueTypeName Color4h,, class PXR_NS::SdfValueTypeName Color4f,, class PXR_NS::SdfValueTypeName Color4d,, class PXR_NS::SdfValueTypeName Quath,, class PXR_NS::SdfValueTypeName Quatf,, class PXR_NS::SdfValueTypeName Quatd,, class PXR_NS::SdfValueTypeName Matrix2d,, class PXR_NS::SdfValueTypeName Matrix3d,, class PXR_NS::SdfValueTypeName Matrix4d,, class PXR_NS::SdfValueTypeName Frame4d,, class PXR_NS::SdfValueTypeName TexCoord2h,, class PXR_NS::SdfValueTypeName TexCoord2f,, class PXR_NS::SdfValueTypeName TexCoord2d,, class PXR_NS::SdfValueTypeName TexCoord3h,, class PXR_NS::SdfValueTypeName TexCoord3f,, class PXR_NS::SdfValueTypeName TexCoord3d,, class PXR_NS::SdfValueTypeName Opaque,, class PXR_NS::SdfValueTypeName Group,, class PXR_NS::SdfValueTypeName PathExpression,, class PXR_NS::SdfValueTypeName BoolArray,, class PXR_NS::SdfValueTypeName UCharArray,, class PXR_NS::SdfValueTypeName IntArray,, class PXR_NS::SdfValueTypeName UIntArray,, class PXR_NS::SdfValueTypeName Int64Array,, class PXR_NS::SdfValueTypeName UInt64Array,, class PXR_NS::SdfValueTypeName HalfArray,, class PXR_NS::SdfValueTypeName FloatArray,, class PXR_NS::SdfValueTypeName DoubleArray,, class PXR_NS::SdfValueTypeName TimeCodeArray,, class PXR_NS::SdfValueTypeName StringArray,, class PXR_NS::SdfValueTypeName TokenArray,, class PXR_NS::SdfValueTypeName AssetArray,, class PXR_NS::SdfValueTypeName Int2Array,, class PXR_NS::SdfValueTypeName Int3Array,, class PXR_NS::SdfValueTypeName Int4Array,, class PXR_NS::SdfValueTypeName Half2Array,, class PXR_NS::SdfValueTypeName Half3Array,, class PXR_NS::SdfValueTypeName Half4Array,, class PXR_NS::SdfValueTypeName Float2Array,, class PXR_NS::SdfValueTypeName Float3Array,, class PXR_NS::SdfValueTypeName Float4Array,, class PXR_NS::SdfValueTypeName Double2Array,, class PXR_NS::SdfValueTypeName Double3Array,, class PXR_NS::SdfValueTypeName Double4Array,, class PXR_NS::SdfValueTypeName Point3hArray,, class PXR_NS::SdfValueTypeName Point3fArray,, class PXR_NS::SdfValueTypeName Point3dArray,, class PXR_NS::SdfValueTypeName Vector3hArray,, class PXR_NS::SdfValueTypeName Vector3fArray,, class PXR_NS::SdfValueTypeName Vector3dArray,, class PXR_NS::SdfValueTypeName Normal3hArray,, class PXR_NS::SdfValueTypeName Normal3fArray,, class PXR_NS::SdfValueTypeName Normal3dArray,, class PXR_NS::SdfValueTypeName Color3hArray,, class PXR_NS::SdfValueTypeName Color3fArray,, class PXR_NS::SdfValueTypeName Color3dArray,, class PXR_NS::SdfValueTypeName Color4hArray,, class PXR_NS::SdfValueTypeName Color4fArray,, class PXR_NS::SdfValueTypeName Color4dArray,, class PXR_NS::SdfValueTypeName QuathArray,, class PXR_NS::SdfValueTypeName QuatfArray,, class PXR_NS::SdfValueTypeName QuatdArray,, class PXR_NS::SdfValueTypeName Matrix2dArray,, class PXR_NS::SdfValueTypeName Matrix3dArray,, class PXR_NS::SdfValueTypeName Matrix4dArray,, class PXR_NS::SdfValueTypeName Frame4dArray,, class PXR_NS::SdfValueTypeName TexCoord2hArray,, class PXR_NS::SdfValueTypeName TexCoord2fArray,, class PXR_NS::SdfValueTypeName TexCoord2dArray,, class PXR_NS::SdfValueTypeName TexCoord3hArray,, class PXR_NS::SdfValueTypeName TexCoord3fArray,, class PXR_NS::SdfValueTypeName TexCoord3dArray,, class PXR_NS::SdfValueTypeName PathExpressionArray]
+class PXR_NS::SdfHandle<class PXR_NS::SdfPropertySpec>; [class PXR_NS::SdfPropertySpec _spec];
+class PXR_NS::SdfSchema; [$inheritance class PXR_NS::SdfSchemaBase,, $specialImportedAsReference];
+
+
+
+class PXR_NS::UsdAPISchemaBase; [$inheritance class PXR_NS::UsdSchemaBase,, class PXR_NS::TfToken _instanceName];
+class PXR_NS::UsdAttribute; [$inheritance class PXR_NS::UsdProperty];
+class PXR_NS::UsdEditContext; [class PXR_NS::TfWeakPtr<class PXR_NS::UsdStage> _stage,, class PXR_NS::UsdEditTarget _originalEditTarget];
+class PXR_NS::UsdEditTarget; [class PXR_NS::TfWeakPtr<class PXR_NS::SdfLayer> _layer,, class PXR_NS::PcpMapFunction _mapping];
+class PXR_NS::UsdInherits; [class PXR_NS::UsdPrim _prim];
+class PXR_NS::UsdNotice; [];
+class PXR_NS::UsdObject; [enum PXR_NS::UsdObjType _type,, class PXR_NS::Usd_PrimDataHandle _prim,, class PXR_NS::SdfPath _proxyPrimPath,, class PXR_NS::TfToken _propName];
+class PXR_NS::UsdPayloads; [class PXR_NS::UsdPrim _prim];
+class PXR_NS::UsdPrim; [$inheritance class PXR_NS::UsdObject];
+class PXR_NS::UsdPrimRange; [const class PXR_NS::Usd_PrimData * _begin,, const class PXR_NS::Usd_PrimData * _end,, class PXR_NS::SdfPath _initProxyPrimPath,, class PXR_NS::Usd_PrimFlagsPredicate _predicate,, unsigned int _initDepth,, _Bool _postOrder];
+class PXR_NS::UsdProperty; [$inheritance class PXR_NS::UsdObject];
+class PXR_NS::UsdReferences; [class PXR_NS::UsdPrim _prim];
+class PXR_NS::UsdRelationship; [$inheritance class PXR_NS::UsdProperty];
+class PXR_NS::UsdSchemaBase; [class PXR_NS::Usd_PrimDataHandle _primData,, class PXR_NS::SdfPath _proxyPrimPath];
+class PXR_NS::UsdSpecializes; [class PXR_NS::UsdPrim _prim];
+class PXR_NS::UsdStage; [$inheritance class PXR_NS::TfRefBase,, $inheritance class PXR_NS::TfWeakBase,, class PXR_NS::Usd_PrimData * _pseudoRoot,, class PXR_NS::TfRefPtr<class PXR_NS::SdfLayer> _rootLayer,, class PXR_NS::TfRefPtr<class PXR_NS::SdfLayer> _sessionLayer,, class PXR_NS::UsdEditTarget _editTarget,, _Bool _editTargetIsLocalLayer,, class std::unique_ptr<class PXR_NS::PcpCache> _cache,, class std::unique_ptr<class PXR_NS::Usd_ClipCache> _clipCache,, class std::unique_ptr<class PXR_NS::Usd_InstanceCache> _instanceCache,, class PXR_NS::TfHashMap<class PXR_NS::TfToken, class PXR_NS::TfToken, class PXR_NS::TfHash> _invalidPrimTypeToFallbackMap,, unsigned long _usedLayersRevision,, class tbb::interface5::concurrent_hash_map<class PXR_NS::SdfPath, class PXR_NS::TfDelegatedCountPtr<class PXR_NS::Usd_PrimData>, struct PXR_NS::UsdStage::_TbbHashEq> _primMap,, enum PXR_NS::UsdInterpolationType _interpolationType,, class std::vector<struct std::pair<class PXR_NS::TfWeakPtr<class PXR_NS::SdfLayer>, class PXR_NS::TfNotice::Key> > _layersAndNoticeKeys,, unsigned long _lastChangeSerialNumber,, class PXR_NS::TfNotice::Key _resolverChangeKey,, class PXR_NS::UsdStage::_PendingChanges * _pendingChanges,, class std::optional<class PXR_NS::WorkDispatcher> _dispatcher,, class std::unique_ptr<std::string> _mallocTagID,, enum PXR_NS::UsdStage::InitialLoadSet _initialLoadSet,, class PXR_NS::UsdStagePopulationMask _populationMask,, class PXR_NS::UsdStageLoadRules _loadRules,, _Bool _isClosingStage,, _Bool _isWritingFallbackPrimTypes,, $specialImportedAsReference];
+class PXR_NS::UsdTimeCode; [double _value,, _Bool _isPreTime];
+class PXR_NS::UsdClipsAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+class PXR_NS::UsdModelAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+class PXR_NS::UsdTyped; [$inheritance class PXR_NS::UsdSchemaBase];
+class PXR_NS::UsdSchemaRegistry; [$inheritance class PXR_NS::TfWeakBase,, class std::vector<class PXR_NS::TfRefPtr<class PXR_NS::SdfLayer> > _schematicsLayers,, class std::unordered_map<class PXR_NS::TfToken, const class std::unique_ptr<class PXR_NS::UsdPrimDefinition>, class PXR_NS::TfHash> _concreteTypedPrimDefinitions,, class std::unordered_map<class PXR_NS::TfToken, const struct PXR_NS::UsdSchemaRegistry::_APISchemaDefinitionInfo, class PXR_NS::TfHash> _appliedAPIPrimDefinitions,, class PXR_NS::UsdPrimDefinition * _emptyPrimDefinition,, class PXR_NS::VtDictionary _fallbackPrimTypes,, $specialImportedAsReference];
+
+
+class PXR_NS::UsdGeomBBoxCache; [class PXR_NS::WorkDispatcher _dispatcher,, class PXR_NS::UsdTimeCode _time,, class std::optional<class PXR_NS::UsdTimeCode> _baseTime,, class std::vector<class PXR_NS::TfToken> _includedPurposes,, class PXR_NS::UsdGeomXformCache _ctmCache,, class PXR_NS::TfHashMap<struct PXR_NS::UsdGeomBBoxCache::_PrimContext, struct PXR_NS::UsdGeomBBoxCache::_Entry, class PXR_NS::TfHash> _bboxCache,, _Bool _useExtentsHint,, _Bool _ignoreVisibility];
+class PXR_NS::UsdGeomBasisCurves; [$inheritance class PXR_NS::UsdGeomCurves];
+class PXR_NS::UsdGeomBoundable; [$inheritance class PXR_NS::UsdGeomXformable];
+class PXR_NS::UsdGeomCamera; [$inheritance class PXR_NS::UsdGeomXformable];
+class PXR_NS::UsdGeomXformOp; [class std::variant<class PXR_NS::UsdAttribute, class PXR_NS::UsdAttributeQuery> _attr,, enum PXR_NS::UsdGeomXformOp::Type _opType,, _Bool _isInverseOp];
+class PXR_NS::UsdGeomCapsule; [$inheritance class PXR_NS::UsdGeomGprim];
+class PXR_NS::UsdGeomCapsule_1; [$inheritance class PXR_NS::UsdGeomGprim];
+class PXR_NS::UsdGeomCone; [$inheritance class PXR_NS::UsdGeomGprim];
+class PXR_NS::UsdGeomCube; [$inheritance class PXR_NS::UsdGeomGprim];
+class PXR_NS::UsdGeomCurves; [$inheritance class PXR_NS::UsdGeomPointBased];
+class PXR_NS::UsdGeomCylinder; [$inheritance class PXR_NS::UsdGeomGprim];
+class PXR_NS::UsdGeomCylinder_1; [$inheritance class PXR_NS::UsdGeomGprim];
+class PXR_NS::UsdGeomHermiteCurves; [$inheritance class PXR_NS::UsdGeomCurves];
+class PXR_NS::UsdGeomImageable; [$inheritance class PXR_NS::UsdTyped];
+class PXR_NS::UsdGeomGprim; [$inheritance class PXR_NS::UsdGeomBoundable];
+class PXR_NS::UsdGeomMesh; [$inheritance class PXR_NS::UsdGeomPointBased];
+class PXR_NS::UsdGeomModelAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+class PXR_NS::UsdGeomPlane; [$inheritance class PXR_NS::UsdGeomGprim];
+class PXR_NS::UsdGeomPointBased; [$inheritance class PXR_NS::UsdGeomGprim];
+class PXR_NS::UsdGeomPointInstancer; [$inheritance class PXR_NS::UsdGeomBoundable];
+class PXR_NS::UsdGeomPoints; [$inheritance class PXR_NS::UsdGeomPointBased];
+class PXR_NS::UsdGeomPrimvar; [class PXR_NS::UsdAttribute _attr,, class PXR_NS::TfToken _idTargetRelName,, struct std::atomic<enum PXR_NS::UsdGeomPrimvar::_IdTargetStatus> _idTargetStatus];
+class PXR_NS::UsdGeomScope; [$inheritance class PXR_NS::UsdGeomImageable];
+class PXR_NS::UsdGeomSphere; [$inheritance class PXR_NS::UsdGeomGprim];
+class PXR_NS::UsdGeomSubset; [$inheritance class PXR_NS::UsdTyped];
+class PXR_NS::UsdGeomTetMesh; [$inheritance class PXR_NS::UsdGeomPointBased];
+class PXR_NS::UsdGeomVisibilityAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+class PXR_NS::UsdGeomXform; [$inheritance class PXR_NS::UsdGeomXformable];
+class PXR_NS::UsdGeomXformable; [$inheritance class PXR_NS::UsdGeomImageable];
+class PXR_NS::UsdGeomXformCommonAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+class PXR_NS::UsdGeomPrimvarsAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+
+
+class PXR_NS::UsdVolVolume; [$inheritance class PXR_NS::UsdGeomGprim];
+
+
+class PXR_NS::UsdMediaSpatialAudio; [$inheritance class PXR_NS::UsdGeomXformable];
+
+
+class PXR_NS::UsdShadeConnectableAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+class PXR_NS::UsdShadeInput; [class PXR_NS::UsdAttribute _attr];
+class PXR_NS::UsdShadeOutput; [class PXR_NS::UsdAttribute _attr];
+class PXR_NS::UsdShadeMaterial; [$inheritance class PXR_NS::UsdShadeNodeGraph];
+class PXR_NS::UsdShadeMaterialBindingAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+class PXR_NS::UsdShadeNodeDefAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+class PXR_NS::UsdShadeShader; [$inheritance class PXR_NS::UsdTyped];
+class PXR_NS::UsdShadeNodeGraph; [$inheritance class PXR_NS::UsdTyped];
+
+
+class PXR_NS::UsdLuxBoundableLightBase; [$inheritance class PXR_NS::UsdGeomBoundable];
+class PXR_NS::UsdLuxCylinderLight; [$inheritance class PXR_NS::UsdLuxBoundableLightBase];
+class PXR_NS::UsdLuxDiskLight; [$inheritance class PXR_NS::UsdLuxBoundableLightBase];
+class PXR_NS::UsdLuxDomeLight; [$inheritance class PXR_NS::UsdLuxNonboundableLightBase];
+class PXR_NS::UsdLuxGeometryLight; [$inheritance class PXR_NS::UsdLuxNonboundableLightBase];
+class PXR_NS::UsdLuxLightAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+class PXR_NS::UsdLuxLightFilter; [$inheritance class PXR_NS::UsdGeomXformable];
+class PXR_NS::UsdLuxLightListAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+class PXR_NS::UsdLuxListAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+class PXR_NS::UsdLuxMeshLightAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+class PXR_NS::UsdLuxShadowAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+
+
+class PXR_NS::UsdProcGenerativeProcedural; [$inheritance class PXR_NS::UsdGeomBoundable];
+
+
+class PXR_NS::UsdRenderSettings; [$inheritance class PXR_NS::UsdRenderSettingsBase];
+
+
+class PXR_NS::UsdHydraGenerativeProceduralAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+
+
+class PXR_NS::UsdRiMaterialAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+
+
+class PXR_NS::UsdSkelAnimation; [$inheritance class PXR_NS::UsdTyped];
+class PXR_NS::UsdSkelBindingAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+class PXR_NS::UsdSkelBlendShape; [$inheritance class PXR_NS::UsdTyped];
+class PXR_NS::UsdSkelRoot; [$inheritance class PXR_NS::UsdGeomBoundable];
+class PXR_NS::UsdSkelSkeleton; [$inheritance class PXR_NS::UsdGeomBoundable];
+class PXR_NS::UsdSkelBinding; [class PXR_NS::UsdSkelSkeleton _skel,, class PXR_NS::VtArray<class PXR_NS::UsdSkelSkinningQuery> _skinningQueries];
+
+
+class PXR_NS::UsdUINodeGraphNodeAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+
+
+class PXR_NS::UsdPhysicsCollisionAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+class PXR_NS::UsdPhysicsLimitAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+class PXR_NS::UsdPhysicsMassAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+class PXR_NS::UsdPhysicsMaterialAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+class PXR_NS::UsdPhysicsMeshCollisionAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+class PXR_NS::UsdPhysicsRigidBodyAPI; [$inheritance class PXR_NS::UsdAPISchemaBase];
+class PXR_NS::UsdPhysicsScene; [$inheritance class PXR_NS::UsdTyped];
+class PXR_NS::UsdPhysicsSphericalJoint; [$inheritance class PXR_NS::UsdPhysicsJoint];
+
+
+class PXR_NS::UsdMtlxFileFormat; [$inheritance class PXR_NS::SdfFileFormat];
+
+
+
+class PXR_NS::HioImage; [];
+class PXR_NS::HioImage::StorageSpec; [int width,, int height,, int depth,, enum PXR_NS::HioFormat format,, _Bool flipped,, void * data];
+enum PXR_NS::HioImage::ImageOriginLocation; [];
+enum PXR_NS::HioImage::SourceColorSpace; [];
+class PXR_NS::HioImageRegistry; [$inheritance class PXR_NS::TfSingleton<HioImageRegistry>,, class std::unique_ptr<class PXR_NS::HioRankedTypeMap> _typeMap,, $specialImportedAsReference];
+
+enum PXR_NS::CameraUtilConformWindowPolicy; [];
+
+
+class PXR_NS::GlfSimpleLight; [class PXR_NS::GfVec4f _ambient,, class PXR_NS::GfVec4f _diffuse,, class PXR_NS::GfVec4f _specular,, class PXR_NS::GfVec4f _position,, class PXR_NS::GfVec3f _spotDirection,, float _spotCutoff,, float _spotFalloff,, class PXR_NS::GfVec3f _attenuation,, _Bool _isCameraSpaceLight,, _Bool _hasIntensity,, _Bool _hasShadow,, int _shadowResolution,, float _shadowBias,, float _shadowBlur,, int _shadowIndexStart,, int _shadowIndexEnd,, class PXR_NS::GfMatrix4d _transform,, class std::vector<class PXR_NS::GfMatrix4d> _shadowMatrices,, _Bool _isDomeLight,, class PXR_NS::SdfAssetPath _domeLightTextureFile,, class PXR_NS::TfToken _postSurfaceIdentifier,, std::string _postSurfaceShaderSource,, class PXR_NS::VtArray<unsigned char> _postSurfaceShaderParams,, class PXR_NS::SdfPath _id];
+class PXR_NS::GlfContextCaps; [int glVersion,, _Bool coreProfile,, int maxArrayTextureLayers,, $specialImportedAsReference];
+
+
+class PXR_NS::HgiBuffer; [struct PXR_NS::HgiBufferDesc _descriptor];
+class PXR_NS::HgiCmds; [_Bool _submitted];
+class PXR_NS::Hgi; [struct std::atomic<unsigned long long> _uniqueIdCounter];
+class PXR_NS::HgiTexture; [struct PXR_NS::HgiTextureDesc _descriptor];
+
+
+class PXR_NS::HgiMetalBuffer; [$inheritance class PXR_NS::HgiBuffer,, id<MTLBuffer> _bufferId];
+class PXR_NS::HgiMetal; [$inheritance class PXR_NS::Hgi,, id<MTLDevice> _device,, id<MTLCommandQueue> _commandQueue,, id<MTLCommandBuffer> _commandBuffer,, id<MTLCaptureScope> _captureScopeFullFrame,, id<MTLArgumentEncoder> _argEncoderBuffer,, id<MTLArgumentEncoder> _argEncoderSampler,, id<MTLArgumentEncoder> _argEncoderTexture,, class std::stack<id<MTLBuffer> > _freeArgBuffers,, class std::vector<id<MTLBuffer> > _activeArgBuffers,, class std::mutex _freeArgMutex,, class PXR_NS::HgiCmds * _currentCmds,, class std::unique_ptr<class PXR_NS::HgiMetalCapabilities> _capabilities,, class std::unique_ptr<class PXR_NS::HgiMetalIndirectCommandEncoder> _indirectCommandEncoder,, int _frameDepth,, _Bool _workToFlush,, class std::unique_ptr<struct PXR_NS::HgiMetal::AutoReleasePool> _pool];
+class PXR_NS::HgiMetalIndirectCommandEncoder; [$inheritance class PXR_NS::HgiIndirectCommandEncoder,, class PXR_NS::HgiMetal * _hgi,, id<MTLDevice> _device,, id<MTLLibrary> _library,, class std::vector<struct PXR_NS::HgiMetalIndirectCommandEncoder::FunctionState> _functions,, unsigned long _bufferStorageMode,, id<MTLBuffer> _triangleTessFactors,, id<MTLBuffer> _quadTessFactors,, class std::mutex _poolMutex,, class std::multimap<unsigned int, id<MTLIndirectCommandBuffer> > _commandBufferPool,, class std::multimap<unsigned int, id<MTLBuffer> > _argumentBufferPool];
+class PXR_NS::HgiMetalTexture; [$inheritance class PXR_NS::HgiTexture,, id<MTLTexture> _textureId];
+
+
+class PXR_NS::HdSceneIndexPrimView::const_iterator; [class PXR_NS::TfRefPtr<class PXR_NS::HdSceneIndexBase> _inputSceneIndex,, class std::vector<struct PXR_NS::HdSceneIndexPrimView::const_iterator::_StackFrame> _stack,, _Bool _skipDescendants];
+class PXR_NS::HdPerfLog; [class PXR_NS::TfHashMap<class PXR_NS::TfToken, class PXR_NS::HdPerfLog::_CacheEntry, struct PXR_NS::TfToken::HashFunctor> _cacheMap,, class PXR_NS::TfHashMap<class PXR_NS::TfToken, double, struct PXR_NS::TfToken::HashFunctor> _counterMap,, class std::vector<class PXR_NS::HdResourceRegistry *> _resourceRegistryVector,, _Bool _enabled,, class std::mutex _mutex,, $specialImportedAsReference];
+class PXR_NS::HdRendererPluginRegistry; [$inheritance class PXR_NS::HfPluginRegistry,, $specialImportedAsReference];
+class PXR_NS::HdSceneIndexPluginRegistry; [$inheritance class PXR_NS::HfPluginRegistry,, class std::map<std::string, class std::map<int, class std::vector<struct PXR_NS::HdSceneIndexPluginRegistry::_Entry> > > _sceneIndicesForRenderers,, class std::map<std::string, class std::vector<class PXR_NS::TfToken> > _preloadsForRenderer,, class std::map<class PXR_NS::TfToken, class std::set<std::string> > _preloadAppsForPlugins,, $specialImportedAsReference];
+
+class PXR_NS::HdGpGenerativeProceduralPluginRegistry; [$inheritance class PXR_NS::HfPluginRegistry,, $specialImportedAsReference];
+
+
+struct PXR_NS::HdsiLegacyDisplayStyleOverrideSceneIndex::OptionalInt; [_Bool hasValue,, int value];
+
+
+class PXR_NS::UsdImagingGLEngine; [class std::unique_ptr<class PXR_NS::Hgi> _hgi,, class PXR_NS::HdDriver _hgiDriver,, class PXR_NS::VtValue _userFramebuffer,, _Bool _displayUnloadedPrimsWithBounds,, _Bool _gpuEnabled,, class PXR_NS::HdPluginRenderDelegateUniqueHandle _renderDelegate,, class std::unique_ptr<class PXR_NS::HdRenderIndex> _renderIndex,, class PXR_NS::SdfPath _sceneDelegateId,, class std::unique_ptr<class PXR_NS::HdxTaskController> _taskController,, class PXR_NS::TfRefPtr<class PXR_NS::HdxTaskControllerSceneIndex> _taskControllerSceneIndex,, class std::shared_ptr<class PXR_NS::HdxSelectionTracker> _selTracker,, class PXR_NS::HdRprimCollection _renderCollection,, class PXR_NS::HdRprimCollection _intersectCollection,, class PXR_NS::TfRefPtr<class PXR_NS::GlfSimpleLightingContext> _lightingContextForOpenGLState,, class PXR_NS::GfVec4f _selectionColor,, _Bool _domeLightCameraVisibility,, class PXR_NS::SdfPath _rootPath,, class std::vector<class PXR_NS::SdfPath> _excludedPrimPaths,, class std::vector<class PXR_NS::SdfPath> _invisedPrimPaths,, _Bool _isPopulated,, class std::shared_ptr<struct PXR_NS::UsdImagingGLEngine_Impl::_AppSceneIndices> _appSceneIndices,, class PXR_NS::TfRefPtr<class PXR_NS::UsdImagingStageSceneIndex> _stageSceneIndex,, class PXR_NS::TfRefPtr<class PXR_NS::UsdImagingSelectionSceneIndex> _selectionSceneIndex,, class PXR_NS::TfRefPtr<class PXR_NS::UsdImagingRootOverridesSceneIndex> _rootOverridesSceneIndex,, class PXR_NS::TfRefPtr<class PXR_NS::HdsiLegacyDisplayStyleOverrideSceneIndex> _displayStyleSceneIndex,, class PXR_NS::TfRefPtr<class PXR_NS::HdsiPrimTypePruningSceneIndex> _materialPruningSceneIndex,, class PXR_NS::TfRefPtr<class PXR_NS::HdsiPrimTypePruningSceneIndex> _lightPruningSceneIndex,, class PXR_NS::TfRefPtr<class PXR_NS::HdSceneIndexBase> _sceneIndex,, class std::unique_ptr<class PXR_NS::UsdImagingDelegate> _sceneDelegate,, class std::unique_ptr<class PXR_NS::HdEngine> _engine,, _Bool _allowAsynchronousSceneProcessing];
+class PXR_NS::UsdImagingGLRenderParams; [class PXR_NS::UsdTimeCode frame,, float complexity,, enum PXR_NS::UsdImagingGLDrawMode drawMode,, _Bool showGuides,, _Bool showProxy,, _Bool showRender,, _Bool forceRefresh,, _Bool flipFrontFacing,, enum PXR_NS::UsdImagingGLCullStyle cullStyle,, _Bool enableLighting,, _Bool enableSampleAlphaToCoverage,, _Bool applyRenderState,, _Bool gammaCorrectColors,, _Bool highlight,, class PXR_NS::GfVec4f overrideColor,, class PXR_NS::GfVec4f wireframeColor,, float alphaThreshold,, class std::vector<class PXR_NS::GfVec4d> clipPlanes,, _Bool enableSceneMaterials,, _Bool enableSceneLights,, _Bool enableUsdDrawModes,, class PXR_NS::GfVec4f clearColor,, class PXR_NS::TfToken colorCorrectionMode,, int lut3dSizeOCIO,, class PXR_NS::TfToken ocioDisplay,, class PXR_NS::TfToken ocioView,, class PXR_NS::TfToken ocioColorSpace,, class PXR_NS::TfToken ocioLook,, class std::vector<class PXR_NS::GfBBox3d> bboxes,, class PXR_NS::GfVec4f bboxLineColor,, float bboxLineDashSize];
+
+

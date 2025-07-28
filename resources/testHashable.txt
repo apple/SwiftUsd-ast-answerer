@@ -1,0 +1,184 @@
+class PXR_NS::TfError; blockedByNoCandidate;
+class PXR_NS::TfHash; blockedByNoCandidate;
+class PXR_NS::TfNotice; blockedByNoCandidate;
+class PXR_NS::TfRefBase; available;
+class PXR_NS::TfRefPtr<class PXR_NS::SdfLayer>; available;
+class PXR_NS::TfRefPtr<class PXR_NS::UsdStage>; available;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdGeomTokensType>; blockedByImport;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdMtlxTokensType>; blockedByImport;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdShadeTokensType>; blockedByImport;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdHydraTokensType>; blockedByImport;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdLuxTokensType>; blockedByImport;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdMediaTokensType>; blockedByImport;
+class PXR_NS::TfToken; available;
+class PXR_NS::TfType; available;
+class PXR_NS::TfWeakBase; blockedByImport;
+class PXR_NS::TfWeakPtrFacade<PXR_NS::TfWeakPtr, class PXR_NS::SdfLayer>; foundCandidateButBlockedByEquatable;
+class PXR_NS::TfWeakPtrFacade<PXR_NS::TfWeakPtr, class PXR_NS::UsdStage>; foundCandidateButBlockedByEquatable;
+class PXR_NS::TfWeakPtr<class PXR_NS::SdfLayer>; available;
+class PXR_NS::TfWeakPtr<class PXR_NS::UsdStage>; available;
+
+
+class PXR_NS::GfBBox3d; available;
+class PXR_NS::GfFrustum; available;
+class PXR_NS::pxr_half::half; available;
+class PXR_NS::GfMatrix2d; available;
+class PXR_NS::GfMatrix2f; available;
+class PXR_NS::GfMatrix3f; available;
+class PXR_NS::GfMatrix3d; available;
+class PXR_NS::GfMatrix4f; available;
+class PXR_NS::GfMatrix4d; available;
+class PXR_NS::GfQuatd; available;
+class PXR_NS::GfQuatf; available;
+class PXR_NS::GfQuath; available;
+class PXR_NS::GfQuaternion; available;
+class PXR_NS::GfRange1d; available;
+class PXR_NS::GfRange1f; available;
+class PXR_NS::GfRange2d; available;
+class PXR_NS::GfRange2f; available;
+class PXR_NS::GfRange3d; available;
+class PXR_NS::GfRange3f; available;
+class PXR_NS::GfRect2i; available;
+class PXR_NS::GfVec2d; available;
+class PXR_NS::GfVec2f; available;
+class PXR_NS::GfVec2h; available;
+class PXR_NS::GfVec2i; available;
+class PXR_NS::GfVec3d; available;
+class PXR_NS::GfVec3f; available;
+class PXR_NS::GfVec3h; available;
+class PXR_NS::GfVec3i; available;
+class PXR_NS::GfVec4d; available;
+class PXR_NS::GfVec4f; available;
+class PXR_NS::GfVec4h; available;
+class PXR_NS::GfVec4i; available;
+
+class PXR_NS::PlugRegistry; available;
+
+class PXR_NS::VtArray<TfToken>; available;
+class PXR_NS::VtArray<int>; available;
+class PXR_NS::VtArray<GfVec3f>; available;
+class PXR_NS::VtArray<GfVec4d>; available;
+class PXR_NS::VtArray<class PXR_NS::SdfPath>; available;
+class PXR_NS::VtArray<float>; available;
+class PXR_NS::VtArray<double>; available;
+class PXR_NS::VtArray<GfVec2d>; available;
+class PXR_NS::VtArray<GfVec3d>; available;
+class PXR_NS::VtArray<class PXR_NS::SdfAssetPath>; available;
+class PXR_NS::VtArray<GfVec4f>; available;
+class PXR_NS::VtArray<GfVec2f>; available;
+class PXR_NS::VtArray<GfVec4i>; available;
+class PXR_NS::VtArray<GfVec3i>; available;
+class PXR_NS::VtArray<GfVec2i>; available;
+class PXR_NS::VtArray<GfVec4h>; available;
+class PXR_NS::VtArray<GfVec3h>; available;
+class PXR_NS::VtArray<GfVec2h>; available;
+class PXR_NS::VtArray<GfMatrix4f>; available;
+class PXR_NS::VtArray<GfMatrix3f>; available;
+class PXR_NS::VtArray<GfMatrix2f>; available;
+class PXR_NS::VtArray<GfMatrix4d>; available;
+class PXR_NS::VtArray<GfMatrix3d>; available;
+class PXR_NS::VtArray<GfMatrix2d>; available;
+class PXR_NS::VtArray<GfRange3f>; available;
+class PXR_NS::VtArray<GfRange3d>; available;
+class PXR_NS::VtArray<GfRange2f>; available;
+class PXR_NS::VtArray<GfRange2d>; available;
+class PXR_NS::VtArray<GfRange1f>; available;
+class PXR_NS::VtArray<GfRange1d>; available;
+class PXR_NS::VtArray<GfInterval>; available;
+class PXR_NS::VtArray<GfRect2i>; available;
+class PXR_NS::VtArray<GfQuath>; available;
+class PXR_NS::VtArray<GfQuatf>; available;
+class PXR_NS::VtArray<GfQuatd>; available;
+class PXR_NS::VtArray<GfQuaternion>; available;
+class PXR_NS::VtArray<GfDualQuath>; available;
+class PXR_NS::VtArray<GfDualQuatf>; available;
+class PXR_NS::VtArray<GfDualQuatd>; available;
+class PXR_NS::VtArray<char>; available;
+class PXR_NS::VtArray<unsigned char>; available;
+class PXR_NS::VtArray<short>; available;
+class PXR_NS::VtArray<unsigned short>; available;
+class PXR_NS::VtArray<unsigned int>; available;
+class PXR_NS::VtArray<int64_t>; available;
+class PXR_NS::VtArray<uint64_t>; available;
+class PXR_NS::VtArray<GfHalf>; available;
+class PXR_NS::VtArray<std::string>; available;
+
+class PXR_NS::VtDictionary; available;
+class PXR_NS::VtValue; available;
+
+class PXR_NS::KindRegistry; available;
+
+class PXR_NS::SdfAssetPath; available;
+class PXR_NS::SdfLayer; available;
+class PXR_NS::SdfLayerOffset; available;
+class PXR_NS::SdfPath; available;
+class PXR_NS::SdfPrimSpec; available;
+class PXR_NS::SdfReference; available;
+class PXR_NS::SdfValueTypeName; available;
+
+class PXR_NS::UsdAPISchemaBase; blockedByNoCandidate;
+class PXR_NS::UsdAttribute; available;
+class PXR_NS::UsdObject; available;
+class PXR_NS::UsdEditContext; blockedByImport;
+class PXR_NS::UsdEditTarget;  blockedByNoCandidate;
+class PXR_NS::UsdInherits; blockedByNoCandidate;
+class PXR_NS::UsdNotice; blockedByNoCandidate;
+class PXR_NS::UsdPrim; available;
+class PXR_NS::UsdPayloads; blockedByNoCandidate;
+class PXR_NS::UsdProperty; available;
+class PXR_NS::UsdReferences; blockedByNoCandidate;
+class PXR_NS::UsdRelationship; available;
+class PXR_NS::UsdSchemaBase; blockedByNoCandidate;
+class PXR_NS::UsdStage; available;
+class PXR_NS::UsdTimeCode; available;
+
+class PXR_NS::UsdGeomBBoxCache; blockedByNoCandidate;
+class PXR_NS::UsdGeomBasisCurves; blockedByNoCandidate;
+class PXR_NS::UsdGeomBoundable; blockedByNoCandidate;
+class PXR_NS::UsdGeomCamera; blockedByNoCandidate;
+
+
+class PXR_NS::UsdVolVolume; blockedByNoCandidate;
+
+class PXR_NS::UsdMediaSpatialAudio; blockedByNoCandidate;
+
+class PXR_NS::UsdShadeConnectableAPI; blockedByNoCandidate;
+class PXR_NS::UsdShadeInput; blockedByNoCandidate;
+class PXR_NS::UsdShadeOutput; blockedByNoCandidate;
+class PXR_NS::UsdShadeMaterial; blockedByNoCandidate;
+
+class PXR_NS::UsdLuxBoundableLightBase; blockedByNoCandidate;
+class PXR_NS::UsdLuxCylinderLight; blockedByNoCandidate;
+
+class PXR_NS::UsdProcGenerativeProcedural; blockedByNoCandidate;
+
+class PXR_NS::UsdRenderSettings; blockedByNoCandidate;
+
+class PXR_NS::UsdHydraGenerativeProceduralAPI; blockedByNoCandidate;
+
+class PXR_NS::UsdSkelAnimation; blockedByNoCandidate;
+class PXR_NS::UsdSkelBindingAPI; blockedByNoCandidate;
+
+class PXR_NS::UsdUINodeGraphNodeAPI; blockedByNoCandidate;
+
+class PXR_NS::UsdPhysicsCollisionAPI; blockedByNoCandidate;
+class PXR_NS::UsdPhysicsLimitAPI; blockedByNoCandidate;
+
+class PXR_NS::HioImage; blockedByImport;
+class PXR_NS::HioImage::StorageSpec; blockedByImport;
+
+class PXR_NS::GlfSimpleLight; blockedByNoCandidate;
+
+class PXR_NS::HgiBuffer; blockedByImport;
+class PXR_NS::HgiCmds; blockedByImport;
+class PXR_NS::Hgi; blockedByImport;
+class PXR_NS::HgiTexture; blockedByImport;
+
+class PXR_NS::HgiMetalBuffer; blockedByImport;
+class PXR_NS::HgiMetal; blockedByImport;
+class PXR_NS::HgiMetalIndirectCommandEncoder; blockedByImport;
+class PXR_NS::HgiMetalTexture; blockedByImport;
+
+class PXR_NS::UsdImagingGLEngine; blockedByImport;
+
+

@@ -1,0 +1,184 @@
+class PXR_NS::TfError; unavailable;
+class PXR_NS::TfHash; unavailable;
+class PXR_NS::TfNotice; unavailable;
+class PXR_NS::TfRefBase; availableImportedAsReference;
+class PXR_NS::TfRefPtr<class PXR_NS::SdfLayer>; availableClassTemplateSpecialization;
+class PXR_NS::TfRefPtr<class PXR_NS::UsdStage>; availableClassTemplateSpecialization;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdGeomTokensType>; noAnalysisBecauseBlockedByImport;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdMtlxTokensType>; noAnalysisBecauseBlockedByImport;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdShadeTokensType>; noAnalysisBecauseBlockedByImport;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdHydraTokensType>; noAnalysisBecauseBlockedByImport;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdLuxTokensType>; noAnalysisBecauseBlockedByImport;
+class PXR_NS::TfStaticData<struct PXR_NS::UsdMediaTokensType>; noAnalysisBecauseBlockedByImport;
+class PXR_NS::TfWeakPtr<class PXR_NS::SdfLayer>; availableClassTemplateSpecialization;
+class PXR_NS::TfWeakPtr<class PXR_NS::UsdStage>; availableClassTemplateSpecialization;
+
+class PXR_NS::TfToken; availableFoundBySwift;
+class PXR_NS::TfType; availableFoundBySwift;
+class PXR_NS::TfWeakBase; noAnalysisBecauseBlockedByImport;
+class PXR_NS::TfWeakPtr<class PXR_NS::SdfLayer>; availableClassTemplateSpecialization;
+class PXR_NS::TfWeakPtr<class PXR_NS::UsdStage>; availableClassTemplateSpecialization;
+
+class PXR_NS::GfBBox3d; unavailable;
+class PXR_NS::GfCamera; unavailable;
+class PXR_NS::GfFrustum; unavailable;
+class PXR_NS::pxr_half::half; [availableDifferentArgumentTypes,, float,, float];
+class PXR_NS::GfMatrix2d; unavailable;
+class PXR_NS::GfMatrix2f; unavailable;
+class PXR_NS::GfMatrix3f; unavailable;
+class PXR_NS::GfMatrix3d; unavailable;
+class PXR_NS::GfMatrix4f; unavailable;
+class PXR_NS::GfMatrix4d; unavailable;
+class PXR_NS::GfQuatd; unavailable;
+class PXR_NS::GfQuatf; unavailable;
+class PXR_NS::GfQuath; unavailable;
+class PXR_NS::GfQuaternion; unavailable;
+class PXR_NS::GfRange1d; unavailable;
+class PXR_NS::GfRange1f; unavailable;
+class PXR_NS::GfRange2d; unavailable;
+class PXR_NS::GfRange2f; unavailable;
+class PXR_NS::GfRange3d; unavailable;
+class PXR_NS::GfRange3f; unavailable;
+class PXR_NS::GfRect2i; unavailable;
+class PXR_NS::GfVec2d; unavailable;
+class PXR_NS::GfVec2f; unavailable;
+class PXR_NS::GfVec2h; unavailable;
+class PXR_NS::GfVec2i; unavailable;
+class PXR_NS::GfVec3d; unavailable;
+class PXR_NS::GfVec3f; unavailable;
+class PXR_NS::GfVec3h; unavailable;
+class PXR_NS::GfVec3i; unavailable;
+class PXR_NS::GfVec4d; unavailable;
+class PXR_NS::GfVec4f; unavailable;
+class PXR_NS::GfVec4h; unavailable;
+class PXR_NS::GfVec4i; unavailable;
+
+class PXR_NS::PlugRegistry; availableImportedAsReference;
+
+class PXR_NS::VtArray<TfToken>; unavailable;
+class PXR_NS::VtArray<int>; unavailable;
+class PXR_NS::VtArray<GfVec3f>; unavailable;
+class PXR_NS::VtArray<GfVec4d>; unavailable;
+class PXR_NS::VtArray<class PXR_NS::SdfPath>; unavailable;
+class PXR_NS::VtArray<float>; unavailable;
+class PXR_NS::VtArray<double>; unavailable;
+class PXR_NS::VtArray<GfVec2d>; unavailable;
+class PXR_NS::VtArray<GfVec3d>; unavailable;
+class PXR_NS::VtArray<class PXR_NS::SdfAssetPath>; unavailable;
+class PXR_NS::VtArray<GfVec4f>; unavailable;
+class PXR_NS::VtArray<GfVec2f>; unavailable;
+class PXR_NS::VtArray<GfVec4i>; unavailable;
+class PXR_NS::VtArray<GfVec3i>; unavailable;
+class PXR_NS::VtArray<GfVec2i>; unavailable;
+class PXR_NS::VtArray<GfVec4h>; unavailable;
+class PXR_NS::VtArray<GfVec3h>; unavailable;
+class PXR_NS::VtArray<GfVec2h>; unavailable;
+class PXR_NS::VtArray<GfMatrix4f>; unavailable;
+class PXR_NS::VtArray<GfMatrix3f>; unavailable;
+class PXR_NS::VtArray<GfMatrix2f>; unavailable;
+class PXR_NS::VtArray<GfMatrix4d>; unavailable;
+class PXR_NS::VtArray<GfMatrix3d>; unavailable;
+class PXR_NS::VtArray<GfMatrix2d>; unavailable;
+class PXR_NS::VtArray<GfRange3f>; unavailable;
+class PXR_NS::VtArray<GfRange3d>; unavailable;
+class PXR_NS::VtArray<GfRange2f>; unavailable;
+class PXR_NS::VtArray<GfRange2d>; unavailable;
+class PXR_NS::VtArray<GfRange1f>; unavailable;
+class PXR_NS::VtArray<GfRange1d>; unavailable;
+class PXR_NS::VtArray<GfInterval>; unavailable;
+class PXR_NS::VtArray<GfRect2i>; unavailable;
+class PXR_NS::VtArray<GfQuath>; unavailable;
+class PXR_NS::VtArray<GfQuatf>; unavailable;
+class PXR_NS::VtArray<GfQuatd>; unavailable;
+class PXR_NS::VtArray<GfQuaternion>; unavailable;
+class PXR_NS::VtArray<GfDualQuath>; unavailable;
+class PXR_NS::VtArray<GfDualQuatf>; unavailable;
+class PXR_NS::VtArray<GfDualQuatd>; unavailable;
+class PXR_NS::VtArray<char>; unavailable;
+class PXR_NS::VtArray<unsigned char>; unavailable;
+class PXR_NS::VtArray<short>; unavailable;
+class PXR_NS::VtArray<unsigned short>; unavailable;
+class PXR_NS::VtArray<unsigned int>; unavailable;
+class PXR_NS::VtArray<int64_t>; unavailable;
+class PXR_NS::VtArray<uint64_t>; unavailable;
+class PXR_NS::VtArray<GfHalf>; unavailable;
+class PXR_NS::VtArray<std::string>; unavailable;
+class PXR_NS::VtDictionary; unavailable;
+class PXR_NS::VtValue; unavailable;
+
+class PXR_NS::KindRegistry; availableImportedAsReference;
+
+class PXR_NS::SdfAssetPath; availableFoundBySwift;
+class PXR_NS::SdfLayer; availableImportedAsReference;
+class PXR_NS::SdfLayerOffset; availableFoundBySwift;
+class PXR_NS::SdfPath; availableFoundBySwift;
+class PXR_NS::SdfSpec; availableFoundBySwift;
+class PXR_NS::SdfPrimSpec; [availableDifferentArgumentTypes,, class PXR_NS::SdfSpec,, class PXR_NS::SdfSpec];
+class PXR_NS::SdfReference; availableFoundBySwift;
+class PXR_NS::SdfValueTypeName; unavailable;
+
+class PXR_NS::UsdAPISchemaBase; unavailable;
+class PXR_NS::UsdAttribute; [availableDifferentArgumentTypes,, class PXR_NS::UsdObject,, class PXR_NS::UsdObject];
+class PXR_NS::UsdEditContext; noAnalysisBecauseBlockedByImport;
+class PXR_NS::UsdEditTarget; unavailable;
+class PXR_NS::UsdInherits; unavailable;
+class PXR_NS::UsdNotice; unavailable;
+class PXR_NS::UsdObject; availableFriendFunction;
+class PXR_NS::UsdPayloads; unavailable;
+class PXR_NS::UsdPrim; [availableDifferentArgumentTypes,, class PXR_NS::UsdObject,, class PXR_NS::UsdObject];
+class PXR_NS::UsdPrimRange; unavailable;
+class PXR_NS::UsdProperty; [availableDifferentArgumentTypes,, class PXR_NS::UsdObject,, class PXR_NS::UsdObject];
+class PXR_NS::UsdReferences; unavailable;
+class PXR_NS::UsdRelationship; [availableDifferentArgumentTypes,, class PXR_NS::UsdObject,, class PXR_NS::UsdObject];
+class PXR_NS::UsdSchemaBase; unavailable;
+class PXR_NS::UsdSpecializes; unavailable;
+class PXR_NS::UsdStage; availableImportedAsReference;
+class PXR_NS::UsdTimeCode; availableFriendFunction;
+
+class PXR_NS::UsdGeomBBoxCache; unavailable;
+class PXR_NS::UsdGeomBasisCurves; unavailable;
+class PXR_NS::UsdGeomBoundable; unavailable;
+class PXR_NS::UsdGeomCamera; unavailable;
+
+class PXR_NS::UsdVolVolume; unavailable;
+
+class PXR_NS::UsdMediaSpatialAudio; unavailable;
+
+class PXR_NS::UsdShadeConnectableAPI; unavailable;
+class PXR_NS::UsdShadeInput; unavailable;
+class PXR_NS::UsdShadeOutput; unavailable;
+class PXR_NS::UsdShadeMaterial; unavailable;
+
+class PXR_NS::UsdLuxBoundableLightBase; unavailable;
+class PXR_NS::UsdLuxCylinderLight; unavailable;
+
+class PXR_NS::UsdProcGenerativeProcedural; unavailable;
+
+class PXR_NS::UsdRenderSettings; unavailable;
+
+class PXR_NS::UsdHydraGenerativeProceduralAPI; unavailable;
+
+class PXR_NS::UsdSkelAnimation; unavailable;
+class PXR_NS::UsdSkelBindingAPI; unavailable;
+
+class PXR_NS::UsdUINodeGraphNodeAPI; unavailable;
+
+class PXR_NS::UsdPhysicsCollisionAPI; unavailable;
+class PXR_NS::UsdPhysicsLimitAPI; unavailable;
+
+class PXR_NS::HioImage; noAnalysisBecauseBlockedByImport;
+class PXR_NS::HioImage::StorageSpec; noAnalysisBecauseBlockedByImport;
+
+class PXR_NS::GlfSimpleLight; unavailable;
+
+class PXR_NS::HgiBuffer; noAnalysisBecauseBlockedByImport;
+class PXR_NS::HgiCmds; noAnalysisBecauseBlockedByImport;
+class PXR_NS::Hgi; noAnalysisBecauseBlockedByImport;
+class PXR_NS::HgiTexture; noAnalysisBecauseBlockedByImport;
+
+class PXR_NS::HgiMetalBuffer; noAnalysisBecauseBlockedByImport;
+class PXR_NS::HgiMetal; noAnalysisBecauseBlockedByImport;
+class PXR_NS::HgiMetalIndirectCommandEncoder; noAnalysisBecauseBlockedByImport;
+class PXR_NS::HgiMetalTexture; noAnalysisBecauseBlockedByImport;
+
+class PXR_NS::UsdImagingGLEngine; noAnalysisBecauseBlockedByImport;
