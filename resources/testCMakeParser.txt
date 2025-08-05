@@ -70,13 +70,9 @@ pxr/base/trace; publicHeader; stringHash.h;
 pxr/base/trace; publicHeader; trace.h;
 
 pxr/base/work; publicHeader; detachedTask.h;
-pxr/base/work; sourceFile; detachedTask.cpp;
 pxr/base/work; publicHeader; dispatcher.h;
-pxr/base/work; sourceFile; dispatcher.cpp;
 pxr/base/work; publicHeader; loops.h;
-pxr/base/work; sourceFile; loops.cpp;
 pxr/base/work; publicHeader; reduce.h;
-pxr/base/work; sourceFile; reduce.cpp;
 pxr/base/work; publicHeader; api.h;
 pxr/base/work; publicHeader; withScopedParallelism.h;
 
@@ -188,14 +184,6 @@ pxr/usd/sdf; sourceFile; assetPathResolver.cpp;
 pxr/usd/sdf; sourceFile; subLayerListEditor.cpp;
 pxr/usd/sdf; sourceFile; valueTypeRegistry.cpp;
 pxr/usd/sdf; sourceFile; textFileFormat.cpp;
-
-pxr/usd/ndr; publicHeader; declare.h;
-pxr/usd/ndr; sourceFile; declare.cpp;
-pxr/usd/ndr; publicHeader; node.h;
-pxr/usd/ndr; sourceFile; node.cpp;
-pxr/usd/ndr; publicHeader; registry.h;
-pxr/usd/ndr; sourceFile; registry.cpp;
-pxr/usd/ndr; publicHeader; api.h;
 
 pxr/usd/sdr; publicHeader; registry.h;
 pxr/usd/sdr; sourceFile; registry.cpp;
@@ -380,6 +368,67 @@ pxr/usd/usdMtlx; sourceFile; reader.cpp;
 pxr/usd/usdMtlx; publicHeader; utils.h;
 pxr/usd/usdMtlx; sourceFile; utils.cpp;
 pxr/usd/usdMtlx; publicHeader; api.h;
+
+pxr/exec/vdf; publicHeader; api.h;
+pxr/exec/vdf; publicHeader; connection.h;
+pxr/exec/vdf; sourceFile; connection.cpp;
+pxr/exec/vdf; sourceFile; dynamicTopologicalSorter.cpp;
+pxr/exec/vdf; publicHeader; evaluationState.h;
+pxr/exec/vdf; sourceFile; evaluationState.cpp;
+pxr/exec/vdf; publicHeader; indexedWeights.h;
+pxr/exec/vdf; publicHeader; executorDataManager.h;
+pxr/exec/vdf; sourceFile; scheduleInvalidator.cpp;
+pxr/exec/vdf; publicHeader; traits.h;
+
+pxr/exec/ef; publicHeader; api.h;
+pxr/exec/ef; publicHeader; dependencyCache.h;
+pxr/exec/ef; sourceFile; dependencyCache.cpp;
+pxr/exec/ef; publicHeader; executor.h;
+pxr/exec/ef; publicHeader; pageCacheExecutor.h;
+pxr/exec/ef; publicHeader; time.h;
+pxr/exec/ef; sourceFile; time.cpp;
+
+pxr/exec/esf; publicHeader; attribute.h;
+pxr/exec/esf; sourceFile; attribute.cpp;
+pxr/exec/esf; publicHeader; api.h;
+pxr/exec/esf; publicHeader; journal.h;
+pxr/exec/esf; publicHeader; object.h;
+pxr/exec/esf; sourceFile; object.cpp;
+pxr/exec/esf; publicHeader; prim.h;
+pxr/exec/esf; sourceFile; prim.cpp;
+pxr/exec/esf; publicHeader; schemaConfigKey.h;
+pxr/exec/esf; publicHeader; stage.h;
+pxr/exec/esf; sourceFile; stage.cpp;
+
+pxr/exec/esfUsd; sourceFile; attribute.cpp;
+pxr/exec/esfUsd; publicHeader; api.h;
+pxr/exec/esfUsd; sourceFile; object.cpp;
+pxr/exec/esfUsd; sourceFile; prim.cpp;
+pxr/exec/esfUsd; publicHeader; sceneAdapter.h;
+pxr/exec/esfUsd; sourceFile; sceneAdapter.cpp;
+pxr/exec/esfUsd; sourceFile; stage.cpp;
+
+pxr/exec/exec; publicHeader; api.h;
+pxr/exec/exec; publicHeader; builtinComputations.h;
+pxr/exec/exec; sourceFile; builtinComputations.cpp;
+pxr/exec/exec; sourceFile; outputKey.cpp;
+pxr/exec/exec; sourceFile; program.cpp;
+pxr/exec/exec; publicHeader; providerResolution.h;
+pxr/exec/exec; publicHeader; system.h;
+pxr/exec/exec; sourceFile; system.cpp;
+pxr/exec/exec; publicHeader; types.h;
+
+pxr/exec/execUsd; publicHeader; api.h;
+pxr/exec/execUsd; publicHeader; cacheView.h;
+pxr/exec/execUsd; sourceFile; cacheView.cpp;
+pxr/exec/execUsd; sourceFile; requestImpl.cpp;
+pxr/exec/execUsd; publicHeader; system.h;
+pxr/exec/execUsd; sourceFile; system.cpp;
+
+pxr/exec/execGeom; publicHeader; api.h;
+pxr/exec/execGeom; publicHeader; tokens.h;
+pxr/exec/execGeom; sourceFile; tokens.cpp;
+pxr/exec/execGeom; sourceFile; xformable.cpp;
 
 pxr/imaging/garch; publicHeader; glApi.h;
 pxr/imaging/garch; sourceFile; glApi.cpp;

@@ -229,7 +229,7 @@ void TagItem::addTfRemnantAsUnavailableImmortalFrtSpecialCaseField() {
     tfRemnantAsUnavailableImmortalFrtSpecialCaseField = std::make_unique<TfRemnantAsUnavailableImmortalFrtSpecialCaseField>();
 }
 
-void TagItem::addSwiftNameUsdZipFileIteratorSpecialCase() {
+void TagItem::addSwiftNameSdfZipFileIteratorSpecialCase() {
     swiftName = std::make_unique<SwiftNameField>("pxrIterator");
 }
 
@@ -345,8 +345,8 @@ void NamespaceItem::add(const clang::NamedDecl *target, APINotesAnalysisResult r
             currentNode->dyn_cast<TagItem>().addTfRemnantAsUnavailableImmortalFrtSpecialCaseField();
             break;
             
-        case APINotesAnalysisResult::Kind::renameUsdZipFileIteratorSpecialCase:
-            currentNode->dyn_cast<TagItem>().addSwiftNameUsdZipFileIteratorSpecialCase();
+        case APINotesAnalysisResult::Kind::renameSdfZipFileIteratorSpecialCase:
+            currentNode->dyn_cast<TagItem>().addSwiftNameSdfZipFileIteratorSpecialCase();
             break;
     }
 }

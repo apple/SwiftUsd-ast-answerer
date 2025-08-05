@@ -492,8 +492,8 @@ private:
         }
         
         if (_usesBackticksOnSwiftReservedKeywords) {
-            // pxr::UsdZipFile::Iterator is renamed to pxr.UsdZipFile.pxrIterator in Swift
-            if (reversedComponents == std::vector<std::string>({"Iterator", "UsdZipFile", "pxr"})) {
+            // pxr::SdfZipFile::Iterator is renamed to pxr.SdfZipFile.pxrIterator in Swift
+            if (reversedComponents == std::vector<std::string>({"Iterator", "SdfZipFile", "pxr"})) {
                 reversedComponents[0] = "pxrIterator";
             }
         }

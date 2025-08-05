@@ -33,6 +33,7 @@ class _ModelBase:
                     x = re.sub("pxrInternal_v0_24_11__pxrReserved__", "PXR_NS", x)
                     x = re.sub("pxrInternal_v0_25_2__pxrReserved__", "PXR_NS", x)
                     x = re.sub("pxrInternal_v0_25_5__pxrReserved__", "PXR_NS", x)
+                    x = re.sub("pxrInternal_v0_25_8__pxrReserved__", "PXR_NS", x)
                     return x
 
                 

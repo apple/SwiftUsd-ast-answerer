@@ -161,17 +161,14 @@ class PXR_NS::SdfPath; importedAsValue;
 class PXR_NS::SdfPrimSpec; importedAsValue;
 class PXR_NS::SdfReference; importedAsValue;
 class PXR_NS::SdfValueTypeName; importedAsValue;
-
-class PXR_NS::NdrDiscoveryPluginContext; importedAsSharedReference;
-class PXR_NS::NdrDiscoveryPlugin; importedAsSharedReference;
-class PXR_NS::_NdrFilesystemDiscoveryPlugin; importedAsSharedReference;
+class PXR_NS::SdfUsdFileFormat; importedAsSharedReference;
+class PXR_NS::SdfUsdaFileFormat; importedAsSharedReference;
+class PXR_NS::SdfUsdcFileFormat; importedAsSharedReference;
+class PXR_NS::SdfUsdzFileFormat; importedAsSharedReference;
+class PXR_NS::SdfZipFileWriter; importedAsNonCopyable;
 
 class PXR_NS::PcpLayerStack; importedAsSharedReference;
 
-class PXR_NS::UsdUsdFileFormat; importedAsSharedReference;
-class PXR_NS::UsdUsdaFileFormat; importedAsSharedReference;
-class PXR_NS::UsdUsdcFileFormat; importedAsSharedReference;
-class PXR_NS::UsdUsdzFileFormat; importedAsSharedReference;
 class PXR_NS::UsdAPISchemaBase; importedAsValue;
 class PXR_NS::UsdAttribute; importedAsValue;
 class PXR_NS::UsdEditContext; blockedByInaccessibleMove;
@@ -189,7 +186,6 @@ class PXR_NS::UsdSchemaBase; importedAsValue;
 class PXR_NS::UsdSpecializes; importedAsValue;
 class PXR_NS::UsdStage; importedAsSharedReference;
 class PXR_NS::UsdTimeCode; importedAsValue;
-class PXR_NS::UsdZipFileWriter; importedAsNonCopyable;
 class PXR_NS::UsdPrimTypeInfo; blockedByInaccessibleMove;
 class PXR_NS::UsdPrimDefinition; blockedByInaccessibleMove;
 

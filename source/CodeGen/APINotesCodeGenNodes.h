@@ -179,7 +179,7 @@ struct TagItem: DeclContext {
     TagItem(std::string name, const clang::Decl* decl);
     void addSwiftImportAs(std::string importAs, std::string retainOp, std::string releaseOp);
     void addTfRemnantAsUnavailableImmortalFrtSpecialCaseField();
-    void addSwiftNameUsdZipFileIteratorSpecialCase();
+    void addSwiftNameSdfZipFileIteratorSpecialCase();
     void _write(std::vector<std::string>& lines, int indentation) const;
 };
 

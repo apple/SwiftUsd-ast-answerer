@@ -66,16 +66,7 @@ class PXR_NS::SdfLayerTree; [class PXR_NS::TfRefBase,, class PXR_NS::TfWeakBase]
 class PXR_NS::SdfLayer; [class PXR_NS::TfRefBase,, class PXR_NS::TfWeakBase];
 class PXR_NS::SdfPseudoRootSpec; [class PXR_NS::SdfPrimSpec];
 
-class PXR_NS::NdrDiscoveryPluginContext; [class PXR_NS::TfRefBase,, class PXR_NS::TfWeakBase];
-class PXR_NS::NdrDiscoveryPlugin; [class PXR_NS::TfRefBase,, class PXR_NS::TfWeakBase];
-class PXR_NS::NdrDiscoveryPluginFactoryBase; [class PXR_NS::TfType::FactoryBase];
-class PXR_NS::NdrRegistry; [class PXR_NS::TfWeakBase];
-class PXR_NS::NdrParserPlugin; [class PXR_NS::TfWeakBase];
-class PXR_NS::NdrParserPluginFactoryBase; [class PXR_NS::TfType::FactoryBase];
-
-class PXR_NS::SdrRegistry; [class PXR_NS::NdrRegistry];
-class PXR_NS::SdrShaderNode; [class PXR_NS::NdrNode];
-class PXR_NS::SdrShaderProperty; [class PXR_NS::NdrProperty];
+class PXR_NS::SdrRegistry; [class PXR_NS::TfWeakBase];
 
 class PXR_NS::PcpErrorArcCycle; [class PXR_NS::PcpErrorBase];
 class PXR_NS::PcpErrorArcPermissionDenied; [class PXR_NS::PcpErrorBase];
@@ -112,10 +103,10 @@ class PXR_NS::PcpLayerStack; [class PXR_NS::TfRefBase,, class PXR_NS::TfWeakBase
 
 
 
-class PXR_NS::UsdUsdzFileFormat; [class PXR_NS::SdfFileFormat];
-class PXR_NS::UsdUsdcFileFormat; [class PXR_NS::SdfFileFormat];
+class PXR_NS::SdfUsdzFileFormat; [class PXR_NS::SdfFileFormat];
+class PXR_NS::SdfUsdcFileFormat; [class PXR_NS::SdfFileFormat];
 class PXR_NS::UsdExpiredPrimAccessError; [class PXR_NS::TfBaseException];
-class PXR_NS::UsdUsdFileFormat; [class PXR_NS::SdfFileFormat];
+class PXR_NS::SdfUsdFileFormat; [class PXR_NS::SdfFileFormat];
 class PXR_NS::UsdRelationship; [class PXR_NS::UsdProperty];
 class PXR_NS::UsdNotice::StageNotice; [class PXR_NS::TfNotice];
 class PXR_NS::UsdNotice::StageContentsChanged; [class PXR_NS::UsdNotice::StageNotice];
@@ -125,10 +116,10 @@ class PXR_NS::UsdNotice::LayerMutingChanged; [class PXR_NS::UsdNotice::StageNoti
 class PXR_NS::UsdModelAPI; [class PXR_NS::UsdAPISchemaBase];
 class PXR_NS::UsdPrimDefinition::Attribute; [class PXR_NS::UsdPrimDefinition::Property];
 class PXR_NS::UsdPrimDefinition::Relationship; [class PXR_NS::UsdPrimDefinition::Property];
-class PXR_NS::UsdUsdaFileFormat; [class PXR_NS::SdfTextFileFormat];
+class PXR_NS::SdfUsdaFileFormat; [class PXR_NS::SdfFileFormat];
 class PXR_NS::UsdStage; [class PXR_NS::TfRefBase,, class PXR_NS::TfWeakBase];
 class PXR_NS::UsdCollectionAPI; [class PXR_NS::UsdAPISchemaBase];
-class PXR_NS::Usd_CrateData; [class PXR_NS::SdfAbstractData];
+class PXR_NS::Sdf_CrateData; [class PXR_NS::SdfAbstractData];
 class PXR_NS::Usd_PrimFlagsConjunction; [class PXR_NS::Usd_PrimFlagsPredicate];
 class PXR_NS::Usd_PrimFlagsDisjunction; [class PXR_NS::Usd_PrimFlagsPredicate];
 class PXR_NS::UsdTyped; [class PXR_NS::UsdSchemaBase];
@@ -613,7 +604,7 @@ class PXR_NS::UsdImagingDelegate; [class PXR_NS::HdSceneDelegate,, class PXR_NS:
 class PXR_NS::UsdImagingFieldAdapter; [class PXR_NS::UsdImagingPrimAdapter];
 class PXR_NS::UsdImagingGeometryLightAdapter; [class PXR_NS::UsdImagingLightAdapter];
 class PXR_NS::UsdImagingRenderProductAdapter; [class PXR_NS::UsdImagingPrimAdapter];
-class PXR_NS::UsdImaging_NiInstanceAggregationSceneIndex; [class PXR_NS::HdFilteringSceneIndexBase];
+class PXR_NS::UsdImaging_NiInstanceAggregationSceneIndex; [class PXR_NS::HdFilteringSceneIndexBase,, class PXR_NS::HdEncapsulatingSceneIndexBase];
 class PXR_NS::UsdImaging_NiInstanceAggregationSceneIndex::_RetainedSceneIndexObserver; [class PXR_NS::HdSceneIndexObserver];
 class PXR_NS::UsdImagingUsdPrimInfoSchema; [class PXR_NS::HdSchema];
 class PXR_NS::UsdImagingLightFilterAdapter; [class PXR_NS::UsdImagingPrimAdapter];

@@ -106,6 +106,7 @@ class PXR_NS::VtArray<GfHalf>; availableClassTemplateSpecialization;
 class PXR_NS::VtArray<std::string>; availableClassTemplateSpecialization;
 class PXR_NS::VtDictionary; availableFoundBySwift;
 class PXR_NS::VtValue; availableFoundBySwift;
+class PXR_NS::VtArrayEdit<GfDualQuatd>; availableFriendFunction;
 
 class PXR_NS::KindRegistry; availableImportedAsReference;
 

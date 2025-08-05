@@ -998,6 +998,7 @@ variables({
     {"PXR_BUILD_IMAGING", "yes"},
     {"PXR_BUILD_USD_IMAGING", "yes"},
     {"PXR_BUILD_GPU_SUPPORT", "1"},
+    {"PXR_BUILD_EXEC", "1"},
     {"PXR_ENABLE_MATERIALX_SUPPORT", "yes"},
     {"PXR_ENABLE_GL_SUPPORT", "1"},
     {"PXR_ENABLE_METAL_SUPPORT", "1"}, // LINUX

@@ -79,7 +79,6 @@ std::vector<const clang::FunctionDecl*> APINotesAnalysisPass::getHardCodedReplac
         "const class " PXR_NS"::TfToken & " PXR_NS"::SdfFileFormat::GetFormatId() const",
         "const class " PXR_NS"::TfWeakPtr<const class " PXR_NS"::SdfFileFormat> & " PXR_NS"::SdfLayer::GetFileFormat() const",
         "const std::string & " PXR_NS"::SdfLayer::GetRealPath() const",
-        "const class std::vector<class " PXR_NS"::TfToken> & " PXR_NS"::NdrNode::GetInputNames() const",
         "const class " PXR_NS"::UsdAttribute & " PXR_NS"::UsdShadeInput::GetAttr() const",
         "const class " PXR_NS"::UsdAttribute & " PXR_NS"::UsdShadeOutput::GetAttr() const",
         "const class " PXR_NS"::SdfPath & " PXR_NS"::UsdShadeMaterialBindingAPI::DirectBinding::GetMaterialPath() const",
@@ -203,20 +202,20 @@ bool APINotesAnalysisPass::VisitNamedDecl(clang::NamedDecl *namedDecl) {
     }
     
     {
-        // pxr::UsdZipFile::Iterator can't conform to Sequence because it's ~Copyable.
+        // pxr::SdfZipFile::Iterator can't conform to Sequence because it's ~Copyable.
         // (Also, we want to expose something with the full functionality of the iterator,
-        // not just its operator->().) So, we create Overlay.UsdZipFileIteratorWrapper,
-        // and add `public typealias Iterator = Overlay.UsdZipFileIteratorWrapper` in
-        // an extension on pxr.UsdZipFile for the Sequence conformance. But, that means
-        // that `pxr.UsdZipFile.Iterator` is now an ambiguous type lookup between the
-        // typealias and the C++ class. So, rename pxr::UsdZipFile::Iterator in Swift.
-        std::string s = "class " PXR_NS"::UsdZipFile::Iterator";
+        // not just its operator->().) So, we create Overlay.SdfZipFileIteratorWrapper,
+        // and add `public typealias Iterator = Overlay.SdfZipFileIteratorWrapper` in
+        // an extension on pxr.SdfZipFile for the Sequence conformance. But, that means
+        // that `pxr.SdfZipFile.Iterator` is now an ambiguous type lookup between the
+        // typealias and the C++ class. So, rename pxr::SdfZipFile::Iterator in Swift.
+        std::string s = "class " PXR_NS"::SdfZipFile::Iterator";
         const clang::TagDecl* tagDecl = findTagDecl(s);
         if (!tagDecl) {
             std::cerr << "Could not find " << s << std::endl;
             __builtin_trap();
         }
-        insert_or_assign(tagDecl, APINotesAnalysisResult::Kind::renameUsdZipFileIteratorSpecialCase);
+        insert_or_assign(tagDecl, APINotesAnalysisResult::Kind::renameSdfZipFileIteratorSpecialCase);
     }
     
     // Return false to stop the AST traversal immediately, because we don't need to do it

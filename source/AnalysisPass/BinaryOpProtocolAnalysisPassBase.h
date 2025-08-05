@@ -73,6 +73,14 @@ public:
                 return;
             }
         }
+        
+        if (ASTHelpers::getAsString(tagDecl) == "class " PXR_NS"::VdfIndexedWeightsOperand") {
+            // VdfIndexedWeightsOperand derives from VdfIndexedData<float>, which has a `bool operator==(const& VdfIndexedData other)`.
+            // But, VdfIndexedWeightsOperand adds a `This operator==(const& This other)`, and the compiler
+            // selects that overload for `a == b`. Special case it as unavailable, because this is the only known case
+            // of an inherited `operator==` being blocked due to an overload with an incompatible signature.
+            it->second._kind = BinaryOpProtocolAnalysisResult::unavailable;
+        }
 
         
         const clang::CXXRecordDecl* cxxRecordDecl = clang::dyn_cast<clang::CXXRecordDecl>(tagDecl);
@@ -145,9 +153,10 @@ public:
                         
                     } else if (properties.isFriendFunction) {
                         // If the argument types are the same but it's a friend function, Swift doesn't find an
-                        // ==(Self, Self)
+                        // ==(Self, Self) unless its a friend function of a class template specialization
                         if (it->second._kind == BinaryOpProtocolAnalysisResult::unknown ||
-                            it->second._kind == BinaryOpProtocolAnalysisResult::availableDifferentArgumentTypes) {
+                            it->second._kind == BinaryOpProtocolAnalysisResult::availableDifferentArgumentTypes ||
+                            it->second._kind == BinaryOpProtocolAnalysisResult::availableClassTemplateSpecialization) {
                             it->second = BinaryOpProtocolAnalysisResult(BinaryOpProtocolAnalysisResult::availableFriendFunction);
                         }
                         

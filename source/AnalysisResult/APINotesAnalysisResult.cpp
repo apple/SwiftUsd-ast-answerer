@@ -20,7 +20,7 @@ APINotesAnalysisResult::operator std::string() const {
         case Kind::replaceConstRefFunctionWithCopyingWrapper: return "replaceConstRefFunctionWithCopyingWrapper";
         case Kind::renameTfNoticeRegisterFunctionSpecialCase: return "renameTfNoticeRegisterFunctionSpecialCase";
         case Kind::markTfRemnantAsUnavailableImmortalFrtSpecialCase: return "markTfRemnantAsUnavailableImmortalFrtSpecialCase";
-        case Kind::renameUsdZipFileIteratorSpecialCase: return "renameUsdZipFileIteratorSpecialCase";
+        case Kind::renameSdfZipFileIteratorSpecialCase: return "renameSdfZipFileIteratorSpecialCase";
     }
 }
 
@@ -35,7 +35,7 @@ std::vector<APINotesAnalysisResult::Kind> APINotesAnalysisResult::allCases() {
         Kind::replaceConstRefFunctionWithCopyingWrapper,
         Kind::renameTfNoticeRegisterFunctionSpecialCase,
         Kind::markTfRemnantAsUnavailableImmortalFrtSpecialCase,
-        Kind::renameUsdZipFileIteratorSpecialCase,
+        Kind::renameSdfZipFileIteratorSpecialCase,
     };
 }
 

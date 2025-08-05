@@ -9,7 +9,6 @@ const std::string & PXR_NS::SdfPropertySpec::GetName() const; replaceConstRefFun
 const class PXR_NS::TfToken & PXR_NS::SdfFileFormat::GetFormatId() const; replaceConstRefFunctionWithCopyingWrapper;
 const class PXR_NS::TfWeakPtr<const class PXR_NS::SdfFileFormat> & PXR_NS::SdfLayer::GetFileFormat() const; replaceConstRefFunctionWithCopyingWrapper;
 const std::string & PXR_NS::SdfLayer::GetRealPath() const; replaceConstRefFunctionWithCopyingWrapper;
-const class std::vector<class PXR_NS::TfToken> & PXR_NS::NdrNode::GetInputNames() const; replaceConstRefFunctionWithCopyingWrapper;
 const class PXR_NS::UsdAttribute & PXR_NS::UsdShadeInput::GetAttr() const; replaceConstRefFunctionWithCopyingWrapper;
 const class PXR_NS::UsdAttribute & PXR_NS::UsdShadeOutput::GetAttr() const; replaceConstRefFunctionWithCopyingWrapper;
 const class PXR_NS::SdfPath & PXR_NS::UsdShadeMaterialBindingAPI::DirectBinding::GetMaterialPath() const; replaceConstRefFunctionWithCopyingWrapper;
@@ -60,7 +59,7 @@ _Bool PXR_NS::UsdReferences::SetReferences(const class std::vector<class PXR_NS:
 
 template <class LPtr, class MethodPtr> static class PXR_NS::TfNotice::Key PXR_NS::TfNotice::Register(const type-parameter-0-0 & listener, type-parameter-0-1 method); renameTfNoticeRegisterFunctionSpecialCase;
 class PXR_NS::Tf_Remnant; markTfRemnantAsUnavailableImmortalFrtSpecialCase;
-class PXR_NS::UsdZipFile::Iterator; renameUsdZipFileIteratorSpecialCase;
+class PXR_NS::SdfZipFile::Iterator; renameSdfZipFileIteratorSpecialCase;
 
 class PXR_NS::UsdNotice::StageNotice; importTagAsOwned;
 class PXR_NS::UsdNotice::StageContentsChanged; importTagAsOwned;
@@ -112,16 +111,14 @@ class PXR_NS::SdfLayerStateDelegateBase; importTagAsShared;
 class PXR_NS::SdfSimpleLayerStateDelegate; importTagAsShared;
 class PXR_NS::SdfLayerTree; importTagAsShared;
 class PXR_NS::SdfTextFileFormat; importTagAsShared;
-class PXR_NS::NdrDiscoveryPluginContext; importTagAsShared;
-class PXR_NS::NdrDiscoveryPlugin; importTagAsShared;
 class PXR_NS::SdrDiscoveryPluginContext; importTagAsShared;
 class PXR_NS::SdrDiscoveryPlugin; importTagAsShared;
 class PXR_NS::PcpLayerStack; importTagAsShared;
 class PXR_NS::UsdStage; importTagAsShared;
-class PXR_NS::UsdUsdFileFormat; importTagAsShared;
-class PXR_NS::UsdUsdaFileFormat; importTagAsShared;
-class PXR_NS::UsdUsdcFileFormat; importTagAsShared;
-class PXR_NS::UsdUsdzFileFormat; importTagAsShared;
+class PXR_NS::SdfUsdFileFormat; importTagAsShared;
+class PXR_NS::SdfUsdaFileFormat; importTagAsShared;
+class PXR_NS::SdfUsdcFileFormat; importTagAsShared;
+class PXR_NS::SdfUsdzFileFormat; importTagAsShared;
 class PXR_NS::UsdHydraDiscoveryPlugin; importTagAsShared;
 class PXR_NS::GarchGLPlatformDebugContext; importTagAsShared;
 class PXR_NS::GlfBindingMap; importTagAsShared;

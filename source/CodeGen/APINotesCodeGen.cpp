@@ -56,7 +56,7 @@ std::vector<APINotesCodeGen::ReplacedMethod> APINotesCodeGen::getReplacedMethods
                 case APINotesAnalysisResult::Kind::makeFunctionUnavailable: // fallthrough
                 case APINotesAnalysisResult::Kind::renameTfNoticeRegisterFunctionSpecialCase: // fallthrough
                 case APINotesAnalysisResult::Kind::markTfRemnantAsUnavailableImmortalFrtSpecialCase: // fallthrough
-                case APINotesAnalysisResult::Kind::renameUsdZipFileIteratorSpecialCase:
+                case APINotesAnalysisResult::Kind::renameSdfZipFileIteratorSpecialCase:
                     std::cerr << "Error! Bad APINotesAnalysisResult::Kind in renamed methods" << std::endl;
                     std::cerr << ASTHelpers::getAsString(it.first) << " " << it.second << std::endl;
                     __builtin_trap();
