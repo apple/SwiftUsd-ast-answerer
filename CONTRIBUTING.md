@@ -1,0 +1,1 @@
+Please see [SwiftUsd's contributing guildelines](https://github.com/apple/SwiftUsd/blob/main/CONTRIBUTING.md)
