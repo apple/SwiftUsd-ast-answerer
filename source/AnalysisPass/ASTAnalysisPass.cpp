@@ -362,7 +362,9 @@ bool ASTHelpers::isConstDuplicateSpecializationDecl(const clang::ClassTemplateSp
 bool ASTHelpers::hasSwiftAccessibleCopyCtor(const clang::CXXRecordDecl* cxxRecordDecl) {
     for (const clang::CXXConstructorDecl* cxxConstructorDecl : cxxRecordDecl->ctors()) {
         if (!cxxConstructorDecl->isCopyConstructor()) { continue; }
-        if (cxxConstructorDecl->isDeleted() || ASTHelpers::isNotVisibleToSwift(cxxConstructorDecl->getAccess())) {
+        if (cxxConstructorDecl->isDeleted() ||
+            cxxConstructorDecl->isIneligibleOrNotSelected() ||
+            ASTHelpers::isNotVisibleToSwift(cxxConstructorDecl->getAccess())) {
             continue;
         }
         return true;
@@ -373,7 +375,9 @@ bool ASTHelpers::hasSwiftAccessibleMoveCtor(const clang::CXXRecordDecl* cxxRecor
     // Is there an explicitly declared accessible moved constructor?
     for (const clang::CXXConstructorDecl* cxxConstructorDecl : cxxRecordDecl->ctors()) {
         if (!cxxConstructorDecl->isMoveConstructor()) { continue; }
-        if (cxxConstructorDecl->isDeleted() || ASTHelpers::isNotVisibleToSwift(cxxConstructorDecl->getAccess())) {
+        if (cxxConstructorDecl->isDeleted() ||
+            cxxConstructorDecl->isIneligibleOrNotSelected() ||
+            ASTHelpers::isNotVisibleToSwift(cxxConstructorDecl->getAccess())) {
             continue;
         }
         return true;
@@ -383,7 +387,9 @@ bool ASTHelpers::hasSwiftAccessibleMoveCtor(const clang::CXXRecordDecl* cxxRecor
 }
 bool ASTHelpers::hasSwiftAccessibleDtor(const clang::CXXRecordDecl* cxxRecordDecl) {
     if (const clang::CXXDestructorDecl* cxxDestructorDecl = cxxRecordDecl->getDestructor()) {
-        if (cxxDestructorDecl->isDeleted() || ASTHelpers::isNotVisibleToSwift(cxxDestructorDecl->getAccess())) {
+        if (cxxDestructorDecl->isDeleted() ||
+            cxxDestructorDecl->isIneligibleOrNotSelected() ||
+            ASTHelpers::isNotVisibleToSwift(cxxDestructorDecl->getAccess())) {
             return false;
         }
     } else if (cxxRecordDecl->defaultedDestructorIsDeleted()) {

@@ -144,9 +144,9 @@ void FileWriterHelper::setWritesPrologue(bool newValue) {
 std::vector<std::string> FileWriterHelper::_getPrologue() const {
     std::vector<std::string> result = {
         "//===----------------------------------------------------------------------===//",
-        "// This source file is part of github.com/apple/SwiftUsd-ast-answerer",
+        "// This source file is part of github.com/apple/SwiftUsd",
         "//",
-        "// Copyright © 2025 Apple Inc. and the SwiftUsd-ast-answerer project authors.",
+        "// Copyright © 2025 Apple Inc. and the SwiftUsd project authors.",
         "//",
         "// Licensed under the Apache License, Version 2.0 (the \"License\");",
         "// you may not use this file except in compliance with the License.",
