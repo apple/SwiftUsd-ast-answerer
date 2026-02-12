@@ -118,7 +118,7 @@ public:
         // but neither `A` or `B` implicitly convertible to each other, we want to generate Equatable for C.
         //
         // Note: We want to order convertibleTypes so that we end up using the best possible conformance witness.
-        // We build convertibleTypes from best to worst, then reverse it so we loop from reverse to best
+        // We build convertibleTypes from best to worst, then reverse it so we loop from worst to best
         // and allow upgrading but not downgrading the witness
         
         std::vector<clang::QualType> convertibleTypes;
@@ -166,10 +166,10 @@ public:
                         
                     } else if (properties.isFriendFunction) {
                         // If the argument types are the same but it's a friend function, Swift doesn't find an
-                        // ==(Self, Self) unless its a friend function of a class template specialization
+                        // ==(Self, Self). (v25.08 found that friend functions of class template specializations were found by Swift,
+                        // but v26.03-alpha VtArrayEdit<T> has friend functions not found by Swift, so we're reverting to old behavior)
                         if (it->second._kind == BinaryOpProtocolAnalysisResult::unknown ||
-                            it->second._kind == BinaryOpProtocolAnalysisResult::availableDifferentArgumentTypes ||
-                            it->second._kind == BinaryOpProtocolAnalysisResult::availableClassTemplateSpecialization) {
+                            it->second._kind == BinaryOpProtocolAnalysisResult::availableDifferentArgumentTypes) {
                             it->second = BinaryOpProtocolAnalysisResult(BinaryOpProtocolAnalysisResult::availableFriendFunction);
                         }
                         

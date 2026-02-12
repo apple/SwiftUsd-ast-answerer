@@ -54,6 +54,8 @@ class _ModelBase:
                     x = re.sub("pxrInternal_v0_25_2__pxrReserved__", "PXR_NS", x)
                     x = re.sub("pxrInternal_v0_25_5__pxrReserved__", "PXR_NS", x)
                     x = re.sub("pxrInternal_v0_25_8__pxrReserved__", "PXR_NS", x)
+                    x = re.sub("pxrInternal_v0_25_11__pxrReserved__", "PXR_NS", x)
+                    x = re.sub("pxrInternal_v0_26_3__pxrReserved__", "PXR_NS", x)
                     return x
 
                 
@@ -436,7 +438,7 @@ if __name__ == "__main__":
                                "Equatable", "Comparable", "Hashable", "CustomStringConvertible",
                                "FindSendableDependencies", "Sendable", "FindEnums",
                                "FindStaticTokens", "FindTfNoticeSubclasses",
-                               "FindSchemas", "SdfValueTypeNamesMembers", "APINotes"]
+                               "FindSchemas", "SdfValueTypeNamesMembers", "APINotes", "FindVtValueRefFunctions"]
     default_meta_analysis = ["diff_kinds", "diff_types", "moved_types_summary", "moved_types", "all_types"]
     
     parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)

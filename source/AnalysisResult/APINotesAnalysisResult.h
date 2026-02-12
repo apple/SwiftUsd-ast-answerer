@@ -39,7 +39,9 @@ public:
         replaceConstRefFunctionWithCopyingWrapper,
         renameTfNoticeRegisterFunctionSpecialCase,
         markTfRemnantAsUnavailableImmortalFrtSpecialCase,
-        renameSdfZipFileIteratorSpecialCase
+        renameSdfZipFileIteratorSpecialCase,
+        augmentVtValueRefFunctionWithVtValue,
+        renameFunctionUnsafe,
     };
         
     explicit operator std::string() const;

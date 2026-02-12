@@ -44,6 +44,7 @@ class CustomStringConvertibleAnalysisPass;
 class TypedefAnalysisPass;
 class SdfValueTypeNamesMembersAnalysisPass;
 class FindSchemasAnalysisPass;
+class FindVtValueRefFunctionsAnalysisPass;
 class FindSendableDependenciesAnalysisPass;
 class SendableAnalysisPass;
 class APINotesAnalysisPass;
@@ -81,6 +82,7 @@ public:
     const TypedefAnalysisPass* getTypedefAnalysisPass() const;
     const SdfValueTypeNamesMembersAnalysisPass* getSdfValueTypeNamesMembersAnalysisPass() const;
     const FindSchemasAnalysisPass* getFindSchemasAnalysisPass() const;
+    const FindVtValueRefFunctionsAnalysisPass* getFindVtValueRefFunctionsAnalysisPass() const;
     const FindSendableDependenciesAnalysisPass* getFindSendableDependenciesAnalysisPass() const;
     const SendableAnalysisPass* getSendableAnalysisPass() const;
     const APINotesAnalysisPass* getAPINotesAnalysisPass() const;
@@ -107,6 +109,7 @@ private:
     std::unique_ptr<TypedefAnalysisPass> _typedefAnalysisPass;
     std::unique_ptr<SdfValueTypeNamesMembersAnalysisPass> _sdfValueTypeNamesMembersAnalysisPass;
     std::unique_ptr<FindSchemasAnalysisPass> _findSchemasAnalysisPass;
+    std::unique_ptr<FindVtValueRefFunctionsAnalysisPass> _findVtValueRefFunctionsAnalysisPass;
     std::unique_ptr<FindSendableDependenciesAnalysisPass> _findSendableDependenciesAnalysisPass;
     std::unique_ptr<SendableAnalysisPass> _sendableAnalysisPass;
     std::unique_ptr<APINotesAnalysisPass> _apiNotesAnalysisPass;

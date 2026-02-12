@@ -181,6 +181,7 @@ struct MethodItem: DeclContext {
     void addRename(const clang::NamedDecl* target, APINotesAnalysisResult result);
     void addUnavailable();
     void addSwiftNameTfNoticeRegisterSpecialCaseField();
+    void addVtValueRefFunctionAugmentation();
     void _write(std::vector<std::string>& lines, int indentation) const override;
 };
 

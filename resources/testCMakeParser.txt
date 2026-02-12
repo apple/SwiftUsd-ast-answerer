@@ -183,7 +183,6 @@ pxr/usd/sdf; publicHeader; layerHints.h;
 pxr/usd/sdf; sourceFile; assetPathResolver.cpp;
 pxr/usd/sdf; sourceFile; subLayerListEditor.cpp;
 pxr/usd/sdf; sourceFile; valueTypeRegistry.cpp;
-pxr/usd/sdf; sourceFile; textFileFormat.cpp;
 
 pxr/usd/sdr; publicHeader; registry.h;
 pxr/usd/sdr; sourceFile; registry.cpp;
@@ -458,8 +457,6 @@ pxr/imaging/hio; sourceFile; fieldTextureData.cpp;
 pxr/imaging/hio; sourceFile; debugCodes.cpp;
 pxr/imaging/hio; sourceFile; dictionary.cpp;
 pxr/imaging/hio; publicHeader; api.h;
-pxr/imaging/hio; sourceFile; OpenEXRImage.cpp;
-pxr/imaging/hio; sourceFile; OpenEXR/openexr-c.c;
 
 pxr/imaging/cameraUtil; publicHeader; conformWindow.h;
 pxr/imaging/cameraUtil; sourceFile; conformWindow.cpp;

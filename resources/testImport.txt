@@ -144,7 +144,6 @@ class PXR_NS::KindRegistry; importedAsImmortalReference;
 class PXR_NS::SdfAbstractData; importedAsSharedReference;
 class PXR_NS::SdfData; importedAsSharedReference;
 class PXR_NS::SdfFileFormat; importedAsSharedReference;
-class PXR_NS::SdfTextFileFormat; importedAsSharedReference;
 class PXR_NS::SdfLayerStateDelegateBase; importedAsSharedReference;
 class PXR_NS::SdfLayerTree; importedAsSharedReference;
 class PXR_NS::SdfSpec; importedAsValue;

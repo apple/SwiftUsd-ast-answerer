@@ -20,6 +20,7 @@
 
 #include "AnalysisPass/APINotesAnalysisPass.h"
 #include "AnalysisPass/ImportAnalysisPass.h"
+#include "AnalysisPass/FindVtValueRefFunctionsAnalysisPass.h"
 
 APINotesAnalysisPass::APINotesAnalysisPass(ASTAnalysisRunner* astAnalysisRunner) :
     ASTAnalysisPass<APINotesAnalysisPass, APINotesAnalysisResult>(astAnalysisRunner) {}
@@ -165,6 +166,17 @@ std::vector<const clang::FunctionDecl*> APINotesAnalysisPass::getHardCodedReplac
     return result;
 }
 
+std::vector<const clang::FunctionDecl*> APINotesAnalysisPass::getAugmentVtValueRefFunctionsWithVtValue() const {
+    std::vector<const clang::FunctionDecl*> result;
+
+    const FindVtValueRefFunctionsAnalysisPass* ap = getASTAnalysisRunner().getFindVtValueRefFunctionsAnalysisPass();
+    for (const auto& it : ap->getData()) {
+        const clang::FunctionDecl* toPushBack = clang::dyn_cast<clang::FunctionDecl>(it.first);
+        result.push_back(toPushBack);
+    }
+    return result;
+}
+
 bool APINotesAnalysisPass::VisitNamedDecl(clang::NamedDecl *namedDecl) {
     const ImportAnalysisPass* importAnalysisPass = getASTAnalysisRunner().getImportAnalysisPass();
     for (const auto& it : importAnalysisPass->getData()) {
@@ -183,6 +195,22 @@ bool APINotesAnalysisPass::VisitNamedDecl(clang::NamedDecl *namedDecl) {
     }
     for (const clang::FunctionDecl* functionDecl : getHardCodedReplaceMutatingFunctionsWithNonmutating()) {
         insert_or_assign(functionDecl, APINotesAnalysisResult::Kind::replaceMutatingFunctionWithNonmutatingWrapper);
+    }
+    
+    for (const clang::FunctionDecl* functionDecl : getAugmentVtValueRefFunctionsWithVtValue()) {
+        insert_or_assign(functionDecl, APINotesAnalysisResult::Kind::augmentVtValueRefFunctionWithVtValue);
+    }
+    
+    {
+        // Rename VtValue::Ref() to VtValue.__RefUnsafe() in Swift, because VtValueRef is a view type
+        // not detected as such by the Swift compiler, but it should still have methods returning it be renamed
+        std::string s = "class " PXR_NS"::VtValueRef " PXR_NS"::VtValue::Ref() const";
+        const clang::FunctionDecl* functionDecl = findFunctionDecl(s);
+        if (!functionDecl) {
+            std::cerr << "Could not find " << s << std::endl;
+            __builtin_trap();
+        }
+        insert_or_assign(functionDecl, APINotesAnalysisResult::Kind::renameFunctionUnsafe);
     }
     
     {

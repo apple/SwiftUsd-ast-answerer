@@ -31,33 +31,25 @@ APINotesCodeGen::APINotesCodeGen(const CodeGenRunner* codeGenRunner) : CodeGenBa
 
 APINotesCodeGen::~APINotesCodeGen() = default;
 
-std::string APINotesNode::indent(int indentation) const {
-    std::stringstream ss;
-    for (int i = 0; i < indentation; i++) {
-        ss << "  ";
-    }
-    return ss.str();
-}
-
 std::string APINotesCodeGen::fileNamePrefix() const {
     return "_OpenUSD_SwiftBindingHelpers";
 }
 
-bool APINotesCodeGen::ReplacedMethod::operator<(const ReplacedMethod& other) const {
-    if (ASTHelpers::DeclComparator()(method, other.method)) {
+bool APINotesCodeGen::ReplacedOrAugmentedFunction::operator<(const ReplacedOrAugmentedFunction& other) const {
+    if (ASTHelpers::DeclComparator()(function, other.function)) {
         return true;
-    } else if (ASTHelpers::DeclComparator()(other.method, method)) {
+    } else if (ASTHelpers::DeclComparator()(other.function, function)) {
         return false;
     } else {
         return ASTHelpers::DeclComparator()(owningType, other.owningType);
     }
 }
 
-std::vector<APINotesCodeGen::ReplacedMethod> APINotesCodeGen::getReplacedMethods(const APINotesNode* node) {
+std::vector<APINotesCodeGen::ReplacedOrAugmentedFunction> APINotesCodeGen::getReplacedOrAugmentedFunctions(const APINotesNode* node) {
     const PublicInheritanceAnalysisPass* publicInheritance = getPublicInheritanceAnalysisPass();
     const ImportAnalysisPass* importPass = getImportAnalysisPass();
     
-    std::vector<ReplacedMethod> result;
+    std::vector<ReplacedOrAugmentedFunction> result;
     node->walk([&result, &publicInheritance, &importPass](const APINotesNode* node){
         const MethodItem* method = node->dyn_cast_opt<MethodItem>();
         if (!method) { return; }
@@ -77,16 +69,25 @@ std::vector<APINotesCodeGen::ReplacedMethod> APINotesCodeGen::getReplacedMethods
 
                 case APINotesAnalysisResult::Kind::replaceMutatingFunctionWithNonmutatingWrapper: // fallthrough
                 case APINotesAnalysisResult::Kind::replaceConstRefFunctionWithCopyingWrapper: // fallthrough
-                    // valid for renaming methods; pass
+                case APINotesAnalysisResult::Kind::augmentVtValueRefFunctionWithVtValue: // fallthrough
+                    // valid for replacing or augmenting functions; pass
                     break;
+                    
+                case APINotesAnalysisResult::Kind::renameFunctionUnsafe:
+                    // We aren't replacing or augmenting this, just renaming it in API Notes,
+                    // so we don't want to write any code for it
+                    return;
             }
+            
+            
             
             // ImportAsMember only attaches to the target type, not types that inherit from the target.
             // So, we need to replace the method on available publicly-inheriting types
-            const clang::CXXMethodDecl* cxxMethod = clang::dyn_cast<clang::CXXMethodDecl>(it.first);
-            for (const clang::CXXRecordDecl* cxxRecordDecl : publicInheritance->getPublicSubtypes(cxxMethod->getParent())) {
-                if (importPass->find(cxxRecordDecl)->second.isImportedSomehow()) {
-                    result.push_back({cxxMethod, cxxRecordDecl, it.second});
+            if (const clang::CXXMethodDecl* cxxMethod = clang::dyn_cast<clang::CXXMethodDecl>(it.first)) {
+                for (const clang::CXXRecordDecl* cxxRecordDecl : publicInheritance->getPublicSubtypes(cxxMethod->getParent())) {
+                    if (importPass->find(cxxRecordDecl)->second.isImportedSomehow()) {
+                        result.push_back({cxxMethod, cxxRecordDecl, it.second});
+                    }
                 }
             }
         }
@@ -118,11 +119,12 @@ APINotesCodeGen::Data APINotesCodeGen::preprocess() {
     Data preprocessResult;
     std::set<const clang::NamedDecl*> alreadyAdded;
     
-    for (const auto& it : getReplacedMethods(_root.get())) {
-        const clang::CXXRecordDecl* typeOwningMethod = it.owningType;
-        if (!alreadyAdded.contains(typeOwningMethod)) {
-            preprocessResult.push_back(typeOwningMethod);
-            alreadyAdded.insert(typeOwningMethod);
+    for (const auto& it : getReplacedOrAugmentedFunctions(_root.get())) {
+        if (const clang::CXXRecordDecl* typeOwningMethod = it.owningType) {
+            if (!alreadyAdded.contains(typeOwningMethod)) {
+                preprocessResult.push_back(typeOwningMethod);
+                alreadyAdded.insert(typeOwningMethod);
+            }
         }
     }
 
@@ -131,25 +133,26 @@ APINotesCodeGen::Data APINotesCodeGen::preprocess() {
 
 void APINotesCodeGen::writeHeaderFile(const APINotesCodeGen::Data& data) {
     std::map<const clang::CXXRecordDecl*, std::string> importAsMemberTypedefs;
-    for (const auto& it : getReplacedMethods(_root.get())) {
-        writeReplaceMethod(it, true, importAsMemberTypedefs);
+    for (const auto& it : getReplacedOrAugmentedFunctions(_root.get())) {
+        writeReplacedOrAugmentedFunction(it, true, importAsMemberTypedefs);
     }
 }
 
 void APINotesCodeGen::writeCppFile(const APINotesCodeGen::Data& data) {
     std::map<const clang::CXXRecordDecl*, std::string> importAsMemberTypedefs;
     
-    for (const auto& it : getReplacedMethods(_root.get())) {
-        writeReplaceMethod(it, false, importAsMemberTypedefs);
+    for (const auto& it : getReplacedOrAugmentedFunctions(_root.get())) {
+        writeReplacedOrAugmentedFunction(it, false, importAsMemberTypedefs);
         
     }
 }
 
-void APINotesCodeGen::writeReplaceMethod(ReplacedMethod replacedMethod,
+void APINotesCodeGen::writeReplacedOrAugmentedFunction(ReplacedOrAugmentedFunction replacedOrAugmentedFunction,
                                          bool isHeader,
                                          std::map<const clang::CXXRecordDecl *, std::string> &importAsMemberTypedefs) {
-    const clang::CXXMethodDecl* method = replacedMethod.method;
-    const clang::CXXRecordDecl* owningType = replacedMethod.owningType;
+    const clang::FunctionDecl* function = replacedOrAugmentedFunction.function;
+    const clang::CXXMethodDecl* method = clang::dyn_cast<clang::CXXMethodDecl>(function);
+    const clang::CXXRecordDecl* owningType = replacedOrAugmentedFunction.owningType;
     
     // Important: We want scoped access to any number of typeNamePrinters,
     // for the return value and all the arguments. We need to make sure
@@ -176,14 +179,14 @@ void APINotesCodeGen::writeReplaceMethod(ReplacedMethod replacedMethod,
     
 
     { // isInstanceMethod
-        isInstanceMethod = method->isInstance();
+        isInstanceMethod = method != nullptr && method->isInstance();
     }
     
     { // documentation
         clang::Preprocessor& preprocessor = getCodeGenRunner()->getDriver()->getClangToolHelper()->getASTUnits()[0]->getPreprocessor();
-        clang::comments::FullComment* comment = method->getASTContext().getCommentForDecl(method, &preprocessor);
-        const char* commentStart = method->getASTContext().getSourceManager().getCharacterData(comment->getBeginLoc());
-        const char* commentEnd = method->getASTContext().getSourceManager().getCharacterData(comment->getEndLoc()) + 1;
+        clang::comments::FullComment* comment = function->getASTContext().getCommentForDecl(function, &preprocessor);
+        const char* commentStart = function->getASTContext().getSourceManager().getCharacterData(comment->getBeginLoc());
+        const char* commentEnd = function->getASTContext().getSourceManager().getCharacterData(comment->getEndLoc()) + 1;
         documentation = std::string(commentStart, static_cast<size_t>(commentEnd - commentStart));
         // trim leading whitespace on each line
         std::vector<std::string> docLines = {""};
@@ -217,21 +220,26 @@ void APINotesCodeGen::writeReplaceMethod(ReplacedMethod replacedMethod,
         // Attribution
         std::string attributionLinkPrefix = getCodeGenRunner()->getFileSystemInfo().usdDocumentationAttributionLinkPrefix;
         auto analysisPass = getCodeGenRunner()->getASTAnalysisRunner().getImportAnalysisPass();
-        std::string attributionLinkSuffix = analysisPass->headerPathForUsdType(method);
+        std::string attributionLinkSuffix = analysisPass->headerPathForUsdType(function);
         documentation += "// Original documentation from " + attributionLinkPrefix + attributionLinkSuffix + "\n";
     }
     
     { // retType
-        clang::QualType retQualType = method->getReturnType();
-        if (replacedMethod.analysisResult.getKind() == APINotesAnalysisResult::Kind::replaceConstRefFunctionWithCopyingWrapper) {
+        std::cout << ASTHelpers::getAsString(function) << ": original ret ";
+        clang::QualType retQualType = function->getReturnType();
+        std::cout << retQualType.getAsString();
+        if (replacedOrAugmentedFunction.analysisResult.getKind() == APINotesAnalysisResult::Kind::replaceConstRefFunctionWithCopyingWrapper) {
             retQualType = ASTHelpers::removingRefConst(retQualType);
+            std::cout << ", constRef removed to " << retQualType.getAsString();
         }
         typeNamePrinters.push_back(typeNamePrinter(retQualType));
         retType = getTypeName<CppNameInCpp>(typeNamePrinters.back());
+        
+        std::cout << ", printed as " << retType << std::endl;
     }
         
     { // replacementFName
-        replacementFName = "__SwiftUsdImportAsMemberReplacement_" + mangleName(owningType) + "__" + method->getNameAsString();
+        replacementFName = "__SwiftUsdImportAsMemberReplacement_" + mangleName(owningType) + "__" + function->getNameAsString();
     }
     
     { // argumentTypes, argumentNames, defaultArguments
@@ -239,7 +247,7 @@ void APINotesCodeGen::writeReplaceMethod(ReplacedMethod replacedMethod,
             clang::QualType instanceType = owningType->getTypeForDecl()->getCanonicalTypeUnqualified();
             // Make the instance type be const&
             instanceType.addConst();
-            instanceType = method->getASTContext().getLValueReferenceType(instanceType);
+            instanceType = function->getASTContext().getLValueReferenceType(instanceType);
             
             typeNamePrinters.push_back(typeNamePrinter(instanceType));
             argumentTypes.push_back(getTypeName<CppNameInCpp>(typeNamePrinters.back()));
@@ -247,8 +255,19 @@ void APINotesCodeGen::writeReplaceMethod(ReplacedMethod replacedMethod,
             defaultArguments.push_back("");
         }
         
-        for (const clang::ParmVarDecl* parm : method->parameters()) {
-            typeNamePrinters.push_back(typeNamePrinter(parm->getType()));
+        for (const clang::ParmVarDecl* parm : function->parameters()) {
+            clang::QualType toPushBack = parm->getType();
+            
+            if (replacedOrAugmentedFunction.analysisResult.getKind() == APINotesAnalysisResult::Kind::augmentVtValueRefFunctionWithVtValue) {
+                const clang::TagDecl* vtValueRef = getAstAnalysisRunner().findTagDecl("class " PXR_NS"::VtValueRef");
+                const clang::TagDecl* vtValue = getAstAnalysisRunner().findTagDecl("class " PXR_NS"::VtValue");
+                
+                if (toPushBack->getAsTagDecl() == vtValueRef) {
+                    toPushBack = vtValue->getTypeForDecl()->getCanonicalTypeUnqualified();
+                }
+            }
+            
+            typeNamePrinters.push_back(typeNamePrinter(toPushBack));
             argumentTypes.push_back(getTypeName<CppNameInCpp>(typeNamePrinters.back()));
             argumentNames.push_back(parm->getNameAsString());
             if (parm->hasDefaultArg()) {
@@ -267,7 +286,7 @@ void APINotesCodeGen::writeReplaceMethod(ReplacedMethod replacedMethod,
     }
         
     { // importAsMemberTypedef, isFirstTypedefUse
-        if (isHeader) {
+        if (isHeader && owningType) {
             if (importAsMemberTypedefs.contains(owningType)) {
                 importAsMemberTypedef = importAsMemberTypedefs.find(owningType)->second;
                 isFirstTypedefUse = false;
@@ -280,20 +299,20 @@ void APINotesCodeGen::writeReplaceMethod(ReplacedMethod replacedMethod,
     }
     
     { // copyArg0
-        copyArg0 = replacedMethod.analysisResult.getKind() == APINotesAnalysisResult::Kind::replaceMutatingFunctionWithNonmutatingWrapper;
+        copyArg0 = replacedOrAugmentedFunction.analysisResult.getKind() == APINotesAnalysisResult::Kind::replaceMutatingFunctionWithNonmutatingWrapper;
     }
     
     { // originalCalledName
         if (isInstanceMethod) {
-            originalCalledName = method->getNameAsString();
+            originalCalledName = function->getNameAsString();
         } else {
-            originalCalledName = method->getQualifiedNameAsString();
+            originalCalledName = function->getQualifiedNameAsString();
             originalCalledName = std::regex_replace(originalCalledName, std::regex(PXR_NS), "pxr");
         }
     }
     
     { // originalFName
-        originalFName = method->getNameAsString();
+        originalFName = function->getNameAsString();
     }
     
     // Okay, we've set everything up. Now, let's actually write.
@@ -301,7 +320,7 @@ void APINotesCodeGen::writeReplaceMethod(ReplacedMethod replacedMethod,
     // because we want to write parts of a line at a time.)
     std::stringstream ss;
     
-    if (isHeader && isFirstTypedefUse) {
+    if (isHeader && isFirstTypedefUse && owningType) {
         // Typedef declaration: `typedef pixar-type single-token;`
         ss << "typedef ";
         typeNamePrinters.push_back(typeNamePrinter(owningType));
@@ -333,9 +352,13 @@ void APINotesCodeGen::writeReplaceMethod(ReplacedMethod replacedMethod,
     
     if (isHeader) {
         // Headers get SWIFT_NAME(Typedef.method(...))
-        ss << "\nSWIFT_NAME(" + importAsMemberTypedef + "." + originalFName + "(";
+        ss << "\nSWIFT_NAME(";
+        if (owningType) {
+            ss << importAsMemberTypedef + ".";
+        }
+        ss << originalFName + "(";
         for (int i = 0; i < argumentNames.size(); i++) {
-            if (i == 0 && !method->isStatic()) {
+            if (i == 0 && !(method != nullptr && method->isStatic())) {
                 ss << "self:";
             } else {
                 ss << "_:";

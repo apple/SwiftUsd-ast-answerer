@@ -18,26 +18,24 @@
 // SPDX-License-Identifier: Apache-2.0
 //===----------------------------------------------------------------------===//
 
-#ifndef APINotesAnalysisPass_h
-#define APINotesAnalysisPass_h
+#ifndef FindVtValueRefFunctionsAnalysisPass_h
+#define FindVtValueRefFunctionsAnalysisPass_h
 
 #include "AnalysisPass/ASTAnalysisPass.h"
-#include "AnalysisResult/APINotesAnalysisResult.h"
+#include "AnalysisResult/FindVtValueRefFunctionsAnalysisResult.h"
+
 #include "clang/AST/RecursiveASTVisitor.h"
 
+// Analysis pass that finds all functions that use VtValueRef declared in
+// a Usd library after Vt, for APINotesAnalysisPass/CodeGen to use
 
-class APINotesAnalysisPass final: public ASTAnalysisPass<APINotesAnalysisPass, APINotesAnalysisResult> {
+class FindVtValueRefFunctionsAnalysisPass final: public ASTAnalysisPass<FindVtValueRefFunctionsAnalysisPass, FindVtValueRefFunctionsAnalysisResult> {
 public:
-    APINotesAnalysisPass(ASTAnalysisRunner* astAnalysisRunner);
+    FindVtValueRefFunctionsAnalysisPass(ASTAnalysisRunner* astAnalysisRunner);
+    
     std::string serializationFileName() const override;
     std::string testFileName() const override;
-    bool VisitNamedDecl(clang::NamedDecl* namedDecl) override;
-    
-private:
-    std::vector<const clang::NamedDecl*> getHardCodedOwnedTypes() const;
-    std::vector<const clang::FunctionDecl*> getHardCodedReplaceConstRefFunctionsWithCopy() const;
-    std::vector<const clang::FunctionDecl*> getHardCodedReplaceMutatingFunctionsWithNonmutating() const;
-    std::vector<const clang::FunctionDecl*> getAugmentVtValueRefFunctionsWithVtValue() const;
+    bool VisitFunctionDecl(clang::FunctionDecl* functionDecl) override;
 };
 
-#endif /* APINotesAnalysisPass_h */
+#endif /* FindVtValueRefFunctionsAnalysisPass_h */
