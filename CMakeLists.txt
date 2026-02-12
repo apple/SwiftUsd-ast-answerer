@@ -140,6 +140,11 @@ set(SOURCES
     source/AnalysisResult/FindSchemasAnalysisResult.h
     source/AnalysisResult/FindSchemasAnalysisResult.cpp
 
+    source/AnalysisPass/FindVtValueRefFunctionsAnalysisPass.h
+    source/AnalysisPass/FindVtValueRefFunctionsAnalysisPass.cpp
+    source/AnalysisResult/FindVtValueRefFunctionsAnalysisResult.h
+    source/AnalysisResult/FindVtValueRefFunctionsAnalysisResult.cpp
+
     source/AnalysisPass/FindEnumsAnalysisPass.h
     source/AnalysisPass/FindEnumsAnalysisPass.cpp
     source/AnalysisResult/FindEnumsAnalysisResult.h
@@ -226,6 +231,7 @@ set(RESOURCES
     resources/testCMakeParser.txt
     resources/testSdfValueTypeNamesMembers.txt
     resources/testFindSchemas.txt
+    resources/testFindVtValueRefFunctions.txt
     resources/testFindEnums.txt
     resources/testFindStaticTokens.txt
     resources/testFindTfNoticeSubclasses.txt

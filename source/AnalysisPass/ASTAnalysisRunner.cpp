@@ -46,6 +46,7 @@
 #include "AnalysisPass/TypedefAnalysisPass.h"
 #include "AnalysisPass/SdfValueTypeNamesMembersAnalysisPass.h"
 #include "AnalysisPass/FindSchemasAnalysisPass.h"
+#include "AnalysisPass/FindVtValueRefFunctionsAnalysisPass.h"
 #include "AnalysisPass/FindSendableDependenciesAnalysisPass.h"
 #include "AnalysisPass/SendableAnalysisPass.h"
 #include "AnalysisPass/APINotesAnalysisPass.h"
@@ -83,6 +84,7 @@ ASTAnalysisRunner::ASTAnalysisRunner(const Driver* driver) :
     _typedefAnalysisPass = ASTAnalysisPassFactory::makeAnalysisPass<TypedefAnalysisPass>(this);
     _sdfValueTypeNamesMembersAnalysisPass = ASTAnalysisPassFactory::makeAnalysisPass<SdfValueTypeNamesMembersAnalysisPass>(this);
     _findSchemasAnalysisPass = ASTAnalysisPassFactory::makeAnalysisPass<FindSchemasAnalysisPass>(this);
+    _findVtValueRefFunctionsAnalysisPass = ASTAnalysisPassFactory::makeAnalysisPass<FindVtValueRefFunctionsAnalysisPass>(this);
     _findSendableDependenciesAnalysisPass = ASTAnalysisPassFactory::makeAnalysisPass<FindSendableDependenciesAnalysisPass>(this);
     _sendableAnalysisPass = ASTAnalysisPassFactory::makeAnalysisPass<SendableAnalysisPass>(this);
     _apiNotesAnalysisPass = ASTAnalysisPassFactory::makeAnalysisPass<APINotesAnalysisPass>(this);
@@ -151,6 +153,9 @@ const SdfValueTypeNamesMembersAnalysisPass* ASTAnalysisRunner::getSdfValueTypeNa
 }
 const FindSchemasAnalysisPass* ASTAnalysisRunner::getFindSchemasAnalysisPass() const {
     return _findSchemasAnalysisPass.get();
+}
+const FindVtValueRefFunctionsAnalysisPass* ASTAnalysisRunner::getFindVtValueRefFunctionsAnalysisPass() const {
+    return _findVtValueRefFunctionsAnalysisPass.get();
 }
 const FindEnumsAnalysisPass* ASTAnalysisRunner::getFindEnumsAnalysisPass() const {
     return _findEnumsAnalysisPass.get();

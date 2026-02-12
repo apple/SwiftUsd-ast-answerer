@@ -1244,11 +1244,28 @@ std::string CMakeParser::Interpreter::interpretCommand(const CMakeParser::Comman
     }
     
     if (command.lowercaseName == "set") {
+        std::string varName = args.front();
+        
         if (args.size() < 2) {
+            // `set` is actually allowed to be used with only one argument,
+            // in which case it is an alias for `unset`. However, OpenUSD doesn't
+            // do this, and in fact asserting that `set` must have at least two arguments
+            // caught a typo in v26.03-alpha that caused execIr headers to be put into
+            // the wrong place when building OpenUSD. So, we'll keep asserting this
+            // for the foreseeable future, but keep the `unset` alias behavior as well
+            
+            // Assert
             std::cerr << "Illegal arguments to command " << command << std::endl;
             __builtin_trap();
+            
+            // Unset alias
+            // variables.erase(varName);
+            // if (CMAKEPARSER_INTERPRETER_DEBUGPRINT) {
+            //    std::cout << "Unset '" << varName << "' via set with one arg" << std::endl;
+            // }
+            // return "";
         }
-        std::string varName = args.front();
+        
         std::vector<std::string> restArgs = args;
         restArgs.erase(restArgs.begin());
         std::string value = semicolonJoin(restArgs);

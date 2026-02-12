@@ -23,6 +23,7 @@
 
 #include "Util/FileSystemInfo.h"
 #include "Util/ClangToolHelper.h"
+#include "Util/CMakeParser.h"
 #include "Util/TestDataLoader.h"
 #include "AnalysisResult/FindNamedDeclsAnalysisResult.h"
 #include "AnalysisPass/ASTAnalysisRunner.h"
@@ -258,8 +259,39 @@ public:
         if (relative == "") {
             return "";
         }
+        
         // pxr/foo/result/bar.h
-        return splitStringByRegex(relative, std::regex("/"))[2];
+        std::vector<std::string> components = splitStringByRegex(relative, std::regex("/"));
+        if (components.size() < 3) { return ""; }
+        return components[2];
+    }
+    
+    bool isFromUsdLibrary(const clang::Decl* decl, std::string lib) const {
+        return lib == getUsdLibraryForDecl(decl);
+    }
+    
+    bool isFromUsdLibraryStrictlyBefore(const clang::Decl* decl, std::string lib) const {
+        std::string declLib = getUsdLibraryForDecl(decl);
+        
+        if (lib == declLib) {
+            // Same library isn't strictly before
+            return false;
+        }
+        
+        std::vector<std::string> allLibs = getASTAnalysisRunner().getDriver()->getCMakeParser()->getNamesOfPxrLibraries();
+        for (const auto& someLib : allLibs) {
+            if (someLib == declLib) {
+                // Got to the decl's lib before the argument lib
+                return true;
+            }
+            if (someLib == lib) {
+                // Got to the argument lib before the decl's lib
+                return false;
+            }
+        }
+        
+        std::cout << "WARNING: '" << lib << "' not contained in CMakeParser.getNamesOfPxrLibraries()" << std::endl;
+        return false;
     }
     
     bool doesTypeContainUsdTypes(const clang::TypeDecl* typeDecl) const {

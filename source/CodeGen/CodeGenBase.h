@@ -177,6 +177,8 @@ protected:
     // MARK: Accessors
 public:
     static std::string mangleName(const clang::NamedDecl* _namedDecl) {
+        if (!_namedDecl) { return ""; }
+        
         clang::ASTContext& context = _namedDecl->getASTContext();
         clang::ASTNameGenerator astNameGenerator(context);
         std::string result = astNameGenerator.getName(_namedDecl);
