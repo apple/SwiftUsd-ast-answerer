@@ -1,0 +1,5 @@
+_Bool PXR_NS::UsdStage::SetMetadata(const class PXR_NS::TfToken & key, class PXR_NS::VtValueRef value) const; .;
+_Bool PXR_NS::UsdStage::SetMetadataByDictKey(const class PXR_NS::TfToken & key, const class PXR_NS::TfToken & keyPath, class PXR_NS::VtValueRef value) const; .;
+_Bool PXR_NS::UsdObject::SetMetadata(const class PXR_NS::TfToken & key, class PXR_NS::VtValueRef value) const; .;
+_Bool PXR_NS::UsdObject::SetMetadataByDictKey(const class PXR_NS::TfToken & key, const class PXR_NS::TfToken & keyPath, class PXR_NS::VtValueRef value) const; .;
+

@@ -34,6 +34,8 @@ APINotesAnalysisResult::operator std::string() const {
         case Kind::renameTfNoticeRegisterFunctionSpecialCase: return "renameTfNoticeRegisterFunctionSpecialCase";
         case Kind::markTfRemnantAsUnavailableImmortalFrtSpecialCase: return "markTfRemnantAsUnavailableImmortalFrtSpecialCase";
         case Kind::renameSdfZipFileIteratorSpecialCase: return "renameSdfZipFileIteratorSpecialCase";
+        case Kind::augmentVtValueRefFunctionWithVtValue: return "augmentVtValueRefFunctionWithVtValue";
+        case Kind::renameFunctionUnsafe: return "renameFunctionUnsafe";
     }
 }
 
@@ -49,6 +51,8 @@ std::vector<APINotesAnalysisResult::Kind> APINotesAnalysisResult::allCases() {
         Kind::renameTfNoticeRegisterFunctionSpecialCase,
         Kind::markTfRemnantAsUnavailableImmortalFrtSpecialCase,
         Kind::renameSdfZipFileIteratorSpecialCase,
+        Kind::augmentVtValueRefFunctionWithVtValue,
+        Kind::renameFunctionUnsafe,
     };
 }
 

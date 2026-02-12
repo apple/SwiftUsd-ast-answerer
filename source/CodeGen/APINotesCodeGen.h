@@ -42,19 +42,19 @@ public:
     void writeAPINotesFile() override;
     
 private:
-    struct ReplacedMethod {
-        const clang::CXXMethodDecl* method; // method->getParent() may not be owningType
+    struct ReplacedOrAugmentedFunction {
+        const clang::FunctionDecl* function; // method->getParent() may not be owningType
         const clang::CXXRecordDecl* owningType; // may be a type that publicly inherits (directly or indirectly) from method->getParent()
         APINotesAnalysisResult analysisResult;
         
-        bool operator<(const ReplacedMethod& other) const;
+        bool operator<(const ReplacedOrAugmentedFunction& other) const;
     };
     
-    std::vector<ReplacedMethod> getReplacedMethods(const APINotesNode*);
+    std::vector<ReplacedOrAugmentedFunction> getReplacedOrAugmentedFunctions(const APINotesNode*);
     
-    void writeReplaceMethod(ReplacedMethod replacedMethod,
-                            bool isHeader,
-                            std::map<const clang::CXXRecordDecl*, std::string>& importAsMemberTypedefs);
+    void writeReplacedOrAugmentedFunction(ReplacedOrAugmentedFunction function,
+                                          bool isHeader,
+                                          std::map<const clang::CXXRecordDecl*, std::string>& importAsMemberTypedefs);
     
     std::unique_ptr<NamespaceItem> _root;
 

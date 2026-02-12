@@ -18,26 +18,24 @@
 // SPDX-License-Identifier: Apache-2.0
 //===----------------------------------------------------------------------===//
 
-#ifndef APINotesAnalysisPass_h
-#define APINotesAnalysisPass_h
+#ifndef FindVtValueRefFunctionsAnalysisResult_h
+#define FindVtValueRefFunctionsAnalysisResult_h
 
-#include "AnalysisPass/ASTAnalysisPass.h"
-#include "AnalysisResult/APINotesAnalysisResult.h"
 #include "clang/AST/RecursiveASTVisitor.h"
 
+#include <string>
+#include <fstream>
+#include <optional>
+#include <vector>
 
-class APINotesAnalysisPass final: public ASTAnalysisPass<APINotesAnalysisPass, APINotesAnalysisResult> {
-public:
-    APINotesAnalysisPass(ASTAnalysisRunner* astAnalysisRunner);
-    std::string serializationFileName() const override;
-    std::string testFileName() const override;
-    bool VisitNamedDecl(clang::NamedDecl* namedDecl) override;
+class FindVtValueRefFunctionsAnalysisPass;
+
+struct FindVtValueRefFunctionsAnalysisResult {
+    explicit operator std::string() const;
     
-private:
-    std::vector<const clang::NamedDecl*> getHardCodedOwnedTypes() const;
-    std::vector<const clang::FunctionDecl*> getHardCodedReplaceConstRefFunctionsWithCopy() const;
-    std::vector<const clang::FunctionDecl*> getHardCodedReplaceMutatingFunctionsWithNonmutating() const;
-    std::vector<const clang::FunctionDecl*> getAugmentVtValueRefFunctionsWithVtValue() const;
+    FindVtValueRefFunctionsAnalysisResult();
+    static std::optional<FindVtValueRefFunctionsAnalysisResult> deserialize(const std::string& data, const FindVtValueRefFunctionsAnalysisPass* astAnalysisPass);
 };
+std::ostream& operator <<(std::ostream& os, const FindVtValueRefFunctionsAnalysisResult& obj);
 
-#endif /* APINotesAnalysisPass_h */
+#endif /* FindVtValueRefFunctionsAnalysisResult_h */

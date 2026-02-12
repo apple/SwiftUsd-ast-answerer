@@ -37,6 +37,14 @@ void APINotesNode::write(std::vector<std::string> &lines, int indentation) const
     _writeDeclContextChildren(lines, indentation);
 }
 
+std::string APINotesNode::indent(int indentation) const {
+    std::stringstream ss;
+    for (int i = 0; i < indentation; i++) {
+        ss << "  ";
+    }
+    return ss.str();
+}
+
 void APINotesNode::walk(std::function<void (const APINotesNode *)> f) const {
     bool isDeclContext = false;
     
@@ -216,8 +224,22 @@ void MethodItem::addSwiftNameTfNoticeRegisterSpecialCaseField() {
 }
 
 void MethodItem::addRename(const clang::NamedDecl* target, APINotesAnalysisResult result) {
-    addUnavailable();
     renamedMethods.insert({target, result});
+    
+    if (result.getKind() == APINotesAnalysisResult::Kind::renameFunctionUnsafe) {
+        std::string fName = "__" + target->getNameAsString() + "Unsafe(";
+        const clang::FunctionDecl* functionDecl = clang::dyn_cast<clang::FunctionDecl>(target);
+        for (int i = 0; i < functionDecl->parameters().size(); i++) {
+            fName += "_:";
+        }
+        fName += ")";
+        
+        swiftName = std::make_unique<SwiftNameField>(fName);
+    }
+}
+
+void MethodItem::addVtValueRefFunctionAugmentation() {
+    renamedMethods.insert({clang::dyn_cast<clang::NamedDecl>(decl), APINotesAnalysisResult::Kind::augmentVtValueRefFunctionWithVtValue});
 }
 
 void MethodItem::_write(std::vector<std::string> &lines, int indentation) const {
@@ -343,6 +365,11 @@ void NamespaceItem::add(const clang::NamedDecl *target, APINotesAnalysisResult r
             
         case APINotesAnalysisResult::Kind::replaceConstRefFunctionWithCopyingWrapper: // fallthrough
         case APINotesAnalysisResult::Kind::replaceMutatingFunctionWithNonmutatingWrapper:
+            currentNode->dyn_cast<MethodItem>().addUnavailable();
+            currentNode->dyn_cast<MethodItem>().addRename(target, result);
+            break;
+            
+        case APINotesAnalysisResult::Kind::renameFunctionUnsafe: // fallthrough
             currentNode->dyn_cast<MethodItem>().addRename(target, result);
             break;
             
@@ -360,6 +387,10 @@ void NamespaceItem::add(const clang::NamedDecl *target, APINotesAnalysisResult r
             
         case APINotesAnalysisResult::Kind::renameSdfZipFileIteratorSpecialCase:
             currentNode->dyn_cast<TagItem>().addSwiftNameSdfZipFileIteratorSpecialCase();
+            break;
+            
+        case APINotesAnalysisResult::Kind::augmentVtValueRefFunctionWithVtValue:
+            currentNode->dyn_cast<MethodItem>().addVtValueRefFunctionAugmentation();
             break;
     }
 }

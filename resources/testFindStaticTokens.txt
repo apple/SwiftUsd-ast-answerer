@@ -9,7 +9,6 @@ struct PXR_NS::SdfValueRoleNames_StaticTokenType; importedAsValue;
 struct PXR_NS::SdfFieldKeys_StaticTokenType; importedAsValue;
 struct PXR_NS::SdfChildrenKeys_StaticTokenType; importedAsValue;
 struct PXR_NS::SdfFileFormatTokens_StaticTokenType; importedAsValue;
-struct PXR_NS::SdfTextFileFormatTokens_StaticTokenType; importedAsValue;
 struct PXR_NS::SdrNodeMetadata_StaticTokenType; importedAsValue;
 struct PXR_NS::SdrNodeContext_StaticTokenType; importedAsValue;
 struct PXR_NS::SdrNodeRole_StaticTokenType; importedAsValue;
