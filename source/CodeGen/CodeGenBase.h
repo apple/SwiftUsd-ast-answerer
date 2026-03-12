@@ -107,7 +107,7 @@ private:
     : _type(type), _onDtorIfUsedTypeName(onDtorIfUsedTypeName) {}
     
     static std::optional<std::string> getFeatureFlagGuard(const Driver*, TypeNamePrinter::Type type, std::string fileNameSuffix);
-    static std::optional<std::string> getFeatureFlagGuard(std::string includedHeader);
+    static std::optional<std::string> getFeatureFlagGuard(const Driver*, std::string includedHeader);
     
     TypeNamePrinter(const TypeNamePrinter&) = delete;
     TypeNamePrinter& operator=(const TypeNamePrinter&) = delete;
@@ -354,7 +354,7 @@ private:
         std::sort(sortedFilePaths.begin(), sortedFilePaths.end());
         
         for (const auto& f : sortedFilePaths) {
-            auto guard = TypeNamePrinter::getFeatureFlagGuard(f);
+            auto guard = TypeNamePrinter::getFeatureFlagGuard(_codeGenRunner->getDriver(), f);
             if (guard) {
                 writeLine(*guard);
             }
