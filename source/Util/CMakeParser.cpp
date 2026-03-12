@@ -1019,7 +1019,7 @@ variables({
     {"PXR_ENABLE_OPENVDB_SUPPORT", "0"},
     {"PXR_ENABLE_PTEX_SUPPORT", "0"},
     {"PXR_APPLE_EMBEDDED", "1"}, // LINUX
-    {"PXR_BUILD_USD_VALIDATION", "0"},
+    {"PXR_BUILD_USD_VALIDATION", "1"},
     
     // Usd plugins
     {"PXR_BUILD_ALEMBIC_PLUGIN", "0"},

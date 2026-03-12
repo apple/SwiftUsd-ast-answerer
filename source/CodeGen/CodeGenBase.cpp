@@ -563,7 +563,41 @@ private:
     }
 };
 
-std::vector<std::string> _featureFlagGuardSet(std::string filePath, std::string openFileSuffix) {
+// For the given type, compute the list of independent feature flag guards that need to be combined
+std::vector<std::string> _featureFlagGuardSet(const Driver* driver, TypeNamePrinter::Type type, std::string openFileSuffix) {
+    bool isLangCpp = openFileSuffix == "h" || openFileSuffix == "cpp" || openFileSuffix == "mm";
+    bool isLangSwift = openFileSuffix == "swift";
+    bool isLangNoGuard = openFileSuffix == "modulemap" || openFileSuffix == "apinotes" || openFileSuffix == "md" || openFileSuffix == "";
+    
+    if (isLangNoGuard) { return {}; }
+    
+    if (!isLangCpp && !isLangSwift && !isLangNoGuard) {
+        std::cerr << "Unknown openFileSuffix " << openFileSuffix << std::endl;
+        __builtin_trap();
+    }
+        
+    std::vector<std::string> result;
+    
+    const ASTAnalysisRunner* runner = driver->getASTAnalysisRunner();
+    if (const clang::NamedDecl* namedDecl = type.getNamedDeclOpt()) {
+        std::cout << ASTHelpers::getAsString(namedDecl) << std::endl;
+        // Starting in Swift 6.3, these types are no longer found by the compiler. I have no idea why.
+        // They are only used in unavailable Sendable conformances so far.
+        if (namedDecl == runner->findNamedDecl("class " PXR_NS"::VdfDataManagerHashTable") ||
+            namedDecl == runner->findNamedDecl("class " PXR_NS"::UsdImagingPointInstancerAdapter")) {
+            if (isLangSwift) {
+                result.push_back("compiler(<6.3)");
+            }
+        }
+        
+        
+    }
+
+    return result;
+}
+
+// For the given file path, compute the list of independent feature flag guards that need to be combined
+std::vector<std::string> _featureFlagGuardSet(const Driver* driver, std::string filePath, std::string openFileSuffix) {
     bool isLangCpp = openFileSuffix == "h" || openFileSuffix == "cpp" || openFileSuffix == "mm";
     bool isLangSwift = openFileSuffix == "swift";
     bool isLangNoGuard = openFileSuffix == "modulemap" || openFileSuffix == "apinotes" || openFileSuffix == "md" || openFileSuffix == "";
@@ -610,12 +644,21 @@ std::vector<std::string> _featureFlagGuardSet(std::string filePath, std::string 
     return result;
 }
 
-std::optional<std::string> _featureFlagGuard(std::vector<std::string> filePaths, std::string openFileSuffix) {
+// For the given type and/or file paths, compute the single string (or null) that is the concatenation of all component feature flag guards
+std::optional<std::string> _featureFlagGuard(const Driver* driver, std::optional<TypeNamePrinter::Type> type, std::vector<std::string> filePaths, std::string openFileSuffix) {
     std::vector<std::string> featureFlagGuards;
     std::set<std::string> usedFeatureFlagGuards;
     
     for (const auto& filePath : filePaths) {
-        for (const auto& guard : _featureFlagGuardSet(filePath, openFileSuffix)) {
+        for (const auto& guard : _featureFlagGuardSet(driver, filePath, openFileSuffix)) {
+            if (!usedFeatureFlagGuards.contains(guard)) {
+                featureFlagGuards.push_back(guard);
+                usedFeatureFlagGuards.insert(guard);
+            }
+        }
+    }
+    if (type) {
+        for (const auto& guard : _featureFlagGuardSet(driver, *type, openFileSuffix)) {
             if (!usedFeatureFlagGuards.contains(guard)) {
                 featureFlagGuards.push_back(guard);
                 usedFeatureFlagGuards.insert(guard);
@@ -642,11 +685,11 @@ std::optional<std::string> _featureFlagGuard(std::vector<std::string> filePaths,
 // Given this named decl, if I am going to print its type name, what is the feature flag guard I need?
 std::optional<std::string> TypeNamePrinter::getFeatureFlagGuard(const Driver* driver, TypeNamePrinter::Type type, std::string openFileSuffix) {
     auto includePaths = includePathsForSwiftNameInCpp(driver, type);
-    return _featureFlagGuard(std::vector(includePaths.begin(), includePaths.end()), openFileSuffix);
+    return _featureFlagGuard(driver, type, std::vector(includePaths.begin(), includePaths.end()), openFileSuffix);
 }
 
-std::optional<std::string> TypeNamePrinter::getFeatureFlagGuard(std::string includedHeader) {
-    return _featureFlagGuard({includedHeader}, "h");
+std::optional<std::string> TypeNamePrinter::getFeatureFlagGuard(const Driver* driver, std::string includedHeader) {
+    return _featureFlagGuard(driver, std::nullopt, {includedHeader}, "h");
 }
 
 std::optional<std::string> SwiftNameInSwift::getTypeNameOpt(const Driver *driver, TypeNamePrinter::Type type) {
