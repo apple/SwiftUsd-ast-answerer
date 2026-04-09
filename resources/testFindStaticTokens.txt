@@ -197,7 +197,6 @@ struct PXR_NS::UsdImagingUsdPrimInfoSchemaTokens_StaticTokenType; importedAsValu
 struct PXR_NS::UsdImagingUsdRenderProductSchemaTokens_StaticTokenType; importedAsValue;
 struct PXR_NS::UsdImagingUsdRenderSettingsSchemaTokens_StaticTokenType; importedAsValue;
 struct PXR_NS::UsdImagingUsdRenderVarSchemaTokens_StaticTokenType; importedAsValue;
-struct PXR_NS::UsdRiPxrImagingTokens_StaticTokenType; importedAsValue;
 struct PXR_NS::UsdVolImagingTokens_StaticTokenType; importedAsValue;
 struct PXR_NS::UsdMtlxFileFormatTokens_StaticTokenType; blockedByNonPublicHeaderDefinition;
 struct PXR_NS::UsdImaging_NiPrototypeSceneIndexTokens_StaticTokenType; blockedByNonPublicHeaderDefinition;

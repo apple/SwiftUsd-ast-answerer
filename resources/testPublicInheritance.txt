@@ -709,12 +709,6 @@ class PXR_NS::UsdImagingShaderAdapter; [class PXR_NS::UsdImagingRepresentedByAnc
 class PXR_NS::UsdImagingNodeGraphAdapter; [class PXR_NS::UsdImagingRepresentedByAncestorPrimAdapter];
 class PXR_NS::UsdImagingDrawModeSceneIndex; [class PXR_NS::HdSingleInputFilteringSceneIndexBase];
 
-class PXR_NS::UsdRiPxrImagingDisplayFilterAdapter; [class PXR_NS::UsdImagingPrimAdapter];
-class PXR_NS::UsdRiPxrImagingCameraAPIAdapter; [class PXR_NS::UsdImagingAPISchemaAdapter];
-class PXR_NS::UsdRiPxrImagingSampleFilterAdapter; [class PXR_NS::UsdImagingPrimAdapter];
-class PXR_NS::UsdRiPxrImagingAovLightAdapter; [class PXR_NS::UsdImagingLightAdapter];
-class PXR_NS::UsdRiPxrImagingIntegratorAdapter; [class PXR_NS::UsdImagingPrimAdapter];
-
 class PXR_NS::UsdSkelImagingSkeletonAdapter; [class PXR_NS::UsdImagingInstanceablePrimAdapter];
 class PXR_NS::UsdSkelImagingSkelRootAdapter; [class PXR_NS::UsdImagingPrimAdapter];
 

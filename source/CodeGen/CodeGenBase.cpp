@@ -580,7 +580,6 @@ std::vector<std::string> _featureFlagGuardSet(const Driver* driver, TypeNamePrin
     
     const ASTAnalysisRunner* runner = driver->getASTAnalysisRunner();
     if (const clang::NamedDecl* namedDecl = type.getNamedDeclOpt()) {
-        std::cout << ASTHelpers::getAsString(namedDecl) << std::endl;
         // Starting in Swift 6.3, these types are no longer found by the compiler. I have no idea why.
         // They are only used in unavailable Sendable conformances so far.
         if (namedDecl == runner->findNamedDecl("class " PXR_NS"::VdfDataManagerHashTable") ||

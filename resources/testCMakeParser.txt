@@ -382,7 +382,6 @@ pxr/exec/vdf; publicHeader; traits.h;
 pxr/exec/ef; publicHeader; api.h;
 pxr/exec/ef; publicHeader; dependencyCache.h;
 pxr/exec/ef; sourceFile; dependencyCache.cpp;
-pxr/exec/ef; publicHeader; executor.h;
 pxr/exec/ef; publicHeader; pageCacheExecutor.h;
 pxr/exec/ef; publicHeader; time.h;
 pxr/exec/ef; sourceFile; time.cpp;
@@ -593,14 +592,6 @@ pxr/usdImaging/usdImagingGL; publicHeader; rendererSettings.h
 pxr/usdImaging/usdProcImaging; publicHeader; generativeProceduralAdapter.h;
 pxr/usdImaging/usdProcImaging; sourceFile; generativeProceduralAdapter.cpp;
 pxr/usdImaging/usdProcImaging; publicHeader; api.h;
-
-pxr/usdImaging/usdRiPxrImaging; publicHeader; pxrDisplayFilterAdapter.h;
-pxr/usdImaging/usdRiPxrImaging; sourceFile; pxrDisplayFilterAdapter.cpp;
-pxr/usdImaging/usdRiPxrImaging; publicHeader; tokens.h;
-pxr/usdImaging/usdRiPxrImaging; sourceFile; tokens.cpp;
-pxr/usdImaging/usdRiPxrImaging; sourceFile; pxrRenderTerminalHelper.cpp;
-pxr/usdImaging/usdRiPxrImaging; publicHeader; api.h;
-pxr/usdImaging/usdRiPxrImaging; publicHeader; version.h;
 
 pxr/usdImaging/usdSkelImaging; publicHeader; skeletonAdapter.h;
 pxr/usdImaging/usdSkelImaging; sourceFile; skeletonAdapter.cpp;

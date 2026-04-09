@@ -56,6 +56,7 @@ class _ModelBase:
                     x = re.sub("pxrInternal_v0_25_8__pxrReserved__", "PXR_NS", x)
                     x = re.sub("pxrInternal_v0_25_11__pxrReserved__", "PXR_NS", x)
                     x = re.sub("pxrInternal_v0_26_3__pxrReserved__", "PXR_NS", x)
+                    x = re.sub("pxrInternal_v0_26_5__pxrReserved__", "PXR_NS", x)
                     return x
 
                 
@@ -447,11 +448,84 @@ if __name__ == "__main__":
     parser.add_argument("--analyzed_traits", nargs="+", help=f"Analyzed trait (default: {default_analyzed_traits})", default=default_analyzed_traits)
     parser.add_argument("--meta_analysis", nargs="+", help=f"Meta analysis (default: {default_meta_analysis})", default=default_meta_analysis)
     parser.add_argument("--filter", help=f"Filters to suppress results. Can be combined with |, &, and ().\n{AtomicFilter.helpText()}", default="")
+    parser.add_argument("--auto", help=f"Automatically determine good meta_analysis and filter values for each analyzed trait.", action="store_true")
+    parser.add_argument("--wait-between-traits", action="store_true", help="Will wait until a newline is entered after each trait")
 
     args = parser.parse_args()
 
+    def auto_assign_meta_analysis_and_filter():
+        args.meta_analysis = default_meta_analysis
+        args.filter = ""
+
+        if args.analyzed_trait == "CMakeParser":
+            args.meta_analysis = "diff_kinds diff_types moved_types_summary".split()
+
+        elif args.analyzed_trait == "Import":
+            args.meta_analysis = "diff_kinds moved_types_summary moved_types".split()
+            args.filter = "type.is_pxr"
+
+        elif args.analyzed_trait == "PublicInheritance":
+            args.meta_analysis = "moved_types".split()
+            args.filter = "type.is_pxr"
+
+        elif args.analyzed_trait == "Typedef":
+            args.meta_analysis = "diff_types".split()
+
+        elif args.analyzed_trait == "Equatable":
+            args.meta_analysis = "diff_kinds moved_types_summary moved_types".split()
+            args.filter = "type.is_pxr"
+
+        elif args.analyzed_trait == "Comparable":
+            args.meta_analysis = "diff_kinds moved_types_summary moved_types".split()
+            args.filter = "type.is_pxr"
+
+        elif args.analyzed_trait == "Hashable":
+            args.meta_analysis = "diff_kinds moved_types_summary moved_types".split()
+            args.filter = "type.is_pxr"
+
+        elif args.analyzed_trait == "CustomStringConvertible":
+            args.meta_analysis = "diff_kinds moved_types_summary moved_types".split()
+            args.filter = "type.is_pxr"
+
+        elif args.analyzed_trait == "FindSendableDependencies":
+            pass
+
+        elif args.analyzed_trait == "Sendable":
+            pass
+
+        elif args.analyzed_trait == "FindEnums":
+            args.meta_analysis = "diff_kinds diff_types moved_types".split()
+            args.filter = "type.is_pxr"
+
+        elif args.analyzed_trait == "FindStaticTokens":
+            args.meta_analysis = "diff_kinds diff_types moved_types".split()
+            args.filter = "type.is_pxr"
+
+        elif args.analyzed_trait == "FindTfNoticeSubclasses":
+            pass
+
+        elif args.analyzed_trait == "FindSchemas":
+            pass
+
+        elif args.analyzed_trait == "SdfValueTypeNamesMembers":
+            pass
+
+        elif args.analyzed_trait == "APINotes":
+            args.meta_analysis = "diff_kinds diff_types moved_types_summary moved_types".split()
+
+        elif args.analyzed_trait == "FindVtValueRefFunctions":
+            pass
+        
+        else:
+            raise ValueError(f"Unknown analyzed trait {args.analyzed_trait} for --auto")
+
     for i in range(len(args.analyzed_traits)):
         args.analyzed_trait = args.analyzed_traits[i]
+        if args.auto:
+            auto_assign_meta_analysis_and_filter()
+        print(f"================{args.analyzed_trait}================")
         model = Model(args)
+        print(f"================{args.analyzed_trait}================\n\n\n\n\n")
 
-
+        if args.wait_between_traits:
+            input()

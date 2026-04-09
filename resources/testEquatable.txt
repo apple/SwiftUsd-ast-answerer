@@ -176,8 +176,6 @@ class PXR_NS::GlfSimpleLight; availableFoundBySwift;
 class PXR_NS::HdSceneIndexPrimView::const_iterator; availableInlineMethodDefinedAfterDeclaration;
 class PXR_NS::HdPrimOriginSchema::OriginPath; availableShouldBeFoundBySwiftButIsnt;
 
-struct PXR_NS::HdsiLegacyDisplayStyleOverrideSceneIndex::OptionalInt; availableFoundBySwift;
-
 class PXR_NS::HgiBuffer; noAnalysisBecauseBlockedByImport;
 class PXR_NS::HgiCmds; noAnalysisBecauseBlockedByImport;
 class PXR_NS::Hgi; noAnalysisBecauseBlockedByImport;

@@ -239,15 +239,6 @@ bool ImportAnalysisPass::checkSharedReferenceType(const clang::TagDecl* tagDecl)
         const clang::CXXRecordDecl* tfRefBase = clang::dyn_cast<clang::CXXRecordDecl>(findTagDecl("class " PXR_NS"::TfRefBase"));
         
         if (ASTHelpers::isEqualToOrDerivedFromClass(cxxRecordDecl, tfRefBase)) {
-            // Swift 6.0: Don't import nested types as a reference type, because API notes don't support nested tags
-            // Note: This restriction is expected to be lifted in Swift 6.1
-#warning Swift 6.1: Support importing nested tags as reference
-            const clang::Decl* cxxRecordDeclContext = clang::dyn_cast<clang::Decl>(cxxRecordDecl->getDeclContext());
-            const clang::Decl* tfRefBaseContext = clang::dyn_cast<clang::Decl>(tfRefBase->getDeclContext());
-            if (cxxRecordDeclContext->getCanonicalDecl() != tfRefBaseContext->getCanonicalDecl()) {
-                return false;
-            }
-            
             // Alright, we can import it as a reference type
             insert_or_assign(tagDecl, ImportAnalysisResult::importedAsSharedReference);
             return true;
