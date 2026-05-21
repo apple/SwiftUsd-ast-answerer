@@ -61,7 +61,7 @@ template <class LPtr, class MethodPtr> static class PXR_NS::TfNotice::Key PXR_NS
 class PXR_NS::Tf_Remnant; markTfRemnantAsUnavailableImmortalFrtSpecialCase;
 class PXR_NS::SdfZipFile::Iterator; renameSdfZipFileIteratorSpecialCase;
 
-class PXR_NS::VtValueRef PXR_NS::VtValue::Ref() const; renameFunctionUnsafe;
+// class PXR_NS::VtValueRef PXR_NS::VtValue::Ref() const; renameFunctionUnsafe;
 
 class PXR_NS::UsdNotice::StageNotice; importTagAsOwned;
 class PXR_NS::UsdNotice::StageContentsChanged; importTagAsOwned;

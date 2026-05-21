@@ -202,6 +202,12 @@ bool APINotesAnalysisPass::VisitNamedDecl(clang::NamedDecl *namedDecl) {
     }
     
     {
+        // Instead of doing this via API Notes, do it via SWIFT_NAME in the header because
+        // newer compilers supporting rvalue-qualified methods don't handle overload resolution
+        // properly, causing `__RefUnsafe()` to be ambiguous.
+        // rdar://177372504 (Non-const rvalue method shouldn't be a possible overload on `let` variables)
+        
+        /*
         // Rename VtValue::Ref() to VtValue.__RefUnsafe() in Swift, because VtValueRef is a view type
         // not detected as such by the Swift compiler, but it should still have methods returning it be renamed
         std::string s = "class " PXR_NS"::VtValueRef " PXR_NS"::VtValue::Ref() const";
@@ -211,6 +217,7 @@ bool APINotesAnalysisPass::VisitNamedDecl(clang::NamedDecl *namedDecl) {
             __builtin_trap();
         }
         insert_or_assign(functionDecl, APINotesAnalysisResult::Kind::renameFunctionUnsafe);
+        */
     }
     
     {
