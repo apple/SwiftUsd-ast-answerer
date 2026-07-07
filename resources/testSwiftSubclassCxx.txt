@@ -1,0 +1,112 @@
+// MARK: HioImage
+class PXR_NS::HioImage; virtual void PXR_NS::HioImage::~HioImage();
+class PXR_NS::HioImage; void PXR_NS::HioImage::HioImage();
+class PXR_NS::HioImage; static _Bool PXR_NS::HioImage::IsSupportedImageFile(const std::string & filename);
+class PXR_NS::HioImage; static class std::shared_ptr<class PXR_NS::HioImage> PXR_NS::HioImage::OpenForReading(const std::string & filename, int subimage, int mip, enum PXR_NS::HioImage::SourceColorSpace sourceColorSpace, _Bool suppressErrors);
+class PXR_NS::HioImage; virtual _Bool PXR_NS::HioImage::Read(const class PXR_NS::HioImage::StorageSpec & storage);
+class PXR_NS::HioImage; virtual _Bool PXR_NS::HioImage::ReadCropped(int cropTop, int cropBottom, int cropLeft, int cropRight, const class PXR_NS::HioImage::StorageSpec & storage);
+class PXR_NS::HioImage; static class std::shared_ptr<class PXR_NS::HioImage> PXR_NS::HioImage::OpenForWriting(const std::string & filename);
+class PXR_NS::HioImage; virtual _Bool PXR_NS::HioImage::Write(const class PXR_NS::HioImage::StorageSpec & storage, const class PXR_NS::VtDictionary & metadata);
+class PXR_NS::HioImage; virtual const std::string & PXR_NS::HioImage::GetFilename() const;
+class PXR_NS::HioImage; virtual int PXR_NS::HioImage::GetWidth() const;
+class PXR_NS::HioImage; virtual int PXR_NS::HioImage::GetHeight() const;
+class PXR_NS::HioImage; virtual enum PXR_NS::HioFormat PXR_NS::HioImage::GetFormat() const;
+class PXR_NS::HioImage; virtual int PXR_NS::HioImage::GetBytesPerPixel() const;
+class PXR_NS::HioImage; virtual int PXR_NS::HioImage::GetNumMipLevels() const;
+class PXR_NS::HioImage; virtual _Bool PXR_NS::HioImage::IsColorSpaceSRGB() const;
+class PXR_NS::HioImage; template <typename T> _Bool PXR_NS::HioImage::GetMetadata(const class PXR_NS::TfToken & key, type-parameter-0-0 * value) const;
+class PXR_NS::HioImage; virtual _Bool PXR_NS::HioImage::GetMetadata(const class PXR_NS::TfToken & key, class PXR_NS::VtValue * value) const;
+class PXR_NS::HioImage; virtual _Bool PXR_NS::HioImage::GetSamplerMetadata(enum PXR_NS::HioAddressDimension dim, enum PXR_NS::HioAddressMode * param) const;
+class PXR_NS::HioImage; virtual _Bool PXR_NS::HioImage::_OpenForReading(const std::string & filename, int subimage, int mip, enum PXR_NS::HioImage::SourceColorSpace sourceColorSpace, _Bool suppressErrors);
+class PXR_NS::HioImage; virtual _Bool PXR_NS::HioImage::_OpenForWriting(const std::string & filename);
+
+
+// MARK: SdfFileFormat
+class PXR_NS::SdfFileFormat; public class PXR_NS::TfRefBase;
+class PXR_NS::SdfFileFormat; public class PXR_NS::TfWeakBase;
+class PXR_NS::SdfFileFormat; virtual void PXR_NS::SdfFileFormat::~SdfFileFormat();
+class PXR_NS::SdfFileFormat; void PXR_NS::SdfFileFormat::SdfFileFormat(const class PXR_NS::TfToken & formatId, const class PXR_NS::TfToken & versionString, const class PXR_NS::TfToken & target, const std::string & extension);
+class PXR_NS::SdfFileFormat; void PXR_NS::SdfFileFormat::SdfFileFormat(const class PXR_NS::TfToken & formatId, const class PXR_NS::TfToken & versionString, const class PXR_NS::TfToken & target, const std::string & extension, const class PXR_NS::SdfSchemaBase & schema);
+class PXR_NS::SdfFileFormat; void PXR_NS::SdfFileFormat::SdfFileFormat(const class PXR_NS::TfToken & formatId, const class PXR_NS::TfToken & versionString, const class PXR_NS::TfToken & target, const std::string & extension, const class PXR_NS::SdfSchemaBase && schema);
+class PXR_NS::SdfFileFormat; void PXR_NS::SdfFileFormat::SdfFileFormat(const class PXR_NS::TfToken & formatId, const class PXR_NS::TfToken & versionString, const class PXR_NS::TfToken & target, const class std::vector<std::string> & extensions);
+class PXR_NS::SdfFileFormat; void PXR_NS::SdfFileFormat::SdfFileFormat(const class PXR_NS::TfToken & formatId, const class PXR_NS::TfToken & versionString, const class PXR_NS::TfToken & target, const class std::vector<std::string> & extensions, const class PXR_NS::SdfSchemaBase & schema);
+class PXR_NS::SdfFileFormat; void PXR_NS::SdfFileFormat::SdfFileFormat(const class PXR_NS::TfToken & formatId, const class PXR_NS::TfToken & versionString, const class PXR_NS::TfToken & target, const class std::vector<std::string> & extensions, const class PXR_NS::SdfSchemaBase && schema);
+class PXR_NS::SdfFileFormat; const class PXR_NS::SdfSchemaBase & PXR_NS::SdfFileFormat::GetSchema() const;
+class PXR_NS::SdfFileFormat; const class PXR_NS::TfToken & PXR_NS::SdfFileFormat::GetFormatId() const;
+class PXR_NS::SdfFileFormat; const class PXR_NS::TfToken & PXR_NS::SdfFileFormat::GetTarget() const;
+class PXR_NS::SdfFileFormat; const std::string & PXR_NS::SdfFileFormat::GetFileCookie() const;
+class PXR_NS::SdfFileFormat; const class PXR_NS::TfToken & PXR_NS::SdfFileFormat::GetVersionString() const;
+class PXR_NS::SdfFileFormat; _Bool PXR_NS::SdfFileFormat::IsPrimaryFormatForExtensions() const;
+class PXR_NS::SdfFileFormat; const class std::vector<std::string> & PXR_NS::SdfFileFormat::GetFileExtensions() const;
+class PXR_NS::SdfFileFormat; const std::string & PXR_NS::SdfFileFormat::GetPrimaryFileExtension() const;
+class PXR_NS::SdfFileFormat; _Bool PXR_NS::SdfFileFormat::IsSupportedExtension(const std::string & extension) const;
+class PXR_NS::SdfFileFormat; virtual _Bool PXR_NS::SdfFileFormat::IsPackage() const;
+class PXR_NS::SdfFileFormat; virtual std::string PXR_NS::SdfFileFormat::GetPackageRootLayerPath(const std::string & resolvedPath) const;
+class PXR_NS::SdfFileFormat; virtual class std::map<std::string, std::string> PXR_NS::SdfFileFormat::GetDefaultFileFormatArguments() const;
+class PXR_NS::SdfFileFormat; virtual class PXR_NS::TfRefPtr<class PXR_NS::SdfAbstractData> PXR_NS::SdfFileFormat::InitData(const class std::map<std::string, std::string> & args) const;
+class PXR_NS::SdfFileFormat; class PXR_NS::TfRefPtr<class PXR_NS::SdfAbstractData> PXR_NS::SdfFileFormat::InitDetachedData(const class std::map<std::string, std::string> & args) const;
+class PXR_NS::SdfFileFormat; class PXR_NS::TfRefPtr<class PXR_NS::SdfLayer> PXR_NS::SdfFileFormat::NewLayer(const class PXR_NS::TfWeakPtr<const class PXR_NS::SdfFileFormat> & fileFormat, const std::string & identifier, const std::string & realPath, const class PXR_NS::ArAssetInfo & assetInfo, const class std::map<std::string, std::string> & args) const;
+class PXR_NS::SdfFileFormat; _Bool PXR_NS::SdfFileFormat::ShouldSkipAnonymousReload() const;
+class PXR_NS::SdfFileFormat; _Bool PXR_NS::SdfFileFormat::ShouldReadAnonymousLayers() const;
+class PXR_NS::SdfFileFormat; virtual _Bool PXR_NS::SdfFileFormat::CanRead(const std::string & file) const;
+class PXR_NS::SdfFileFormat; virtual _Bool PXR_NS::SdfFileFormat::Read(class PXR_NS::SdfLayer * layer, const std::string & resolvedPath, _Bool metadataOnly) const;
+class PXR_NS::SdfFileFormat; _Bool PXR_NS::SdfFileFormat::ReadDetached(class PXR_NS::SdfLayer * layer, const std::string & resolvedPath, _Bool metadataOnly) const;
+class PXR_NS::SdfFileFormat; virtual _Bool PXR_NS::SdfFileFormat::WriteToFile(const class PXR_NS::SdfLayer &, const std::string &, const std::string &, const class std::map<std::string, std::string> &) const;
+class PXR_NS::SdfFileFormat; virtual _Bool PXR_NS::SdfFileFormat::SaveToFile(const class PXR_NS::SdfLayer & layer, const std::string & filePath, const std::string & comment, const class std::map<std::string, std::string> & args) const;
+class PXR_NS::SdfFileFormat; virtual _Bool PXR_NS::SdfFileFormat::ReadFromString(class PXR_NS::SdfLayer * layer, const std::string & str) const;
+class PXR_NS::SdfFileFormat; virtual _Bool PXR_NS::SdfFileFormat::WriteToStream(const class PXR_NS::SdfHandle<class PXR_NS::SdfSpec> & spec, std::ostream & out, unsigned long indent) const;
+class PXR_NS::SdfFileFormat; virtual _Bool PXR_NS::SdfFileFormat::WriteToString(const class PXR_NS::SdfLayer & layer, std::string * str, const std::string & comment) const;
+class PXR_NS::SdfFileFormat; virtual class std::set<std::string> PXR_NS::SdfFileFormat::GetExternalAssetDependencies(const class PXR_NS::SdfLayer & layer) const;
+class PXR_NS::SdfFileFormat; _Bool PXR_NS::SdfFileFormat::SupportsReading() const;
+class PXR_NS::SdfFileFormat; _Bool PXR_NS::SdfFileFormat::SupportsWriting() const;
+class PXR_NS::SdfFileFormat; _Bool PXR_NS::SdfFileFormat::SupportsEditing() const;
+class PXR_NS::SdfFileFormat; static std::string PXR_NS::SdfFileFormat::GetFileExtension(const std::string & s);
+class PXR_NS::SdfFileFormat; static class std::set<std::string> PXR_NS::SdfFileFormat::FindAllFileFormatExtensions();
+class PXR_NS::SdfFileFormat; static class std::set<std::string> PXR_NS::SdfFileFormat::FindAllDerivedFileFormatExtensions(const class PXR_NS::TfType & baseType);
+class PXR_NS::SdfFileFormat; static _Bool PXR_NS::SdfFileFormat::FormatSupportsReading(const std::string & extension, const std::string & target);
+class PXR_NS::SdfFileFormat; static _Bool PXR_NS::SdfFileFormat::FormatSupportsWriting(const std::string & extension, const std::string & target);
+class PXR_NS::SdfFileFormat; static _Bool PXR_NS::SdfFileFormat::FormatSupportsEditing(const std::string & extension, const std::string & target);
+class PXR_NS::SdfFileFormat; static class PXR_NS::TfWeakPtr<const class PXR_NS::SdfFileFormat> PXR_NS::SdfFileFormat::FindById(const class PXR_NS::TfToken & formatId);
+class PXR_NS::SdfFileFormat; static class PXR_NS::TfWeakPtr<const class PXR_NS::SdfFileFormat> PXR_NS::SdfFileFormat::FindByExtension(const std::string & extension, const std::string & target);
+class PXR_NS::SdfFileFormat; static class PXR_NS::TfWeakPtr<const class PXR_NS::SdfFileFormat> PXR_NS::SdfFileFormat::FindByExtension(const std::string & path, const class std::map<std::string, std::string> & args);
+class PXR_NS::SdfFileFormat; static void PXR_NS::SdfFileFormat::_SetLayerData(class PXR_NS::SdfLayer * layer, class PXR_NS::TfRefPtr<class PXR_NS::SdfAbstractData> & data);
+class PXR_NS::SdfFileFormat; static void PXR_NS::SdfFileFormat::_SetLayerData(class PXR_NS::SdfLayer * layer, class PXR_NS::TfRefPtr<class PXR_NS::SdfAbstractData> & data, class PXR_NS::SdfLayerHints hints);
+class PXR_NS::SdfFileFormat; static class PXR_NS::TfWeakPtr<const class PXR_NS::SdfAbstractData> PXR_NS::SdfFileFormat::_GetLayerData(const class PXR_NS::SdfLayer & layer);
+class PXR_NS::SdfFileFormat; _Bool PXR_NS::SdfFileFormat::_ReadAndCopyLayerDataToMemory(class PXR_NS::SdfLayer * layer, const std::string & resolvedPath, _Bool metadataOnly, _Bool * didCopyData) const;
+class PXR_NS::SdfFileFormat; virtual class PXR_NS::SdfLayer * PXR_NS::SdfFileFormat::_InstantiateNewLayer(const class PXR_NS::TfWeakPtr<const class PXR_NS::SdfFileFormat> & fileFormat, const std::string & identifier, const std::string & realPath, const class PXR_NS::ArAssetInfo & assetInfo, const class std::map<std::string, std::string> & args) const;
+class PXR_NS::SdfFileFormat; virtual _Bool PXR_NS::SdfFileFormat::_ShouldSkipAnonymousReload() const;
+class PXR_NS::SdfFileFormat; virtual _Bool PXR_NS::SdfFileFormat::_ShouldReadAnonymousLayers() const;
+class PXR_NS::SdfFileFormat; virtual class PXR_NS::TfRefPtr<class PXR_NS::SdfAbstractData> PXR_NS::SdfFileFormat::_InitDetachedData(const class std::map<std::string, std::string> & args) const;
+class PXR_NS::SdfFileFormat; virtual _Bool PXR_NS::SdfFileFormat::_ReadDetached(class PXR_NS::SdfLayer * layer, const std::string & resolvedPath, _Bool metadataOnly) const;
+class PXR_NS::SdfFileFormat; PXR_NS::SdfFileFormat::_schema;
+class PXR_NS::SdfFileFormat; PXR_NS::SdfFileFormat::_formatId;
+class PXR_NS::SdfFileFormat; PXR_NS::SdfFileFormat::_target;
+class PXR_NS::SdfFileFormat; PXR_NS::SdfFileFormat::_cookie;
+class PXR_NS::SdfFileFormat; PXR_NS::SdfFileFormat::_versionString;
+class PXR_NS::SdfFileFormat; PXR_NS::SdfFileFormat::_extensions;
+class PXR_NS::SdfFileFormat; PXR_NS::SdfFileFormat::_isPrimaryFormat;
+
+
+
+
+
+// MARK: TfRefBase
+class PXR_NS::TfRefBase; virtual void PXR_NS::TfRefBase::~TfRefBase();
+class PXR_NS::TfRefBase; void PXR_NS::TfRefBase::TfRefBase();
+class PXR_NS::TfRefBase; unsigned long PXR_NS::TfRefBase::GetCurrentCount() const;
+class PXR_NS::TfRefBase; _Bool PXR_NS::TfRefBase::IsUnique() const;
+class PXR_NS::TfRefBase; void PXR_NS::TfRefBase::SetShouldInvokeUniqueChangedListener(_Bool shouldCall);
+class PXR_NS::TfRefBase; static void PXR_NS::TfRefBase::SetUniqueChangedListener(struct PXR_NS::TfRefBase::UniqueChangedListener listener);
+class PXR_NS::TfRefBase; struct std::atomic<int> & PXR_NS::TfRefBase::_GetRefCount() const;
+class PXR_NS::TfRefBase; PXR_NS::TfRefBase::_refCount;
+
+// MARK: TfWeakBase
+class PXR_NS::TfWeakBase; void PXR_NS::TfWeakBase::~TfWeakBase();
+class PXR_NS::TfWeakBase; void PXR_NS::TfWeakBase::TfWeakBase();
+class PXR_NS::TfWeakBase; const class PXR_NS::TfWeakBase & PXR_NS::TfWeakBase::__GetTfWeakBase__() const;
+class PXR_NS::TfWeakBase; void PXR_NS::TfWeakBase::EnableNotification2() const;
+class PXR_NS::TfWeakBase; const void * PXR_NS::TfWeakBase::GetUniqueIdentifier() const;
+class PXR_NS::TfWeakBase; class PXR_NS::TfRefPtr<class PXR_NS::Tf_Remnant> PXR_NS::TfWeakBase::_Register() const;
+class PXR_NS::TfWeakBase; _Bool PXR_NS::TfWeakBase::_HasRemnant() const;
+class PXR_NS::TfWeakBase; template <class T> class PXR_NS::TfRefPtr<class PXR_NS::Tf_Remnant> PXR_NS::TfWeakBase::_Register(type-parameter-0-0 * tempRmnt) const;
+class PXR_NS::TfWeakBase; PXR_NS::TfWeakBase::_remnantPtr;

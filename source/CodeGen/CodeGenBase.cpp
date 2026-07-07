@@ -38,6 +38,14 @@ std::string swiftSpellingForIntegralType(std::string x) {
     return x;
 }
 
+std::string getQualifiedNameAsStringInLanguage(const clang::NamedDecl* nd, bool inSwift) {
+    std::string x = nd->getQualifiedNameAsString();
+    if (inSwift) {
+        return std::regex_replace(x, std::regex("::"), ".");
+    } else {
+        return x;
+    }
+}
 
 class TypeNamePrinterImpl {
 public:
@@ -106,6 +114,81 @@ public:
                                  false /* usesBackticksOnSwiftReservedKeywords */,
                                  false /* isCopy */);
         return impl._includePaths;
+    }
+    
+    static std::optional<std::string> getFullyQualifiedExprString(const clang::Expr* e, bool forSwift) {
+        if (!e) { return std::nullopt; }
+        
+        e->dump();
+        std::cout << std::endl;
+        
+        std::stringstream ss;
+        
+        if (const clang::CXXConstructExpr* cxxConstructExpr = clang::dyn_cast<clang::CXXConstructExpr>(e)) {
+            const clang::CXXConstructorDecl* ctor = cxxConstructExpr->getConstructor();
+            // Want the ctor's _parent's_ qualified name, not the ctors name,
+            // because we want pxr::SdfLayerOffset, not pxr::SdfLayerOffset::SdfLayerOffset
+            ss << getQualifiedNameAsStringInLanguage(ctor->getParent(), forSwift) << "(";
+            std::vector<const clang::Expr*> explicitArgs;
+            for (const clang::Expr* arg : cxxConstructExpr->arguments()) {
+                if (clang::dyn_cast<clang::CXXDefaultArgExpr>(arg)) {
+                    // Don't want to write it out, because the user didn't
+                } else {
+                    explicitArgs.push_back(arg);
+                }
+            }
+            
+            for (int i = 0; i < explicitArgs.size(); i++) {
+                std::optional<std::string> recurse = getFullyQualifiedExprString(explicitArgs[i], forSwift);
+                if (!recurse) {
+                    std::cerr << "Error: Could not get fully qualified expr string" << std::endl;
+                }
+                ss << *recurse;
+                if (i + 1 < explicitArgs.size()) {
+                    ss << ", ";
+                }
+            }
+            ss << ")";
+        } else if (const clang::DeclRefExpr* declRefExpr = clang::dyn_cast<clang::DeclRefExpr>(e)) {
+            ss << getQualifiedNameAsStringInLanguage(declRefExpr->getDecl(), forSwift);
+        } else if (const clang::MaterializeTemporaryExpr* materializeTemporaryExpr = clang::dyn_cast<clang::MaterializeTemporaryExpr>(e)) {
+            std::optional<std::string> recurse = getFullyQualifiedExprString(materializeTemporaryExpr->getSubExpr(), forSwift);
+            if (!recurse) {
+                std::cerr << "Error: Could not get fully qualified expr string" << std::endl;
+            }
+            ss << *recurse;
+        } else if (const clang::CastExpr* castExpr = clang::dyn_cast<clang::CastExpr>(e)) {
+            std::optional<std::string> recurse = getFullyQualifiedExprString(castExpr->getSubExpr(), forSwift);
+            if (!recurse) {
+                std::cerr << "Error: Could not get fully qualified expr string" << std::endl;
+            }
+            ss << *recurse;
+        } else if (const clang::IntegerLiteral* integerLiteral = clang::dyn_cast<clang::IntegerLiteral>(e)) {
+            std::string temp;
+            llvm::raw_string_ostream llvmStream(temp);
+            integerLiteral->getValue().print(llvmStream, true);
+            ss << temp;
+        } else if (const clang::CXXBoolLiteralExpr* cxxBoolLiteral = clang::dyn_cast<clang::CXXBoolLiteralExpr>(e)) {
+            if (cxxBoolLiteral->getValue()) {
+                ss << "true";
+            } else {
+                ss << "false";
+            }
+        } else if (const clang::CXXBindTemporaryExpr* cxxBindTemporary = clang::dyn_cast<clang::CXXBindTemporaryExpr>(e)) {
+            std::optional<std::string> recurse = getFullyQualifiedExprString(cxxBindTemporary->getSubExpr(), forSwift);
+            if (!recurse) {
+                std::cerr << "Error: Could not get fully qualified expr string" << std::endl;
+            }
+            ss << *recurse;
+        } else {
+    #warning todo: change this to __builtin_trap() once we have most of them down
+            std::cout << "WARNING! Unhandled Expr type" << std::endl;
+        }
+        
+        std::string result = ss.str();
+        result = std::regex_replace(result, std::regex(PXR_NS), "pxr");
+        std::cout << result << std::endl << std::endl;
+        return result;
     }
 
 private:
@@ -533,7 +616,7 @@ private:
             if (!_isDoccRef) {
                 if (_usesBackticksOnSwiftReservedKeywords) {
                     if (x.hasOuterRef || x.hasOuterStar) {
-                        _result = std::string("Unsafe") + (x.hasOuterConst ? "Mutable" : "") + "Pointer<" + *_result + ">";
+                        _result = std::string("Unsafe") + (x.hasOuterConst ? "" : "Mutable") + "Pointer<" + *_result + ">";
                     }
                 } else {
                     if (x.hasOuterConst) {
@@ -699,8 +782,15 @@ std::optional<std::string> SwiftNameInCpp::getTypeNameOpt(const Driver *driver, 
     return TypeNamePrinterImpl::swiftNameInCpp(driver, type);
 }
 
+std::optional<std::string> SwiftNameInSwift::getFullyQualifiedExprString(const clang::Expr* expr) {
+    return TypeNamePrinterImpl::getFullyQualifiedExprString(expr, true);
+}
+
 std::optional<std::string> CppNameInCpp::getTypeNameOpt(const Driver *driver, TypeNamePrinter::Type type) {
     return TypeNamePrinterImpl::cppNameInCpp(driver, type);
+}
+std::optional<std::string> CppNameInCpp::getFullyQualifiedExprString(const clang::Expr* expr) {
+    return TypeNamePrinterImpl::getFullyQualifiedExprString(expr, false);
 }
 
 std::optional<std::string> DoccRef::getTypeNameOpt(const Driver *driver, TypeNamePrinter::Type type) {

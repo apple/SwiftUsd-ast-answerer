@@ -27,6 +27,7 @@ APINotesAnalysisResult::operator std::string() const {
     switch (_kind) {
         case Kind::importTagAsShared: return "importTagAsShared";
         case Kind::importTagAsImmortal: return "importTagAsImmortal";
+        case Kind::importTagAsUnsafe: return "importTagAsUnsafe";
         case Kind::importTagAsOwned: return "importTagAsOwned";
         case Kind::makeFunctionUnavailable: return "makeFunctionUnavailable";
         case Kind::replaceMutatingFunctionWithNonmutatingWrapper: return "replaceMutatingFunctionWithNonmutatingWrapper";
@@ -44,6 +45,7 @@ std::vector<APINotesAnalysisResult::Kind> APINotesAnalysisResult::allCases() {
     return {
         Kind::importTagAsShared,
         Kind::importTagAsImmortal,
+        Kind::importTagAsUnsafe,
         Kind::importTagAsOwned,
         Kind::makeFunctionUnavailable,
         Kind::replaceMutatingFunctionWithNonmutatingWrapper,

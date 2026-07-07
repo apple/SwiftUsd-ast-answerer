@@ -26,12 +26,11 @@
 
 class ReferenceTypeConformanceCodeGen;
 class EquatableCodeGen;
-//class OpenUSDSwiftModuleCodeGen;
-//class ModulemapCodeGen;
 class EnumsCodeGen;
 class StaticTokensCodeGen;
 class TfNoticeProtocolCodeGen;
 class CustomStringConvertibleCodeGen;
+class SwiftSubclassCxxCodeGen;
 class SdfValueTypeNamesMembersCodeGen;
 class SchemaGetPrimCodeGen;
 class HashableCodeGen;
@@ -60,12 +59,11 @@ private:
     
     std::unique_ptr<ReferenceTypeConformanceCodeGen> _referenceTypeConformanceCodeGen;
     std::unique_ptr<EquatableCodeGen> _equatableCodeGen;
-//    std::unique_ptr<OpenUSDSwiftModuleCodeGen> _openUSDSwiftModuleCodeGen;
-//    std::unique_ptr<ModulemapCodeGen> _modulemapCodeGen;
     std::unique_ptr<EnumsCodeGen> _enumsCodeGen;
     std::unique_ptr<StaticTokensCodeGen> _staticTokensCodeGen;
     std::unique_ptr<TfNoticeProtocolCodeGen> _tfNoticeProtocolCodeGen;
     std::unique_ptr<CustomStringConvertibleCodeGen> _customStringConvertibleCodeGen;
+    std::unique_ptr<SwiftSubclassCxxCodeGen> _swiftSubclassCxxCodeGen;
     std::unique_ptr<SdfValueTypeNamesMembersCodeGen> _sdfValueTypeNamesMembersCodeGen;
     std::unique_ptr<SchemaGetPrimCodeGen> _schemaGetPrimCodeGen;
     std::unique_ptr<HashableCodeGen> _hashableCodeGen;

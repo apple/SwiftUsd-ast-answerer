@@ -33,6 +33,7 @@ public:
     enum class Kind {
         importTagAsShared,
         importTagAsImmortal,
+        importTagAsUnsafe,
         importTagAsOwned,
         makeFunctionUnavailable,
         replaceMutatingFunctionWithNonmutatingWrapper,
