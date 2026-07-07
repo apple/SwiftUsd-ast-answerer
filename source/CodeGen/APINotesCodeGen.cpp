@@ -25,8 +25,6 @@
 #include "clang/AST/Comment.h"
 #include "llvm/Support/raw_os_ostream.h"
 
-std::string formFullyQualifiedExprString(const clang::Expr*);
-
 APINotesCodeGen::APINotesCodeGen(const CodeGenRunner* codeGenRunner) : CodeGenBase<APINotesCodeGen>(codeGenRunner) {}
 
 APINotesCodeGen::~APINotesCodeGen() = default;
@@ -57,6 +55,7 @@ std::vector<APINotesCodeGen::ReplacedOrAugmentedFunction> APINotesCodeGen::getRe
             switch (it.second.getKind()) {
                 case APINotesAnalysisResult::Kind::importTagAsShared: // fallthrough
                 case APINotesAnalysisResult::Kind::importTagAsImmortal: // fallthrough
+                case APINotesAnalysisResult::Kind::importTagAsUnsafe: // fallthrough
                 case APINotesAnalysisResult::Kind::importTagAsOwned: // fallthrough
                 case APINotesAnalysisResult::Kind::makeFunctionUnavailable: // fallthrough
                 case APINotesAnalysisResult::Kind::renameTfNoticeRegisterFunctionSpecialCase: // fallthrough
@@ -272,8 +271,11 @@ void APINotesCodeGen::writeReplacedOrAugmentedFunction(ReplacedOrAugmentedFuncti
             argumentNames.push_back(parm->getNameAsString());
             if (parm->hasDefaultArg()) {
                 const clang::Expr* defaultArg = parm->getDefaultArg();
-                defaultArguments.push_back(formFullyQualifiedExprString(defaultArg));
-                std::cout << defaultArguments.back() << std::endl;
+                std::optional<std::string> printedArg = CppNameInCpp::getFullyQualifiedExprString(defaultArg);
+                if (printedArg) {
+                    defaultArguments.push_back(*printedArg);
+                    std::cout << defaultArguments.back() << std::endl;
+                }
             } else {
                 defaultArguments.push_back("");
             }
@@ -421,61 +423,4 @@ void APINotesCodeGen::writeAPINotesFile() {
     }
     
     writeLines(linesCopy);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-std::string formFullyQualifiedExprString(const clang::Expr* e) {
-    e->dump();
-    std::cout << std::endl;
-    
-    std::stringstream ss;
-    
-    
-    if (const clang::CXXConstructExpr* cxxConstructExpr = clang::dyn_cast<clang::CXXConstructExpr>(e)) {
-        const clang::CXXConstructorDecl* ctor = cxxConstructExpr->getConstructor();
-        // Want the ctor's _parent's_ qualified name, not the ctors name,
-        // because we want pxr::SdfLayerOffset, not pxr::SdfLayerOffset::SdfLayerOffset
-        ss << ctor->getParent()->getQualifiedNameAsString() << "(";
-        std::vector<const clang::Expr*> explicitArgs;
-        for (const clang::Expr* arg : cxxConstructExpr->arguments()) {
-            if (clang::dyn_cast<clang::CXXDefaultArgExpr>(arg)) {
-                // Don't want to write it out, because the user didn't
-            } else {
-                explicitArgs.push_back(arg);
-            }
-        }
-        
-        for (int i = 0; i < explicitArgs.size(); i++) {
-            ss << formFullyQualifiedExprString(explicitArgs[i]);
-            if (i + 1 < explicitArgs.size()) {
-                ss << ", ";
-            }
-        }
-        ss << ")";
-    } else if (const clang::DeclRefExpr* declRefExpr = clang::dyn_cast<clang::DeclRefExpr>(e)) {
-        ss << declRefExpr->getDecl()->getQualifiedNameAsString();
-    } else if (const clang::MaterializeTemporaryExpr* materializeTemporaryExpr = clang::dyn_cast<clang::MaterializeTemporaryExpr>(e)) {
-        ss << formFullyQualifiedExprString(materializeTemporaryExpr->getSubExpr());
-    } else if (const clang::CastExpr* castExpr = clang::dyn_cast<clang::CastExpr>(e)) {
-        ss << formFullyQualifiedExprString(castExpr->getSubExpr());
-    } else {
-#warning todo: change this to __builtin_trap() once we have most of them down
-        std::cout << "WARNING! Unhandled Expr type" << std::endl;
-    }
-    
-    std::string result = ss.str();
-    result = std::regex_replace(result, std::regex(PXR_NS), "pxr");
-    std::cout << result << std::endl << std::endl;
-    return result;
 }

@@ -171,6 +171,10 @@ public:
         _data.insert_or_assign(x, analysisResult);
     }
     
+    virtual void insert_or_assign_while_deserializing(const clang::NamedDecl* namedDecl, const AnalysisResult& analysisResult) {
+        insert_or_assign(namedDecl, analysisResult);
+    }
+    
     const ASTAnalysisRunner& getASTAnalysisRunner() const {
         return *_astAnalysisRunner;
     }
@@ -409,7 +413,7 @@ public:
                 __builtin_trap();
             }
             
-            insert_or_assign(namedDecl, *analysisResult);
+            insert_or_assign_while_deserializing(namedDecl, *analysisResult);
         }
         
         return true;

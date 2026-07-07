@@ -130,6 +130,11 @@ set(SOURCES
     source/AnalysisResult/TypedefAnalysisResult.h    
     source/AnalysisResult/TypedefAnalysisResult.cpp
 
+    source/AnalysisPass/SwiftSubclassCxxAnalysisPass.h
+    source/AnalysisPass/SwiftSubclassCxxAnalysisPass.cpp
+    source/AnalysisResult/SwiftSubclassCxxAnalysisResult.h
+    source/AnalysisResult/SwiftSubclassCxxAnalysisResult.cpp
+
     source/AnalysisPass/SdfValueTypeNamesMembersAnalysisPass.h
     source/AnalysisPass/SdfValueTypeNamesMembersAnalysisPass.cpp
     source/AnalysisResult/SdfValueTypeNamesMembersAnalysisResult.h
@@ -189,6 +194,9 @@ set(SOURCES
     source/CodeGen/CustomStringConvertibleCodeGen.h
     source/CodeGen/CustomStringConvertibleCodeGen.cpp
 
+    source/CodeGen/SwiftSubclassCxxCodeGen.h
+    source/CodeGen/SwiftSubclassCxxCodeGen.cpp
+
     source/CodeGen/SdfValueTypeNamesMembersCodeGen.h
     source/CodeGen/SdfValueTypeNamesMembersCodeGen.cpp
 
@@ -227,6 +235,7 @@ set(RESOURCES
     resources/testHashable.txt
     resources/testComparable.txt
     resources/testCustomStringConvertible.txt
+    resources/testSwiftSubclassCxx.txt
     resources/testTypedef.txt
     resources/testCMakeParser.txt
     resources/testSdfValueTypeNamesMembers.txt

@@ -33,6 +33,7 @@
 #include "AnalysisPass/HashableAnalysisPass.h"
 #include "AnalysisPass/ComparableAnalysisPass.h"
 #include "AnalysisPass/CustomStringConvertibleAnalysisPass.h"
+#include "AnalysisPass/SwiftSubclassCxxAnalysisPass.h"
 #include "AnalysisPass/TypedefAnalysisPass.h"
 #include "AnalysisPass/SdfValueTypeNamesMembersAnalysisPass.h"
 #include "AnalysisPass/FindEnumsAnalysisPass.h"
@@ -122,6 +123,7 @@ private:
 
 // Languages for TypeNamePrinter
 struct SwiftNameInSwift {
+    static std::optional<std::string> getFullyQualifiedExprString(const clang::Expr*);
 private:
     static std::optional<std::string> getTypeNameOpt(const Driver*, TypeNamePrinter::Type type);
     template <typename Derived> friend class CodeGenBase;
@@ -132,6 +134,7 @@ private:
     template <typename Derived> friend class CodeGenBase;
 };
 struct CppNameInCpp {
+    static std::optional<std::string> getFullyQualifiedExprString(const clang::Expr*);
 private:
     static std::optional<std::string> getTypeNameOpt(const Driver*, TypeNamePrinter::Type type);
     template <typename Derived> friend class CodeGenBase;
@@ -243,6 +246,9 @@ protected:
     const CustomStringConvertibleAnalysisPass* getCustomStringConvertibleAnalysisPass() const {
         return getAstAnalysisRunner().getCustomStringConvertibleAnalysisPass();
     }
+    const SwiftSubclassCxxAnalysisPass* getSwiftSubclassCxxAnalysisPass() const {
+        return getAstAnalysisRunner().getSwiftSubclassCxxAnalysisPass();
+    }
     const TypedefAnalysisPass* getTypedefAnalysisPass() const {
         return getAstAnalysisRunner().getTypedefAnalysisPass();
     }
@@ -293,11 +299,35 @@ private:
     }
     
 public:
+    /// Blocks feature flag guards from being printed. Only use this when you're sure you've already
+    /// written all the feature flags you need for a section of code. SwiftSubclassCxxCodeGen uses
+    /// this to suppress feature flag guards when writing the fields/methods of the synthesized
+    /// derived types after it has written the feature flag guards for the base type itself. 
+    class TypeNamePrinterGuardBlocker {
+    private:
+        std::function<void()> _onDtor;
+        TypeNamePrinterGuardBlocker(std::function<void()> _onDtor) : _onDtor(_onDtor) {}
+        
+        friend class CodeGenBase;
+    public:
+        ~TypeNamePrinterGuardBlocker() { _onDtor(); }
+        
+        TypeNamePrinterGuardBlocker(const TypeNamePrinterGuardBlocker&) = delete;
+        TypeNamePrinterGuardBlocker& operator=(const TypeNamePrinterGuardBlocker&) = delete;
+    };
+    
+    TypeNamePrinterGuardBlocker typeNamePrinterGuardBlocker() {
+        this->_typeNamePrinterGuardBlockerCounter += 1;
+        return TypeNamePrinterGuardBlocker([this]() {
+            this->_typeNamePrinterGuardBlockerCounter -= 1;
+        });
+    }
+    
     // MARK: Name gen
     TypeNamePrinter typeNamePrinter(TypeNamePrinter::Type type) const {
         return TypeNamePrinter(type, [this, type]() {
             std::optional<std::string> guard = _featureFlagGuard(type, _writer->getOpenFileSuffix());
-            if (guard) {
+            if (guard && _typeNamePrinterGuardBlockerCounter == 0) {
                 const_cast<Derived*>(static_cast<const Derived*>(this))->writeLine("#endif // " + *guard);
             }
         });
@@ -318,11 +348,54 @@ public:
         std::optional<std::string> result = Language::getTypeNameOpt(_codeGenRunner->getDriver(), p._type);
         if (_isWritingFile && guard && result && !p._usedTypeName) {
             p._usedTypeName = true;
-            const_cast<Derived*>(static_cast<const Derived*>(this))->writeLine(*guard);
+            if (_typeNamePrinterGuardBlockerCounter == 0) {
+                const_cast<Derived*>(static_cast<const Derived*>(this))->writeLine(*guard);
+            }
         }
         return result;
     }
     
+    struct PrintedFunctionParam {
+        std::string printedType;
+        std::string externalName;
+        std::string internalName;
+        std::optional<std::string> defaultArg;
+        clang::QualType qualType;
+    };
+    // Don't do RAII platform guarding for function transformations
+    template <typename Language>
+    std::optional<std::vector<PrintedFunctionParam>>
+    getPrintedFunctionParamsOpt(const clang::FunctionDecl* fun,
+                                PrintedFunctionParam insertingAtFront,
+                                bool internalNamesForClosure) const {
+        std::vector<PrintedFunctionParam> result;
+        if (!insertingAtFront.printedType.empty()) {
+            result.push_back(insertingAtFront);
+        }
+        
+        for (const clang::ParmVarDecl* parmVarDecl : fun->parameters()) {
+            std::optional<std::string> printedType = Language::getTypeNameOpt(_codeGenRunner->getDriver(), parmVarDecl->getType());
+            if (!printedType) {
+                return std::nullopt;
+            }
+            
+            std::string externalName = parmVarDecl->getNameAsString();
+            
+            std::string index = std::to_string(internalNamesForClosure ? result.size() + 1 : result.size());
+            std::string internalName = (internalNamesForClosure ? "$" : "arg") + index;
+            
+            result.push_back({
+                *printedType,
+                externalName,
+                internalName,
+                Language::getFullyQualifiedExprString(parmVarDecl->getDefaultArg()),
+                parmVarDecl->getType(),
+            });
+        }
+        
+        return result;
+    }
+        
 public:
     
     // MARK: Utility
@@ -447,6 +520,7 @@ private:
         return result;
     }
     
+#warning todo: https://github.com/swiftlang/swift/pull/69813 was merged into 5.10, so we may no longer need to const-deduplicate.
     // Swift treats Foo<Bar> and Foo<const Bar> the same, so we can end up with duplicate symbols
     // if we don't deduplicate consts that occur within templates specializations
     void constDeduplicate(Data& data) const {
@@ -540,6 +614,7 @@ private:
     std::unique_ptr<FileWriterHelper> _writer;
     const CodeGenRunner* _codeGenRunner;
     bool _isWritingFile = false;
+    int _typeNamePrinterGuardBlockerCounter = 0;
 };
 
 class CodeGenFactory {

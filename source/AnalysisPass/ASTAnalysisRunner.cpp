@@ -43,6 +43,7 @@
 #include "AnalysisPass/FindStaticTokensAnalysisPass.h"
 #include "AnalysisPass/FindTfNoticeSubclassesAnalysisPass.h"
 #include "AnalysisPass/CustomStringConvertibleAnalysisPass.h"
+#include "AnalysisPass/SwiftSubclassCxxAnalysisPass.h"
 #include "AnalysisPass/TypedefAnalysisPass.h"
 #include "AnalysisPass/SdfValueTypeNamesMembersAnalysisPass.h"
 #include "AnalysisPass/FindSchemasAnalysisPass.h"
@@ -81,6 +82,7 @@ ASTAnalysisRunner::ASTAnalysisRunner(const Driver* driver) :
     _findStaticTokensAnalysisPass = ASTAnalysisPassFactory::makeAnalysisPass<FindStaticTokensAnalysisPass>(this);
     _findTfNoticeSubclassesAnalysisPass = ASTAnalysisPassFactory::makeAnalysisPass<FindTfNoticeSubclassesAnalysisPass>(this);
     _customStringConvertibleAnalysisPass = ASTAnalysisPassFactory::makeAnalysisPass<CustomStringConvertibleAnalysisPass>(this);
+    _swiftSubclassCxxAnalysisPass = ASTAnalysisPassFactory::makeAnalysisPass<SwiftSubclassCxxAnalysisPass>(this);
     _typedefAnalysisPass = ASTAnalysisPassFactory::makeAnalysisPass<TypedefAnalysisPass>(this);
     _sdfValueTypeNamesMembersAnalysisPass = ASTAnalysisPassFactory::makeAnalysisPass<SdfValueTypeNamesMembersAnalysisPass>(this);
     _findSchemasAnalysisPass = ASTAnalysisPassFactory::makeAnalysisPass<FindSchemasAnalysisPass>(this);
@@ -144,6 +146,9 @@ const ComparableAnalysisPass* ASTAnalysisRunner::getComparableAnalysisPass() con
 }
 const CustomStringConvertibleAnalysisPass* ASTAnalysisRunner::getCustomStringConvertibleAnalysisPass() const {
     return _customStringConvertibleAnalysisPass.get();
+}
+const SwiftSubclassCxxAnalysisPass* ASTAnalysisRunner::getSwiftSubclassCxxAnalysisPass() const {
+    return _swiftSubclassCxxAnalysisPass.get();
 }
 const TypedefAnalysisPass* ASTAnalysisRunner::getTypedefAnalysisPass() const {
     return _typedefAnalysisPass.get();
