@@ -41,6 +41,7 @@ class FindEnumsAnalysisPass;
 class FindStaticTokensAnalysisPass;
 class FindTfNoticeSubclassesAnalysisPass;
 class CustomStringConvertibleAnalysisPass;
+class SwiftSubclassCxxAnalysisPass;
 class TypedefAnalysisPass;
 class SdfValueTypeNamesMembersAnalysisPass;
 class FindSchemasAnalysisPass;
@@ -79,6 +80,7 @@ public:
     const FindStaticTokensAnalysisPass* getFindStaticTokensAnalysisPass() const;
     const FindTfNoticeSubclassesAnalysisPass* getFindTfNoticeSubclassesAnalysisPass() const;
     const CustomStringConvertibleAnalysisPass* getCustomStringConvertibleAnalysisPass() const;
+    const SwiftSubclassCxxAnalysisPass* getSwiftSubclassCxxAnalysisPass() const;
     const TypedefAnalysisPass* getTypedefAnalysisPass() const;
     const SdfValueTypeNamesMembersAnalysisPass* getSdfValueTypeNamesMembersAnalysisPass() const;
     const FindSchemasAnalysisPass* getFindSchemasAnalysisPass() const;
@@ -106,6 +108,7 @@ private:
     std::unique_ptr<FindStaticTokensAnalysisPass> _findStaticTokensAnalysisPass;
     std::unique_ptr<FindTfNoticeSubclassesAnalysisPass> _findTfNoticeSubclassesAnalysisPass;
     std::unique_ptr<CustomStringConvertibleAnalysisPass> _customStringConvertibleAnalysisPass;
+    std::unique_ptr<SwiftSubclassCxxAnalysisPass> _swiftSubclassCxxAnalysisPass;
     std::unique_ptr<TypedefAnalysisPass> _typedefAnalysisPass;
     std::unique_ptr<SdfValueTypeNamesMembersAnalysisPass> _sdfValueTypeNamesMembersAnalysisPass;
     std::unique_ptr<FindSchemasAnalysisPass> _findSchemasAnalysisPass;

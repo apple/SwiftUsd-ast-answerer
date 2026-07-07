@@ -21,6 +21,7 @@
 #include "AnalysisPass/APINotesAnalysisPass.h"
 #include "AnalysisPass/ImportAnalysisPass.h"
 #include "AnalysisPass/FindVtValueRefFunctionsAnalysisPass.h"
+#include "AnalysisPass/SwiftSubclassCxxAnalysisPass.h"
 
 APINotesAnalysisPass::APINotesAnalysisPass(ASTAnalysisRunner* astAnalysisRunner) :
     ASTAnalysisPass<APINotesAnalysisPass, APINotesAnalysisResult>(astAnalysisRunner) {}
@@ -185,6 +186,23 @@ bool APINotesAnalysisPass::VisitNamedDecl(clang::NamedDecl *namedDecl) {
         } else if (it.second.isImportedAsImmortalReference()) {
             insert_or_assign(it.first, APINotesAnalysisResult::Kind::importTagAsImmortal);
         }
+    }
+    for (const auto& it : getASTAnalysisRunner().getSwiftSubclassCxxAnalysisPass()->getData()) {
+        // We're bypassing ImportAnalysisPass here because we don't want users to use
+        // unsafe types in most circumstances, so we don't want to apply any ergonomics
+        // improvements to them. (We might eventually let ImportAnalysisPass know about this
+        // if there's a good reason?)
+        const clang::NamedDecl* namedDecl = it.first;
+        // Don't mark TfWeakBase as imported-unsafe
+        if (namedDecl == findNamedDecl("class " PXR_NS"::TfWeakBase")) {
+            continue;
+        }
+        
+        const auto& importResult = importAnalysisPass->find(namedDecl);
+        if (importResult == importAnalysisPass->end() || importResult->second.isImportedSomehow()) {
+            continue;
+        }
+        insert_or_assign(it.first, APINotesAnalysisResult::Kind::importTagAsUnsafe);
     }
     
     for (const clang::NamedDecl* namedDecl : getHardCodedOwnedTypes()) {

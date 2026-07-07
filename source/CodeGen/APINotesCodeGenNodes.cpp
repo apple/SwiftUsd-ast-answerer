@@ -52,6 +52,7 @@ void APINotesNode::walk(std::function<void (const APINotesNode *)> f) const {
     switch (kind) {
         case Kind::NameField: // fallthrough
         case Kind::SwiftImportAsField: // fallthrough
+        case Kind::SwiftSafetyField: // fallthrough
         case Kind::UnavailableField: // fallthrough
         case Kind::SwiftNameField: // fallthrough
         case Kind::TfRemnantAsUnavailableImmortalFrtSpecialCaseField: break;
@@ -71,6 +72,9 @@ void APINotesNode::walk(std::function<void (const APINotesNode *)> f) const {
                 const TagItem& it = this->dyn_cast<TagItem>();
                 if (it.swiftImportAs) {
                     it.swiftImportAs->walk(f);
+                }
+                if (it.swiftSafety) {
+                    it.swiftSafety->walk(f);
                 }
                 if (it.tfRemnantAsUnavailableImmortalFrtSpecialCaseField) {
                     it.tfRemnantAsUnavailableImmortalFrtSpecialCaseField->walk(f);
@@ -186,6 +190,28 @@ void SwiftImportAsField::_write(std::vector<std::string>& lines, int indentation
     }
 }
 
+// MARK: SwiftSafetyField
+SwiftSafetyField::SwiftSafetyField(std::string kind) :
+APINotesNode(Kind::SwiftNameField),
+kind(kind) {}
+
+void SwiftSafetyField::_write(std::vector<std::string> &lines, int indentation) const {
+#warning Skipping SwiftSafety key in API Notes writing
+    // https://clang.llvm.org/docs/APINotes.html#versioned-api-notes mentions support
+    // for versioned API Notes, but it's tied to the Swift language mode, for which
+    // currently the only valid values are 4, 4.2, 5, and 6, and not the Swift compiler
+    // version, which can take on values like 5.9, 5.10, 6.0, 6.1, 6.2, 6.3, 6.4, 6.5.
+    // 
+    // `SwiftSafety:` is introduced as an APINotes key in compiler 6.2, but currently SwiftUsd
+    // is backwards compatible with Swift 6.1, so we can't write it out without breaking
+    // Swift 6.1 support. Once we remove Swift 6.1 support, we should print out `SwiftSafety:`
+    // keys so that users get a compiler diagnostic that they're using unsafe APIs in Swift.
+    //
+    // rdar://182429180 (Add a way to version API Notes based on Swift compiler version (not language mode))
+    std::cout << "Warning! Skipping SwiftSafety key in API Notes writing" << std::endl;
+    // lines.push_back(indent(indentation) + "SwiftSafety: " + kind);
+}
+
 // MARK: UnavilableField
 
 UnavailableField::UnavailableField() :
@@ -260,6 +286,14 @@ void TagItem::addSwiftImportAs(std::string importAs, std::string retainOp, std::
     swiftImportAs = std::make_unique<SwiftImportAsField>(importAs, retainOp, releaseOp);
 }
 
+void TagItem::addSwiftSafety(std::string kind) {
+    if (swiftSafety) {
+        std::cerr << "Error! Adding SwiftSafety on a Tag that already has it" << std::endl;
+        __builtin_trap();
+    }
+    swiftSafety = std::make_unique<SwiftSafetyField>(kind);
+}
+
 void TagItem::addTfRemnantAsUnavailableImmortalFrtSpecialCaseField() {
     tfRemnantAsUnavailableImmortalFrtSpecialCaseField = std::make_unique<TfRemnantAsUnavailableImmortalFrtSpecialCaseField>();
 }
@@ -271,6 +305,9 @@ void TagItem::addSwiftNameSdfZipFileIteratorSpecialCase() {
 void TagItem::_write(std::vector<std::string> &lines, int indentation) const {
     if (swiftImportAs) {
         swiftImportAs->write(lines, indentation);
+    }
+    if (swiftSafety) {
+        swiftSafety->write(lines, indentation);
     }
     if (tfRemnantAsUnavailableImmortalFrtSpecialCaseField) {
         tfRemnantAsUnavailableImmortalFrtSpecialCaseField->write(lines, indentation);
@@ -361,6 +398,11 @@ void NamespaceItem::add(const clang::NamedDecl *target, APINotesAnalysisResult r
             
         case APINotesAnalysisResult::Kind::importTagAsImmortal:
             currentNode->dyn_cast<TagItem>().addSwiftImportAs("reference", "immortal", "immortal");
+            break;
+            
+        case APINotesAnalysisResult::Kind::importTagAsUnsafe:
+            currentNode->dyn_cast<TagItem>().addSwiftImportAs("reference", "immortal", "immortal");
+            currentNode->dyn_cast<TagItem>().addSwiftSafety("unsafe");
             break;
             
         case APINotesAnalysisResult::Kind::replaceConstRefFunctionWithCopyingWrapper: // fallthrough

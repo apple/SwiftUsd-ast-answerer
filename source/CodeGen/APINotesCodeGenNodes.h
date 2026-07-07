@@ -38,12 +38,13 @@ struct APINotesNode {
     enum class Kind {
         NameField = 1 << 0,
         SwiftImportAsField = 1 << 1,
-        UnavailableField = 1 << 2,
-        SwiftNameField = 1 << 3,
-        TfRemnantAsUnavailableImmortalFrtSpecialCaseField = 1 << 4,
-        MethodItem = 1 << 5,
-        TagItem = 1 << 6,
-        NamespaceItem = 1 << 7,
+        SwiftSafetyField = 1 << 2,
+        UnavailableField = 1 << 3,
+        SwiftNameField = 1 << 4,
+        TfRemnantAsUnavailableImmortalFrtSpecialCaseField = 1 << 5,
+        MethodItem = 1 << 6,
+        TagItem = 1 << 7,
+        NamespaceItem = 1 << 8,
     };
     
     APINotesNode(Kind kind);
@@ -148,6 +149,14 @@ struct SwiftImportAsField: APINotesNode {
     void _write(std::vector<std::string>& lines, int indentation) const override;
 };
 
+// The `SwiftSafety` field
+struct SwiftSafetyField: APINotesNode {
+    std::string kind;
+    
+    SwiftSafetyField(std::string kind);
+    void _write(std::vector<std::string>& lines, int indentation) const override;
+};
+
 // The `Availability:` field, set to `nonswift`
 struct UnavailableField: APINotesNode {
     UnavailableField();
@@ -188,10 +197,12 @@ struct MethodItem: DeclContext {
 // An item in a `Tags:` list
 struct TagItem: DeclContext {
     std::unique_ptr<SwiftImportAsField> swiftImportAs;
+    std::unique_ptr<SwiftSafetyField> swiftSafety;
     std::unique_ptr<TfRemnantAsUnavailableImmortalFrtSpecialCaseField> tfRemnantAsUnavailableImmortalFrtSpecialCaseField;
     
     TagItem(std::string name, const clang::Decl* decl);
     void addSwiftImportAs(std::string importAs, std::string retainOp, std::string releaseOp);
+    void addSwiftSafety(std::string kind);
     void addTfRemnantAsUnavailableImmortalFrtSpecialCaseField();
     void addSwiftNameSdfZipFileIteratorSpecialCase();
     void _write(std::vector<std::string>& lines, int indentation) const;
@@ -225,6 +236,7 @@ return kind == APINotesNode::Kind::U ? static_cast<T*>(this) : nullptr;\
 } else
     DYN_CAST_IMPL(NameField)
     DYN_CAST_IMPL(SwiftImportAsField)
+    DYN_CAST_IMPL(SwiftSafetyField)
     DYN_CAST_IMPL(UnavailableField)
     DYN_CAST_IMPL(SwiftNameField)
     DYN_CAST_IMPL(TfRemnantAsUnavailableImmortalFrtSpecialCaseField)
