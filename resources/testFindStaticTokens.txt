@@ -191,7 +191,6 @@ struct PXR_NS::UsdImagingExtentResolvingSceneIndexTokens_StaticTokenType; import
 struct PXR_NS::UsdImagingExtentsHintSchemaTokens_StaticTokenType; importedAsValue;
 struct PXR_NS::UsdImagingGeomModelSchemaTokens_StaticTokenType; importedAsValue;
 struct PXR_NS::UsdImagingModelSchemaTokens_StaticTokenType; importedAsValue;
-struct PXR_NS::UsdImagingStageSceneIndexTokens_StaticTokenType; importedAsValue;
 struct PXR_NS::UsdImagingTokens_StaticTokenType; importedAsValue;
 struct PXR_NS::UsdImagingUsdPrimInfoSchemaTokens_StaticTokenType; importedAsValue;
 struct PXR_NS::UsdImagingUsdRenderProductSchemaTokens_StaticTokenType; importedAsValue;

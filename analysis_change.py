@@ -57,6 +57,7 @@ class _ModelBase:
                     x = re.sub("pxrInternal_v0_25_11__pxrReserved__", "PXR_NS", x)
                     x = re.sub("pxrInternal_v0_26_3__pxrReserved__", "PXR_NS", x)
                     x = re.sub("pxrInternal_v0_26_5__pxrReserved__", "PXR_NS", x)
+                    x = re.sub("pxrInternal_v0_[0-9][0-9]_[0-9][0-9]?__pxrReserved__", "PXR_NS", x)
                     return x
 
                 
@@ -439,7 +440,8 @@ if __name__ == "__main__":
                                "Equatable", "Comparable", "Hashable", "CustomStringConvertible",
                                "FindSendableDependencies", "Sendable", "FindEnums",
                                "FindStaticTokens", "FindTfNoticeSubclasses",
-                               "FindSchemas", "SdfValueTypeNamesMembers", "APINotes", "FindVtValueRefFunctions"]
+                               "FindSchemas", "SdfValueTypeNamesMembers", "APINotes", "FindVtValueRefFunctions",
+                               "SwiftSubclassCxx"]
     default_meta_analysis = ["diff_kinds", "diff_types", "moved_types_summary", "moved_types", "all_types"]
     
     parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)
@@ -514,6 +516,9 @@ if __name__ == "__main__":
             args.meta_analysis = "diff_kinds diff_types moved_types_summary moved_types".split()
 
         elif args.analyzed_trait == "FindVtValueRefFunctions":
+            pass
+
+        elif args.analyzed_trait == "SwiftSubclassCxx":
             pass
         
         else:
