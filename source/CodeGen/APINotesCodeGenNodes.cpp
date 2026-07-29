@@ -196,7 +196,7 @@ APINotesNode(Kind::SwiftNameField),
 kind(kind) {}
 
 void SwiftSafetyField::_write(std::vector<std::string> &lines, int indentation) const {
-#warning Skipping SwiftSafety key in API Notes writing
+#warning Commenting out SwiftSafety key in API Notes writing
     // https://clang.llvm.org/docs/APINotes.html#versioned-api-notes mentions support
     // for versioned API Notes, but it's tied to the Swift language mode, for which
     // currently the only valid values are 4, 4.2, 5, and 6, and not the Swift compiler
@@ -208,8 +208,8 @@ void SwiftSafetyField::_write(std::vector<std::string> &lines, int indentation) 
     // keys so that users get a compiler diagnostic that they're using unsafe APIs in Swift.
     //
     // rdar://182429180 (Add a way to version API Notes based on Swift compiler version (not language mode))
-    std::cout << "Warning! Skipping SwiftSafety key in API Notes writing" << std::endl;
-    // lines.push_back(indent(indentation) + "SwiftSafety: " + kind);
+    std::cout << "Warning! Commenting out SwiftSafety key in API Notes writing" << std::endl;
+    lines.push_back(indent(indentation) + "# SwiftSafety: " + kind);
 }
 
 // MARK: UnavilableField
