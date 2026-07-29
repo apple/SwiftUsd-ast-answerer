@@ -62,6 +62,8 @@ class PXR_NS::Tf_Remnant; markTfRemnantAsUnavailableImmortalFrtSpecialCase;
 class PXR_NS::SdfZipFile::Iterator; renameSdfZipFileIteratorSpecialCase;
 
 // class PXR_NS::VtValueRef PXR_NS::VtValue::Ref() const; renameFunctionUnsafe;
+static class std::shared_ptr<class PXR_NS::HioImage> PXR_NS::HioImage::OpenForReading(const std::string & filename, int subimage, int mip, enum PXR_NS::HioImage::SourceColorSpace sourceColorSpace, _Bool suppressErrors); renameFunctionUnsafe;
+static class std::shared_ptr<class PXR_NS::HioImage> PXR_NS::HioImage::OpenForWriting(const std::string & filename); renameFunctionUnsafe;
 
 class PXR_NS::UsdNotice::StageNotice; importTagAsOwned;
 class PXR_NS::UsdNotice::StageContentsChanged; importTagAsOwned;

@@ -239,6 +239,30 @@ bool APINotesAnalysisPass::VisitNamedDecl(clang::NamedDecl *namedDecl) {
     }
     
     {
+        // Even though we're importing pxr::HioImage as SWIFT_UNSAFE_REFERENCE, that's just
+        // for "subclassing" plugin support. We don't want users to use pxr::HioImage::OpenForReading/OpenForWriting,
+        // they should use Overlay::HioImageWrapper::OpenForReading/OpenForWriting instead,
+        // because std::shared_ptr is easy to misuse in Swift, leading to memory safety issues.
+        // So, rename it as unsafe so we can stub in our own Swift function with the same signature
+        // with Swift-only diagnostics
+        
+        std::string a = "static class std::shared_ptr<class " PXR_NS"::HioImage> " PXR_NS"::HioImage::OpenForReading(const std::string & filename, int subimage, int mip, enum " PXR_NS"::HioImage::SourceColorSpace sourceColorSpace, _Bool suppressErrors)";
+        std::string b = "static class std::shared_ptr<class " PXR_NS"::HioImage> " PXR_NS"::HioImage::OpenForWriting(const std::string & filename)";
+        const clang::FunctionDecl* functionA = findFunctionDecl(a);
+        const clang::FunctionDecl* functionB = findFunctionDecl(b);
+        if (!functionA) {
+            std::cerr << "Could not find " << a << std::endl;
+            __builtin_trap();
+        }
+        if (!functionB) {
+            std::cerr << "Could not find " << b << std::endl;
+            __builtin_trap();
+        }
+        insert_or_assign(functionA, APINotesAnalysisResult::Kind::renameFunctionUnsafe);
+        insert_or_assign(functionB, APINotesAnalysisResult::Kind::renameFunctionUnsafe);
+    }
+    
+    {
         // Making TfNotice::Register(_:_:) unavailable doesn't stop Swift from
         // trying to resolve to it, but using SwiftName on it in API Notes does,
         // even though SwiftName on templates doesn't work properly and renaming overloads
