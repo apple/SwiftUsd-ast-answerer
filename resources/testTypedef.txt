@@ -57,3 +57,5 @@ class std::vector<class PXR_NS::SdfPath>; [PXR_NS,, SdfPathVector];
 class std::vector<class PXR_NS::SdfLayerOffset>; [PXR_NS,, SdfLayerOffsetVector];
 class PXR_NS::SdfHandle<class PXR_NS::SdfPropertySpec>; [PXR_NS,, SdfPropertySpecHandle];
 class PXR_NS::SdfHandle<class PXR_NS::SdfPrimSpec>; [PXR_NS,, SdfPrimSpecHandle];
+
+class std::map<std::string, std::string>; [class PXR_NS::SdfFileFormat,, FileFormatArguments];
