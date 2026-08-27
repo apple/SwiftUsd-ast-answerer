@@ -367,6 +367,7 @@ class PXR_NS::TfRefPtrTracker; importedAsImmortalReference;
 class PXR_NS::TfRegTest; importedAsValue; // intentionally not immortal
 class PXR_NS::TraceCategory; importedAsValue; // intentionally not immortal
 class PXR_NS::TraceCollector; importedAsImmortalReference;
+class PXR_NS::SdfSchemaBase; importedAsImmortalReference;
 class PXR_NS::SdfSchema; importedAsImmortalReference;
 class PXR_NS::UsdSchemaRegistry; importedAsImmortalReference;
 class PXR_NS::GlfContextCaps; importedAsImmortalReference;

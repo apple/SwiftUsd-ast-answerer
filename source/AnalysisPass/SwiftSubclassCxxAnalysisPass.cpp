@@ -66,7 +66,8 @@ void SwiftSubclassCxxAnalysisPass::process(const clang::CXXRecordDecl* cxxRecord
             ctor->isCopyAssignmentOperator() ||
             ctor->isMoveConstructor() ||
             ctor->isMoveAssignmentOperator() ||
-            ctor->isOverloadedOperator()) {
+            ctor->isOverloadedOperator() ||
+            ctor->isDeleted()) {
             continue;
         }
         

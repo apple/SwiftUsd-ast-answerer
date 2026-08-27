@@ -107,6 +107,15 @@ bool ImportAnalysisPass::checkSpecialCaseHandling(const clang::TagDecl* tagDecl)
         return true;
     }
     
+    if (typeName == "class " PXR_NS"::SdfSchemaBase") {
+        // SdfSchema derives from SdfSchemaBase using TfSingleton but doesn't add
+        // any extra behavior. 
+        // Per https://forum.aousd.org/t/why-sdfschemabase-and-sdfschema/3023/2,
+        // making SdfSchemaBase immortal is reasonably safe in a non-Presto context.
+        insert_or_assign(tagDecl, ImportAnalysisResult::importedAsImmortalReference);
+        return true;
+    }
+    
     return false;
 }
 
