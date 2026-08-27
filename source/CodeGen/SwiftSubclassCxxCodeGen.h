@@ -36,8 +36,9 @@ public:
     void writeSwiftFile(const Data& data) override;
     std::vector<std::pair<std::string, Data>> writeDocCFile(std::string* outTitle, std::string* outOverview, const Data& processedData) override;
     
-    friend struct StringsHelper;
+    friend struct NamesHelper;
     friend struct TypesHelper;
+    friend struct AnalysisHelper;
     friend struct MethodHelper;
 };
 

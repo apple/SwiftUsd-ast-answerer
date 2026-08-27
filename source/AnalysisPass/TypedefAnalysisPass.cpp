@@ -84,9 +84,6 @@ bool TypedefAnalysisPass::VisitTypedefNameDecl(clang::TypedefNameDecl* typedefNa
     if (!unsugaredTagDecl) {
         return true;
     }
-    if (!doesTypeContainUsdTypes(unsugaredTagDecl)) {
-        return true;
-    }
     if (!areAllUsdDeclsFromPublicHeaders(unsugaredTagDecl)) {
         return true;
     }

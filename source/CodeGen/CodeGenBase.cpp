@@ -35,6 +35,8 @@ std::string swiftSpellingForIntegralType(std::string x) {
     if (x == "unsigned long long") { return "CUnsignedLongLong"; }
     if (x == "float") { return "CFloat"; }
     if (x == "double") { return "CDouble"; }
+    if (x == "size_t") { return "Int"; }
+    if (x == "void") { return "Void"; }
     return x;
 }
 
@@ -302,6 +304,42 @@ private:
         return true;
     }
     
+    std::vector<std::string> _tryGetHardCodedTypedefSubstitution(const clang::ClassTemplateSpecializationDecl* specialization) const {
+        std::vector<std::string> result;
+        
+        // Some STL typedefs are so common they should always be used
+        const auto& runner = _driver->getASTAnalysisRunner();
+        if (specialization == runner->findNamedDecl("std::string")) {
+            result.push_back("string");
+            result.push_back("std");
+            return result;
+        }
+        
+        if (specialization == runner->findNamedDecl("std::ostream")) {
+            result.push_back("ostream");
+            result.push_back("std");
+            return result;
+        }
+        
+        if (_usesBackticksOnSwiftReservedKeywords) {
+            // These typedefs are found in SwiftUsd/source/SwiftOverlay/Typedefs.h.
+            // Only adding these for now, but we can add more if we need to later
+            if (specialization == runner->findNamedDecl("class std::set<std::string>")) {
+                result.push_back("String_Set");
+                result.push_back("Overlay");
+                return result;
+            }
+            
+            if (specialization == runner->findNamedDecl("class std::vector<std::string>")) {
+                result.push_back("String_Vector");
+                result.push_back("Overlay");
+                return result;
+            }
+        }
+        
+        return result;
+    }
+    
     std::optional<TypedefAnalysisResult::Pair> _getBestTypedefSpelling(const TypedefAnalysisResult& res) const {
         std::set<TypedefAnalysisResult::Pair> typedefSpellings = res.getTypedefSpellings();
         std::vector<TypedefAnalysisResult::Pair> validCandidates;
@@ -451,18 +489,22 @@ private:
             reversedComponents.push_back(tmp);
         }
         
-        if (currentNamedDecl == _driver->getASTAnalysisRunner()->findNamedDecl("std::string")) {
-            currentNamedDecl = nullptr;
-            reversedComponents.push_back("string");
-            reversedComponents.push_back("std");
-        }
-        
+        const clang::NamedDecl* originalNamedDeclAfterConstStarWrapperQualTypeUnwrapping = currentNamedDecl;
         while (currentNamedDecl) {
             _tryAddIncludePathForDecl(currentNamedDecl);
             std::string toPushBack = currentNamedDecl->getNameAsString();
             
             // Special case template specializations
             if (const clang::ClassTemplateSpecializationDecl* specialization = clang::dyn_cast<clang::ClassTemplateSpecializationDecl>(currentNamedDecl)) {
+                
+                std::vector<std::string> hardCodedSubstitution = _tryGetHardCodedTypedefSubstitution(specialization);
+                if (!hardCodedSubstitution.empty()) {
+                    for (const auto& x : hardCodedSubstitution) {
+                        reversedComponents.push_back(x);
+                    }
+                    currentNamedDecl = nullptr;
+                    break;
+                }
                 
                 if (_doesTypedefSubstitutionForTemplates) {
                     // Try to find a substitution.
@@ -610,13 +652,39 @@ private:
             }
         }
         
+        // Pointers and references to FRTs need special handling in Swift:
+        // In Swift, `pxr::SdfLayer*` should be printed as `pxr.SdfLayer?` and not `UnsafePointer<pxr.SdfLayer>?`, even though
+        // `std::string*` should be printed as `UnsafePointer<std.string>`.
+        if (_usesBackticksOnSwiftReservedKeywords && !constRefStarWrappers.empty() && originalNamedDeclAfterConstStarWrapperQualTypeUnwrapping) {
+            // We're in Swift, there's at least one constRefStar wrapper, and the central namedDecl is valid
+            if (constRefStarWrappers.back().hasOuterStar || constRefStarWrappers.back().hasOuterRef) {
+                // The constRefStar wrapper nearest to the central namedDecl is an indirection
+                const clang::TagDecl* tagDecl = clang::dyn_cast<clang::TagDecl>(originalNamedDeclAfterConstStarWrapperQualTypeUnwrapping);
+                if (tagDecl) {
+                    const ImportAnalysisPass* importAnalysisPass = _driver->getASTAnalysisRunner()->getImportAnalysisPass();
+                    const auto& it = importAnalysisPass->find(tagDecl);
+                    if (it != importAnalysisPass->end() && it->second.isImportedAsAnyReference()) {
+                        // The central namedDecl is an FRT
+                        
+                        // In Swift, indirection to FRTs is implicit and becomes an optional/nonoptional
+                        if (constRefStarWrappers.back().hasOuterStar) {
+                            _result = *_result + "?";
+                        } else {
+                            _result = *_result;
+                        }
+                        constRefStarWrappers.resize(constRefStarWrappers.size() - 1);
+                    }
+                }
+            }
+            
+        }
         for (int i = ((int)constRefStarWrappers.size()) - 1; i >= 0; i--) {
             ConstRefStarWrapper x = constRefStarWrappers[i];
             
             if (!_isDoccRef) {
                 if (_usesBackticksOnSwiftReservedKeywords) {
                     if (x.hasOuterRef || x.hasOuterStar) {
-                        _result = std::string("Unsafe") + (x.hasOuterConst ? "" : "Mutable") + "Pointer<" + *_result + ">";
+                        _result = std::string("Unsafe") + (x.hasOuterConst ? "" : "Mutable") + "Pointer<" + *_result + ">" + (x.hasOuterStar ? "?" : "");
                     }
                 } else {
                     if (x.hasOuterConst) {

@@ -196,6 +196,8 @@ set(SOURCES
 
     source/CodeGen/SwiftSubclassCxxCodeGen.h
     source/CodeGen/SwiftSubclassCxxCodeGen.cpp
+    source/CodeGen/SwiftSubclassCxxCodeGenHelpers.h
+    source/CodeGen/SwiftSubclassCxxCodeGenHelpers.cpp
 
     source/CodeGen/SdfValueTypeNamesMembersCodeGen.h
     source/CodeGen/SdfValueTypeNamesMembersCodeGen.cpp

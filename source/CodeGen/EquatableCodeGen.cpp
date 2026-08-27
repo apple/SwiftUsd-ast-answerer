@@ -56,6 +56,7 @@ EquatableCodeGen::Data EquatableCodeGen::extraSpecialCaseFiltering(const Data& d
         // Note that this isn't a Swift bug, but a Usd bug (present in v25.05.01);
         // in a pure C++ world, the `operator==` still can't be called in a C++ code base
         // because the symbol for it isn't emitted.
+        #warning todo: remove this special case: https://github.com/PixarAnimationStudios/OpenUSD/pull/3682
         if (swiftName == "pxr.HgiShaderProgramDesc") {
             continue;
         }
