@@ -118,7 +118,6 @@ class PXR_NS::SdfHandle<class PXR_NS::SdfSpec>; availableSdfSpecHandleSubclass;
 class PXR_NS::SdfHandle<class PXR_NS::SdfPrimSpec>; availableSdfSpecHandleSubclass;
 enum PXR_NS::SdfSpecType; availableEnum;
 
-class PXR_NS::UsdAPISchemaBase; blockedByNoCandidate;
 class PXR_NS::UsdAttribute; availableUsdObjectSubclass;
 class PXR_NS::UsdEditContext; noAnalysisBecauseBlockedByImport;
 class PXR_NS::UsdEditTarget; blockedByNoCandidate;
@@ -169,8 +168,8 @@ class PXR_NS::UsdUINodeGraphNodeAPI; blockedByNoCandidate;
 class PXR_NS::UsdPhysicsCollisionAPI; blockedByNoCandidate;
 class PXR_NS::UsdPhysicsLimitAPI; blockedByNoCandidate;
 
-class PXR_NS::HioImage; noAnalysisBecauseBlockedByImport;
-class PXR_NS::HioImage::StorageSpec; noAnalysisBecauseBlockedByImport;
+class PXR_NS::HioImage; blockedByNoCandidate;
+class PXR_NS::HioImage::StorageSpec; blockedByNoCandidate;
 
 class PXR_NS::GlfSimpleLight; available;
 

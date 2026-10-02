@@ -18,6 +18,7 @@
 // SPDX-License-Identifier: Apache-2.0
 //===----------------------------------------------------------------------===//
 
+#include "clang/AST/CXXInheritance.h"
 #include "AnalysisPass/ImportAnalysisPass.h"
 #include "AnalysisPass/ASTAnalysisPass.h"
 #include "AnalysisResult/FindNamedDeclsAnalysisResult.h"
@@ -41,15 +42,26 @@ bool ImportAnalysisPass::shouldOnlyVisitDeclsFromUsd() const {
 }
 
 // Swift 6.1 uses the following rules:
-// Class templates: All instantiation arguments must be types, but those types do not need to be importable
 // Parent scope: If a type is nested in a decl context, every enclosing decl context must be an importable type.
 // Access specifier: If a type is private or protected, it is not imported.
 // Copyable: Must have accessible copy ctor or move ctor and an accessible dtor
 // Non-copyable: Must have accessible move ctor and an accessible dtor but not an accessible copy ctor
 // Reference: Must be marked as reference. (May have inaccessible copy/move ctors and inaccessible dtor)
 //
+// Swift 6.5 adds an additional rule:
+// - "Abstract value types" (types with pure-virtual methods that would be imported as copyable or non-copyable types) may not be imported: https://github.com/swiftlang/swift/pull/91124
+//   This fixes a correctness bug that could cause crashes when trying to use "abstract value types", but ends up being a source-breaking change with
+//   prior Swift versions. To maintain backwards compatibility with Swift 6.1, SwiftUsd blocks code generation entirely for "abstract value types" in 9.0.0. 
+//
+//
 // Note that deriving from a private type does not block a type from being imported.
 // And, note that we can do this analysis in a single pass without needing to finalize() anything
+//
+//
+//
+// Previously, we thought that class templates required all instantiation arguments to be types, but that is incorrect.
+// As far back as Swift 6.1 (possibly even earlier), class templates could be imported as long as they were fully
+// specialized by a using/typedef instantiation, even if they used value template or template template parameters.
 
 bool ImportAnalysisPass::VisitTagDecl(clang::TagDecl *tagDecl) {
     onFindPotentialCandidate(tagDecl);
@@ -73,19 +85,25 @@ void ImportAnalysisPass::onFindPotentialCandidate(const clang::TagDecl* tagDecl)
     if (find(tagDecl) != end()) {
         return;
     }
-        
+    
     if (checkSpecialCaseHandling(tagDecl)) { return; }
+    // General blockers to being imported
     if (checkPublicHeader(tagDecl)) { return; }
     if (checkClassTemplateDecl(tagDecl)) { return; }
-    if (checkTemplate(tagDecl)) { return; }
+    if (checkTemplatePartialSpecialization(tagDecl)) { return; }
     if (checkParentScope(tagDecl)) { return; }
     if (checkAccessSpecifier(tagDecl)) { return; }
+    // FRTs
     if (checkSharedReferenceType(tagDecl)) { return; }
-    if (checkValueType(tagDecl)) { return; }
-    if (checkNonCopyableType(tagDecl)) { return; }
     if (checkImmortalReferenceType(tagDecl)) { return; }
+    if (checkUnsafeReferenceType(tagDecl)) { return; }
+    // Non FRTs need a move or copy ctor and may not have pure virtual functions
     if (checkMissingMoveCtor(tagDecl)) { return; }
     if (checkMissingDtor(tagDecl)) { return; }
+    if (checkAbstractValueType(tagDecl)) { return; }
+    // Non FRT classification
+    if (checkValueType(tagDecl)) { return; }
+    if (checkNonCopyableType(tagDecl)) { return; }
     
     // If we haven't gone into a special case, we don't know how to handle it
     insert_or_assign(tagDecl, ImportAnalysisResult::unknown);
@@ -150,50 +168,12 @@ bool ImportAnalysisPass::checkClassTemplateDecl(const clang::TagDecl* tagDecl) {
     return true;
 }
 
-bool ImportAnalysisPass::checkTemplate(const clang::TagDecl* tagDecl) {
-    const clang::ClassTemplateSpecializationDecl* classTemplateSpecializationDecl = clang::dyn_cast<clang::ClassTemplateSpecializationDecl>(tagDecl);
-    if (!classTemplateSpecializationDecl) { return false; }
-    const clang::TemplateArgumentList& args = classTemplateSpecializationDecl->getTemplateInstantiationArgs();
-    for (const clang::TemplateArgument& arg : args.asArray()) {
-        if (arg.getKind() == clang::TemplateArgument::Template) {
-            // Templates as arguments is hard to deal with,
-            // but we need to let TfWeakPtrFacade<TfWeakPtr, T> be importable when T is importable
-            // so that TfWeakPtr<T> is Equatable. So this is probably wrong in general,
-            // but it's the least worst way of special casing this
-            continue;
-        }
-        
-        if (arg.getKind() != clang::TemplateArgument::Type) {
-            insert_or_assign(tagDecl, ImportAnalysisResult::blockedByTemplateInstantiationArgs);
-            return true;
-        }
-        if (arg.getAsType().isNull()) {
-            insert_or_assign(tagDecl, ImportAnalysisResult::blockedByTemplateInstantiationArgs);
-            return true;
-        }
-        
-        const clang::Type* type = arg.getAsType().getTypePtr();
-        if (type->isBuiltinType()) {
-            continue;
-        }
-        
-        if (type->isPointerType()) {
-#warning Is this correct? Swift will import as Unsafe[MRB]Pointer where it can, and OpaquePointer otherwise, right?
-            continue;
-        }
-        
-        const clang::TagDecl* argTagDecl = type->getAsTagDecl();
-#warning Is this correct? From v25.02a to v25.05.01, this made `struct std::is_array<int[]>` go from `importedAsValue` to `blockedByTemplateInstantiationArgs`
-        if (!argTagDecl) {
-            insert_or_assign(tagDecl, ImportAnalysisResult::blockedByTemplateInstantiationArgs);
-            return true;
-        }
-        
-        // Do an import pass for the template argument,
-        // but don't require that it be importable,
-        // because Swift 6 supports templated types with non-imported
-        // type template arguments when the template is used through a typedef
-        onFindPotentialCandidate(argTagDecl);
+bool ImportAnalysisPass::checkTemplatePartialSpecialization(const clang::TagDecl* tagDecl) {
+    // Swift doesn't support importing partial specializations
+    const clang::ClassTemplatePartialSpecializationDecl* specialization = clang::dyn_cast<clang::ClassTemplatePartialSpecializationDecl>(tagDecl);
+    if (specialization) {
+        insert_or_assign(tagDecl, ImportAnalysisResult::blockedByTemplatePartialSpecialization);
+        return true;
     }
     
     return false;
@@ -257,36 +237,6 @@ bool ImportAnalysisPass::checkSharedReferenceType(const clang::TagDecl* tagDecl)
     return false;
 }
 
-bool ImportAnalysisPass::checkValueType(const clang::TagDecl *tagDecl) {
-    // Enums are always imported as copyable value types
-    if (clang::dyn_cast<clang::EnumDecl>(tagDecl)) {
-        insert_or_assign(tagDecl, ImportAnalysisResult::importedAsValue);
-        return true;
-    }
-    
-    const clang::CXXRecordDecl* cxxRecordDecl = clang::dyn_cast<clang::CXXRecordDecl>(tagDecl);
-    if (!cxxRecordDecl) { return false; }
-            
-    if (ASTHelpers::hasSwiftAccessibleCopyCtor(cxxRecordDecl) && ASTHelpers::hasSwiftAccessibleDtor(cxxRecordDecl)) {
-        insert_or_assign(tagDecl, ImportAnalysisResult::importedAsValue);
-        return true;
-    }
-    return false;
-}
-
-bool ImportAnalysisPass::checkNonCopyableType(const clang::TagDecl *tagDecl) {
-    const clang::CXXRecordDecl* cxxRecordDecl = clang::dyn_cast<clang::CXXRecordDecl>(tagDecl);
-    if (!cxxRecordDecl) { return false; }
-    
-    if (!ASTHelpers::hasSwiftAccessibleCopyCtor(cxxRecordDecl)) {
-        if (ASTHelpers::hasSwiftAccessibleMoveCtor(cxxRecordDecl) && ASTHelpers::hasSwiftAccessibleDtor(cxxRecordDecl)) {
-            insert_or_assign(tagDecl, ImportAnalysisResult::importedAsNonCopyable);
-            return true;
-        }
-    }
-    return false;
-}
-
 bool ImportAnalysisPass::checkImmortalReferenceType(const clang::TagDecl *tagDecl) {
     const clang::CXXRecordDecl* cxxRecordDecl = clang::dyn_cast<clang::CXXRecordDecl>(tagDecl);
     if (!cxxRecordDecl) { return false; }
@@ -337,11 +287,81 @@ bool ImportAnalysisPass::checkImmortalReferenceType(const clang::TagDecl *tagDec
     }
 }
 
+bool ImportAnalysisPass::checkUnsafeReferenceType(const clang::TagDecl *tagDecl) {
+    std::vector<std::string> hardCodedUnsafeReferenceTypes = {
+        "class " PXR_NS"::HioImage",
+    };
+    
+    for (const auto& s : hardCodedUnsafeReferenceTypes) {
+        const clang::TagDecl* hardCodedTag = findTagDecl(s);
+        if (!hardCodedTag) {
+            std::cerr << "Error! Couldn't find tag decl for " << s << std::endl;
+            __builtin_trap();
+        }
+        if (hardCodedTag == tagDecl) {
+            insert_or_assign(tagDecl, ImportAnalysisResult::importedAsUnsafeReference);
+            return true;
+        }
+    }
+    
+    return false;
+
+}
+
+// Types with pure-virtual methods that would otherwise be imported as value types
+bool ImportAnalysisPass::checkAbstractValueType(const clang::TagDecl *tagDecl) {
+    // Only FRTs may have pure-virtual methods and be imported.
+    // If we're importing a type as an FRT, we'd bail out before getting to this point,
+    // so we just have to check if we have any pure-virtual methods or not
+    // (Note that pure virtuals in base classes can be okay if they're overridden/defined
+    // by a subclass, which may not need to be our class.)
+    const clang::CXXRecordDecl* cxxRecordDecl = clang::dyn_cast<clang::CXXRecordDecl>(tagDecl);
+    if (!cxxRecordDecl) { return false; }
+    
+    if (cxxRecordDecl->isAbstract()) {
+        insert_or_assign(tagDecl, ImportAnalysisResult::blockedByAbstractValueType);
+        return true;
+
+    }
+    
+    return false;
+}
+
+bool ImportAnalysisPass::checkValueType(const clang::TagDecl *tagDecl) {
+    // Enums are always imported as copyable value types
+    if (clang::dyn_cast<clang::EnumDecl>(tagDecl)) {
+        insert_or_assign(tagDecl, ImportAnalysisResult::importedAsValue);
+        return true;
+    }
+    
+    const clang::CXXRecordDecl* cxxRecordDecl = clang::dyn_cast<clang::CXXRecordDecl>(tagDecl);
+    if (!cxxRecordDecl) { return false; }
+            
+    if (ASTHelpers::hasSwiftAccessibleCopyCtor(cxxRecordDecl) && ASTHelpers::hasSwiftAccessibleDtor(cxxRecordDecl)) {
+        insert_or_assign(tagDecl, ImportAnalysisResult::importedAsValue);
+        return true;
+    }
+    return false;
+}
+
+bool ImportAnalysisPass::checkNonCopyableType(const clang::TagDecl *tagDecl) {
+    const clang::CXXRecordDecl* cxxRecordDecl = clang::dyn_cast<clang::CXXRecordDecl>(tagDecl);
+    if (!cxxRecordDecl) { return false; }
+    
+    if (!ASTHelpers::hasSwiftAccessibleCopyCtor(cxxRecordDecl)) {
+        if (ASTHelpers::hasSwiftAccessibleMoveCtor(cxxRecordDecl) && ASTHelpers::hasSwiftAccessibleDtor(cxxRecordDecl)) {
+            insert_or_assign(tagDecl, ImportAnalysisResult::importedAsNonCopyable);
+            return true;
+        }
+    }
+    return false;
+}
+
 bool ImportAnalysisPass::checkMissingMoveCtor(const clang::TagDecl *tagDecl) {
     const clang::CXXRecordDecl* cxxRecordDecl = clang::dyn_cast<clang::CXXRecordDecl>(tagDecl);
     if (!cxxRecordDecl) { return false; }
     
-    if (ASTHelpers::hasSwiftAccessibleMoveCtor(cxxRecordDecl)) {
+    if (ASTHelpers::hasSwiftAccessibleMoveCtor(cxxRecordDecl) || ASTHelpers::hasSwiftAccessibleCopyCtor(cxxRecordDecl)) {
         return false;
     } else {
         insert_or_assign(tagDecl, ImportAnalysisResult::blockedByInaccessibleMove);

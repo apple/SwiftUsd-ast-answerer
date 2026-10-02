@@ -13,6 +13,7 @@ class PXR_NS::TfStaticData<struct PXR_NS::UsdHydraTokensType>; noAnalysisBecause
 class PXR_NS::TfStaticData<struct PXR_NS::UsdLuxTokensType>; noAnalysisBecauseBlockedByImport;
 class PXR_NS::TfStaticData<struct PXR_NS::UsdMediaTokensType>; noAnalysisBecauseBlockedByImport;
 class PXR_NS::TfHashMap<const void *, struct PXR_NS::TfRefPtrTracker::Trace, class PXR_NS::TfHash>; unavailable;
+class PXR_NS::TfBits::View<PXR_NS::TfBits::AllSet>::const_iterator; availableClassTemplateSpecialization;
 
 class PXR_NS::TfToken; availableFoundBySwift;
 class PXR_NS::TfType; availableFoundBySwift;
@@ -118,7 +119,7 @@ class PXR_NS::SdfPrimSpec; [availableDifferentArgumentTypes,, class PXR_NS::SdfS
 class PXR_NS::SdfReference; availableFoundBySwift;
 class PXR_NS::SdfValueTypeName; availableFoundBySwift;
 
-class PXR_NS::UsdAPISchemaBase; unavailable;
+class PXR_NS::UsdAPISchemaBase; noAnalysisBecauseBlockedByImport;
 class PXR_NS::UsdAttribute; [availableDifferentArgumentTypes,, class PXR_NS::UsdObject,, class PXR_NS::UsdObject];
 class PXR_NS::UsdEditContext; noAnalysisBecauseBlockedByImport;
 class PXR_NS::UsdEditTarget; availableFoundBySwift;
@@ -168,8 +169,8 @@ class PXR_NS::UsdUINodeGraphNodeAPI; unavailable;
 class PXR_NS::UsdPhysicsCollisionAPI; unavailable;
 class PXR_NS::UsdPhysicsLimitAPI; unavailable;
 
-class PXR_NS::HioImage; noAnalysisBecauseBlockedByImport;
-class PXR_NS::HioImage::StorageSpec; noAnalysisBecauseBlockedByImport;
+class PXR_NS::HioImage; availableImportedAsReference;
+class PXR_NS::HioImage::StorageSpec; unavailable;
 
 class PXR_NS::GlfSimpleLight; availableFoundBySwift;
 

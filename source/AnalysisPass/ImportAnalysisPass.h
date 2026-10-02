@@ -56,15 +56,17 @@ public:
     bool checkSpecialCaseHandling(const clang::TagDecl* tagDecl);
     bool checkPublicHeader(const clang::TagDecl* tagDecl);
     bool checkClassTemplateDecl(const clang::TagDecl* tagDecl);
-    bool checkTemplate(const clang::TagDecl* tagDecl);
+    bool checkTemplatePartialSpecialization(const clang::TagDecl* tagDecl);
     bool checkParentScope(const clang::TagDecl* tagDecl);
     bool checkAccessSpecifier(const clang::TagDecl* tagDecl);
     bool checkSharedReferenceType(const clang::TagDecl* tagDecl);
-    bool checkValueType(const clang::TagDecl* tagDecl);
-    bool checkNonCopyableType(const clang::TagDecl* tagDecl);
     bool checkImmortalReferenceType(const clang::TagDecl* tagDecl);
+    bool checkUnsafeReferenceType(const clang::TagDecl* tagDecl);
     bool checkMissingMoveCtor(const clang::TagDecl* tagDecl);
     bool checkMissingDtor(const clang::TagDecl* tagDecl);
+    bool checkAbstractValueType(const clang::TagDecl* tagDecl);
+    bool checkValueType(const clang::TagDecl* tagDecl);
+    bool checkNonCopyableType(const clang::TagDecl* tagDecl);
 };
 
 #endif /* ImportAnalysisResult_h */

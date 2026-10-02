@@ -197,4 +197,5 @@ class PXR_NS::HdRendererPluginRegistry; importTagAsImmortal;
 class PXR_NS::HdSceneIndexPluginRegistry; importTagAsImmortal;
 class PXR_NS::HdGpGenerativeProceduralPluginRegistry; importTagAsImmortal;
 
+class PXR_NS::HioImage; importTagAsUnsafe;
 

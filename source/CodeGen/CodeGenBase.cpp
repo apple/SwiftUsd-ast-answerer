@@ -568,6 +568,42 @@ private:
                         }
                         _includePaths.merge(recurse._includePaths);
                         toPushBack += *recurse._result;
+                        
+                    } else if (arg.getKind() == clang::TemplateArgument::Integral && _isDoccRef) {
+                        // For DocC, we want e.g ``OpenUSD/C++/pxr/TfSmallVector<pxr.UsdShadeConnectionSourceInfo, _CUnsignedInt_1>``
+                        llvm::APSInt integral = arg.getAsIntegral();
+                        int64_t i = integral.getExtValue();
+                        
+                        bool wantsUnsignedMarker;
+                        if (integral.isUnsigned()) {
+                            wantsUnsignedMarker = true;
+                        } else {
+                            wantsUnsignedMarker = false;
+                        }
+                        // DocC always interprets enums case template arguments as signed integers, regardless
+                        // of if the underlying C++ enum is signed or not. So we need e.g.
+                        // `pxr/TfBits/View<_1>` instead of `pxr/TfBits/View<_CUnsignedInt_1>`
+                        {
+                            clang::QualType q = arg.getIntegralType();
+                            if (q.isConstQualified()) {
+                                q.removeLocalConst();
+                            }
+                            if (const clang::Type* type = q.getTypePtr()) {
+                                if (type->isEnumeralType()) {
+                                    wantsUnsignedMarker = false;
+                                }
+                            }
+                        }
+                        
+                        std::stringstream temp;
+                        if (wantsUnsignedMarker) {
+                            temp << "_CUnsignedInt_";
+                        } else {
+                            temp << "_"; // _1 means CSignedInt(1)
+                        }
+                        temp << i;
+                        toPushBack += temp.str();
+
                     } else {
                         // This template argument isn't a type, so it could be a template, a value, etc.
                         // Just have llvm print it for us.
@@ -681,21 +717,21 @@ private:
         for (int i = ((int)constRefStarWrappers.size()) - 1; i >= 0; i--) {
             ConstRefStarWrapper x = constRefStarWrappers[i];
             
-            if (!_isDoccRef) {
-                if (_usesBackticksOnSwiftReservedKeywords) {
-                    if (x.hasOuterRef || x.hasOuterStar) {
-                        _result = std::string("Unsafe") + (x.hasOuterConst ? "" : "Mutable") + "Pointer<" + *_result + ">" + (x.hasOuterStar ? "?" : "");
-                    }
-                } else {
-                    if (x.hasOuterConst) {
-                        _result = *_result + " const";
-                    }
-                    if (x.hasOuterRef) {
-                        _result = *_result + " &";
-                    }
-                    if (x.hasOuterStar) {
-                        _result = *_result + " *";
-                    }
+            if (_isDoccRef || _usesBackticksOnSwiftReservedKeywords) {
+                if (x.hasOuterRef || x.hasOuterStar) {
+                    // Pointers are optional, references are non-optional, but DocC writes `T*` as `UnsafeMutablePointer<T>` and not `UnsafeMutablePointer<T>?`
+                    bool wantsOptionalMarker = x.hasOuterStar && !_isDoccRef;
+                    _result = std::string("Unsafe") + (x.hasOuterConst ? "" : "Mutable") + "Pointer<" + *_result + ">" + (wantsOptionalMarker ? "?" : "");
+                }
+            } else {
+                if (x.hasOuterConst) {
+                    _result = *_result + " const";
+                }
+                if (x.hasOuterRef) {
+                    _result = *_result + " &";
+                }
+                if (x.hasOuterStar) {
+                    _result = *_result + " *";
                 }
             }
         }

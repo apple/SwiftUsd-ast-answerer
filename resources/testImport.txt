@@ -1,3 +1,5 @@
+unique_ptr<type-parameter-0-0[], type-parameter-0-1>; blockedByTemplatePartialSpecialization;
+
 std::string; importedAsValue;
 class std::map<class PXR_NS::TfToken, class PXR_NS::VtValue, struct PXR_NS::TfDictionaryLessThan>; importedAsValue;
 class std::map<int, double>; importedAsValue;
@@ -37,10 +39,11 @@ class PXR_NS::TfSimpleRefBase; importedAsSharedReference;
 class PXR_NS::TfToken; importedAsValue;
 class std::vector<class PXR_NS::TfToken>; importedAsValue;
 class PXR_NS::TfType; importedAsValue;
-class PXR_NS::TfWeakBase; blockedByInaccessibleMove;
+class PXR_NS::TfWeakBase; blockedByInaccessibleDtor;
 class PXR_NS::TfWeakPtr<class PXR_NS::SdfLayer>; importedAsValue;
 class PXR_NS::TfWeakPtr<class PXR_NS::UsdStage>; importedAsValue;
 class PXR_NS::TfWeakPtr<class PXR_NS::PlugPlugin>; importedAsValue;
+class PXR_NS::TfDiagnosticMgr::Delegate; blockedByAbstractValueType;
 
 class PXR_NS::GfBBox3d; importedAsValue;
 class PXR_NS::GfCamera; importedAsValue;
@@ -165,10 +168,11 @@ class PXR_NS::SdfUsdaFileFormat; importedAsSharedReference;
 class PXR_NS::SdfUsdcFileFormat; importedAsSharedReference;
 class PXR_NS::SdfUsdzFileFormat; importedAsSharedReference;
 class PXR_NS::SdfZipFileWriter; importedAsNonCopyable;
+class PXR_NS::SdfAbstractDataSpecVisitor; blockedByAbstractValueType;
 
 class PXR_NS::PcpLayerStack; importedAsSharedReference;
 
-class PXR_NS::UsdAPISchemaBase; importedAsValue;
+class PXR_NS::UsdAPISchemaBase; blockedByAbstractValueType;
 class PXR_NS::UsdAttribute; importedAsValue;
 class PXR_NS::UsdEditContext; blockedByInaccessibleMove;
 class PXR_NS::UsdEditTarget; importedAsValue;
@@ -231,6 +235,7 @@ class PXR_NS::UsdShadeNodeDefAPI; importedAsValue;
 class PXR_NS::UsdShadeOutput; importedAsValue;
 class PXR_NS::UsdShadeShader; importedAsValue;
 class PXR_NS::UsdShadeNodeGraph; importedAsValue;
+class PXR_NS::TfSmallVector<struct PXR_NS::UsdShadeConnectionSourceInfo, 1>; importedAsValue;
 
 class PXR_NS::UsdLuxBoundableLightBase; importedAsValue;
 class PXR_NS::UsdLuxCylinderLight; importedAsValue;
@@ -275,11 +280,11 @@ class PXR_NS::TfRefPtr<class PXR_NS::UsdMtlxFileFormat>; blockedByNonPublicHeade
 
 class PXR_NS::GarchGLPlatformDebugContext; importedAsSharedReference;
 
-class PXR_NS::HioImage; blockedByInaccessibleMove;
+class PXR_NS::HioImage; importedAsUnsafeReference;
 class std::shared_ptr<class PXR_NS::HioImage>; importedAsValue;
-enum PXR_NS::HioImage::ImageOriginLocation; blockedByParent;
-enum PXR_NS::HioImage::SourceColorSpace; blockedByParent;
-class PXR_NS::HioImage::StorageSpec; blockedByParent;
+enum PXR_NS::HioImage::ImageOriginLocation; importedAsValue;
+enum PXR_NS::HioImage::SourceColorSpace; importedAsValue;
+class PXR_NS::HioImage::StorageSpec; importedAsValue;
 enum PXR_NS::CameraUtilConformWindowPolicy; importedAsValue;
 
 class PXR_NS::GlfSimpleLight; importedAsValue;
@@ -320,6 +325,24 @@ class PXR_NS::HdPrefixingSceneIndex; importedAsSharedReference;
 class PXR_NS::HdSingleInputFilteringSceneIndexBase; importedAsSharedReference;
 class PXR_NS::HdSceneIndexPrimView; importedAsValue;
 class PXR_NS::HdSceneIndexPrimView::const_iterator; importedAsValue;
+class PXR_NS::HdDataSourceBase; blockedByAbstractValueType;
+class PXR_NS::HdContainerDataSource; blockedByAbstractValueType;
+class PXR_NS::HdVectorDataSource; blockedByAbstractValueType;
+class PXR_NS::HdSampledDataSource; blockedByAbstractValueType;
+class PXR_NS::HdTypedSampledDataSource<class PXR_NS::GfMatrix4d>; blockedByAbstractValueType;
+class PXR_NS::HdBlockDataSource; importedAsValue;
+class PXR_NS::HdRetainedContainerDataSource; blockedByAbstractValueType;
+class PXR_NS::HdRetainedSampledDataSource; importedAsValue;
+class PXR_NS::HdRetainedTypedSampledDataSource<class PXR_NS::GfMatrix4d>; importedAsValue;
+class PXR_NS::HdRetainedSmallVectorDataSource; importedAsValue;
+class PXR_NS::HdRprim; blockedByAbstractValueType;
+class PXR_NS::HdMesh; blockedByInaccessibleMove;
+class PXR_NS::HdVolume; blockedByAbstractValueType;
+
+
+
+
+
 
 class PXR_NS::HdGpGenerativeProceduralResolvingSceneIndex; importedAsSharedReference;
 

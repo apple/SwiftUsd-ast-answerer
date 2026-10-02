@@ -271,7 +271,7 @@ class PXR_NS::UsdMtlxFileFormat; [$inheritance class PXR_NS::SdfFileFormat];
 
 
 
-class PXR_NS::HioImage; [];
+class PXR_NS::HioImage; [$specialImportedAsReference];
 class PXR_NS::HioImage::StorageSpec; [int width,, int height,, int depth,, enum PXR_NS::HioFormat format,, _Bool flipped,, void * data];
 enum PXR_NS::HioImage::ImageOriginLocation; [];
 enum PXR_NS::HioImage::SourceColorSpace; [];

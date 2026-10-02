@@ -116,7 +116,7 @@ class PXR_NS::SdfPrimSpec; available;
 class PXR_NS::SdfReference; available;
 class PXR_NS::SdfValueTypeName; available;
 
-class PXR_NS::UsdAPISchemaBase; blockedByNoCandidate;
+class PXR_NS::UsdAPISchemaBase; blockedByImport;
 class PXR_NS::UsdAttribute; available;
 class PXR_NS::UsdObject; available;
 class PXR_NS::UsdEditContext; blockedByImport;
@@ -164,8 +164,8 @@ class PXR_NS::UsdUINodeGraphNodeAPI; blockedByNoCandidate;
 class PXR_NS::UsdPhysicsCollisionAPI; blockedByNoCandidate;
 class PXR_NS::UsdPhysicsLimitAPI; blockedByNoCandidate;
 
-class PXR_NS::HioImage; blockedByImport;
-class PXR_NS::HioImage::StorageSpec; blockedByImport;
+class PXR_NS::HioImage; available;
+class PXR_NS::HioImage::StorageSpec; blockedByNoCandidate;
 
 class PXR_NS::GlfSimpleLight; blockedByNoCandidate;
 
