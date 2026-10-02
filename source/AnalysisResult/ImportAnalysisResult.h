@@ -36,15 +36,17 @@ public:
         unknown,
         blockedByNonPublicHeaderDefinition,
         blockedByTemplatedRecordDecl,
-        blockedByTemplateInstantiationArgs,
+        blockedByTemplatePartialSpecialization,
         blockedByParent,
         blockedByAccess,
         blockedByInaccessibleMove,
         blockedByInaccessibleDtor,
+        blockedByAbstractValueType,
         importedAsValue,
         importedAsNonCopyable,
         importedAsSharedReference,
-        importedAsImmortalReference
+        importedAsImmortalReference,
+        importedAsUnsafeReference
     };
     
     /// Returns true if a type is imported in some form, making
@@ -61,6 +63,8 @@ public:
     bool isImportedAsSharedReference() const;
     /// Returns true if a type is imported as an immortal reference
     bool isImportedAsImmortalReference() const;
+    /// Returns true if a type is imported as an unsafe reference
+    bool isImportedAsUnsafeReference() const;
     
 private:
     friend class ImportAnalysisPass;

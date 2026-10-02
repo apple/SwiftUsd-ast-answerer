@@ -359,6 +359,18 @@ bool ASTHelpers::isConstDuplicateSpecializationDecl(const clang::ClassTemplateSp
     return false;
 }
 
+bool ASTHelpers::isTemplatedOrNestedWithinTemplate(const clang::Decl* decl) {
+    if (clang::dyn_cast<clang::ClassTemplateSpecializationDecl>(decl)) {
+        return true;
+    }
+    
+    const clang::DeclContext* declContext = decl->getDeclContext();
+    if (!declContext) { return false; }
+    const clang::Decl* declContextDecl = clang::dyn_cast<clang::Decl>(declContext);
+    return isTemplatedOrNestedWithinTemplate(declContextDecl);
+}
+
+
 bool ASTHelpers::hasSwiftAccessibleCopyCtor(const clang::CXXRecordDecl* cxxRecordDecl) {
     for (const clang::CXXConstructorDecl* cxxConstructorDecl : cxxRecordDecl->ctors()) {
         if (!cxxConstructorDecl->isCopyConstructor()) { continue; }

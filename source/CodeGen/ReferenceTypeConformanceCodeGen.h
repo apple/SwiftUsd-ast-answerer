@@ -39,6 +39,7 @@ private:
     bool isTfRefBaseSubclass(const clang::TagDecl* tagDecl) const;
     bool isTfWeakBaseSubclass(const clang::TagDecl* tagDecl) const;
     bool isTfSingletonImmortalSpecialization(const clang::TagDecl* tagDecl) const;
+    bool isUnsafeFRT(const clang::TagDecl* tagDecl) const;
     bool isExactlyTfRefBase(const clang::TagDecl* tagDecl) const;
     
     

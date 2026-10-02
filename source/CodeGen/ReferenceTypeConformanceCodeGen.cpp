@@ -59,6 +59,11 @@ bool ReferenceTypeConformanceCodeGen::isTfSingletonImmortalSpecialization(const 
     }
     return false;
 }
+bool ReferenceTypeConformanceCodeGen::isUnsafeFRT(const clang::TagDecl *tagDecl) const {
+    const auto& it = getImportAnalysisPass()->find(tagDecl);
+    if (it == getImportAnalysisPass()->end()) { return false; }
+    return it->second.isImportedAsUnsafeReference();
+}
 bool ReferenceTypeConformanceCodeGen::isExactlyTfRefBase(const clang::TagDecl* tagDecl) const {
     const clang::CXXRecordDecl* tfRefBase = clang::dyn_cast<clang::CXXRecordDecl>(getImportAnalysisPass()->findTagDecl("class " PXR_NS"::TfRefBase"));
     return tagDecl == tfRefBase;
@@ -104,7 +109,7 @@ void ReferenceTypeConformanceCodeGen::writeHeaderFile(const ReferenceTypeConform
         // TfRefBase needs to be special cased in some places, because
         // TfRefPtr<TfRefBase> is disallowed
         
-        if (!isTfRefBaseSubclass(tagDecl) && !isTfWeakBaseSubclass(tagDecl) && !isTfSingletonImmortalSpecialization(tagDecl)) {
+        if (!isTfRefBaseSubclass(tagDecl) && !isTfWeakBaseSubclass(tagDecl) && !isTfSingletonImmortalSpecialization(tagDecl) && !isUnsafeFRT(tagDecl)) {
             std::cout << ASTHelpers::getAsString(tagDecl) << std::endl;
             __builtin_trap();
         }
@@ -454,6 +459,13 @@ void ReferenceTypeConformanceCodeGen::writeSwiftFile(const ReferenceTypeConforma
             // Write the Swift conformance to ImmortalReferenceTypeProtocol
             writeLines({
                 "extension " + names.swiftNameInSwift + ": Overlay._SwiftUsdImmortalReferenceTypeProtocol {}",
+            });
+        }
+        
+        if (isUnsafeFRT(tagDecl)) {
+            // Write the Swift conformance to UnsafeReferenceTypeProtocol
+            writeLines({
+                "extension " + names.swiftNameInSwift + ": Overlay._SwiftUsdUnsafeReferenceTypeProtocol {}",
             });
         }
     }

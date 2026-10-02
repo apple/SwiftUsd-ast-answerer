@@ -272,7 +272,7 @@ class PXR_NS::UsdMtlxFileFormat; unavailable [$inheritance class PXR_NS::SdfFile
 
 
 
-class PXR_NS::HioImage; available;
+class PXR_NS::HioImage; unavailable [];
 class PXR_NS::HioImage::StorageSpec; unavailable [void * data];
 enum PXR_NS::HioImage::ImageOriginLocation; available;
 enum PXR_NS::HioImage::SourceColorSpace; available;

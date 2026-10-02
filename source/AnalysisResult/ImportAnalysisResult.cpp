@@ -28,15 +28,17 @@ bool ImportAnalysisResult::isImportedSomehow() const {
         case unknown: return false;
         case blockedByNonPublicHeaderDefinition: return false;
         case blockedByTemplatedRecordDecl: return false;
-        case blockedByTemplateInstantiationArgs: return false;
+        case blockedByTemplatePartialSpecialization: return false;
         case blockedByParent: return false;
         case blockedByAccess: return false;
         case blockedByInaccessibleMove: return false;
         case blockedByInaccessibleDtor: return false;
+        case blockedByAbstractValueType: return false;
         case importedAsValue: return true;
         case importedAsNonCopyable: return true;
         case importedAsSharedReference: return true;
         case importedAsImmortalReference: return true;
+        case importedAsUnsafeReference: return true;
     }
 }
 
@@ -45,15 +47,17 @@ bool ImportAnalysisResult::isImportedAsValue() const {
         case unknown: return false;
         case blockedByNonPublicHeaderDefinition: return false;
         case blockedByTemplatedRecordDecl: return false;
-        case blockedByTemplateInstantiationArgs: return false;
+        case blockedByTemplatePartialSpecialization: return false;
         case blockedByParent: return false;
         case blockedByAccess: return false;
         case blockedByInaccessibleMove: return false;
         case blockedByInaccessibleDtor: return false;
+        case blockedByAbstractValueType: return false;
         case importedAsValue: return true;
         case importedAsNonCopyable: return false;
         case importedAsSharedReference: return false;
         case importedAsImmortalReference: return false;
+        case importedAsUnsafeReference: return false;
     }
 }
 
@@ -62,15 +66,17 @@ bool ImportAnalysisResult::isImportedAsNonCopyable() const {
         case unknown: return false;
         case blockedByNonPublicHeaderDefinition: return false;
         case blockedByTemplatedRecordDecl: return false;
-        case blockedByTemplateInstantiationArgs: return false;
+        case blockedByTemplatePartialSpecialization: return false;
         case blockedByParent: return false;
         case blockedByAccess: return false;
         case blockedByInaccessibleMove: return false;
         case blockedByInaccessibleDtor: return false;
+        case blockedByAbstractValueType: return false;
         case importedAsValue: return false;
         case importedAsNonCopyable: return true;
         case importedAsSharedReference: return false;
         case importedAsImmortalReference: return false;
+        case importedAsUnsafeReference: return false;
     }
 }
 
@@ -79,15 +85,17 @@ bool ImportAnalysisResult::isImportedAsAnyReference() const {
         case unknown: return false;
         case blockedByNonPublicHeaderDefinition: return false;
         case blockedByTemplatedRecordDecl: return false;
-        case blockedByTemplateInstantiationArgs: return false;
+        case blockedByTemplatePartialSpecialization: return false;
         case blockedByParent: return false;
         case blockedByAccess: return false;
         case blockedByInaccessibleMove: return false;
         case blockedByInaccessibleDtor: return false;
+        case blockedByAbstractValueType: return false;
         case importedAsValue: return false;
         case importedAsNonCopyable: return false;
         case importedAsSharedReference: return true;
         case importedAsImmortalReference: return true;
+        case importedAsUnsafeReference: return true;
     }
 }
 
@@ -96,15 +104,17 @@ bool ImportAnalysisResult::isImportedAsSharedReference() const {
         case unknown: return false;
         case blockedByNonPublicHeaderDefinition: return false;
         case blockedByTemplatedRecordDecl: return false;
-        case blockedByTemplateInstantiationArgs: return false;
+        case blockedByTemplatePartialSpecialization: return false;
         case blockedByParent: return false;
         case blockedByAccess: return false;
         case blockedByInaccessibleMove: return false;
         case blockedByInaccessibleDtor: return false;
+        case blockedByAbstractValueType: return false;
         case importedAsValue: return false;
         case importedAsNonCopyable: return false;
         case importedAsSharedReference: return true;
         case importedAsImmortalReference: return false;
+        case importedAsUnsafeReference: return false;
     }
 }
 
@@ -113,15 +123,36 @@ bool ImportAnalysisResult::isImportedAsImmortalReference() const {
         case unknown: return false;
         case blockedByNonPublicHeaderDefinition: return false;
         case blockedByTemplatedRecordDecl: return false;
-        case blockedByTemplateInstantiationArgs: return false;
+        case blockedByTemplatePartialSpecialization: return false;
         case blockedByParent: return false;
         case blockedByAccess: return false;
         case blockedByInaccessibleMove: return false;
         case blockedByInaccessibleDtor: return false;
+        case blockedByAbstractValueType: return false;
         case importedAsValue: return false;
         case importedAsNonCopyable: return false;
         case importedAsSharedReference: return false;
         case importedAsImmortalReference: return true;
+        case importedAsUnsafeReference: return false;
+    }
+}
+
+bool ImportAnalysisResult::isImportedAsUnsafeReference() const {
+    switch (_kind) {
+        case unknown: return false;
+        case blockedByNonPublicHeaderDefinition: return false;
+        case blockedByTemplatedRecordDecl: return false;
+        case blockedByTemplatePartialSpecialization: return false;
+        case blockedByParent: return false;
+        case blockedByAccess: return false;
+        case blockedByInaccessibleMove: return false;
+        case blockedByInaccessibleDtor: return false;
+        case blockedByAbstractValueType: return false;
+        case importedAsValue: return false;
+        case importedAsNonCopyable: return false;
+        case importedAsSharedReference: return false;
+        case importedAsImmortalReference: return false;
+        case importedAsUnsafeReference: return true;
     }
 }
 
@@ -130,15 +161,17 @@ ImportAnalysisResult::operator std::string() const {
         case unknown: return "unknown";
         case blockedByNonPublicHeaderDefinition: return "blockedByNonPublicHeaderDefinition";
         case blockedByTemplatedRecordDecl: return "blockedByTemplatedRecordDecl";
-        case blockedByTemplateInstantiationArgs: return "blockedByTemplateInstantiationArgs";
+        case blockedByTemplatePartialSpecialization: return "blockedByTemplatePartialSpecialization";
         case blockedByParent: return "blockedByParent";
         case blockedByAccess: return "blockedByAccess";
         case blockedByInaccessibleMove: return "blockedByInaccessibleMove";
         case blockedByInaccessibleDtor: return "blockedByInaccessibleDtor";
+        case blockedByAbstractValueType: return "blockedByAbstractValueType";
         case importedAsValue: return "importedAsValue";
         case importedAsNonCopyable: return "importedAsNonCopyable";
         case importedAsSharedReference: return "importedAsSharedReference";
         case importedAsImmortalReference: return "importedAsImmortalReference";
+        case importedAsUnsafeReference: return "importedAsUnsafeReference";
         default: return "__errCase";
     }
 }
@@ -149,15 +182,17 @@ std::vector<ImportAnalysisResult::Kind> ImportAnalysisResult::allCases() {
         unknown,
         blockedByNonPublicHeaderDefinition,
         blockedByTemplatedRecordDecl,
-        blockedByTemplateInstantiationArgs,
+        blockedByTemplatePartialSpecialization,
         blockedByParent,
         blockedByAccess,
         blockedByInaccessibleMove,
         blockedByInaccessibleDtor,
+        blockedByAbstractValueType,
         importedAsValue,
         importedAsNonCopyable,
         importedAsSharedReference,
         importedAsImmortalReference,
+        importedAsUnsafeReference,
     };
 }
 

@@ -47,6 +47,7 @@ struct ASTHelpers {
     static bool isEqualToOrDerivedFromClassVisibleToSwift(const clang::CXXRecordDecl* derived, const clang::CXXRecordDecl* base);
     static bool isEqualToOrDerivedFromClass(const clang::CXXRecordDecl* derived, const clang::CXXRecordDecl* base);
     static bool isConstDuplicateSpecializationDecl(const clang::ClassTemplateSpecializationDecl* d);
+    static bool isTemplatedOrNestedWithinTemplate(const clang::Decl* decl);
     
     static bool hasSwiftAccessibleCopyCtor(const clang::CXXRecordDecl* cxxRecordDecl);
     static bool hasSwiftAccessibleMoveCtor(const clang::CXXRecordDecl* cxxRecordDecl);

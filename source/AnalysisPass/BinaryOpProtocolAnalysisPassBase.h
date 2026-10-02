@@ -87,6 +87,26 @@ public:
             }
         }
         
+        if (ASTHelpers::getAsString(tagDecl) == "class " PXR_NS"::TfSmallVector<struct std::pair<class " PXR_NS"::SdfPath, struct " PXR_NS"::SdfChangeList::Entry>, 1>") {
+            if (!isComparablePass()) {
+                // Similarly, TfSmallVector's operator== assumes its elements have an operator==.
+                // It should be the moral equivalent of an `SWIFT_EQUATABLE_IF`, but our analysis
+                // doesn't support that currently, so special case some specializations as
+                // unavailable.
+                it->second._kind = BinaryOpProtocolAnalysisResult::unavailable;
+                return;
+            }
+
+        }
+        if (ASTHelpers::getAsString(tagDecl) == "class " PXR_NS"::TfSmallVector<struct std::pair<class " PXR_NS"::TfToken, class " PXR_NS"::HdDependencySchema>, 8>") {
+            if (!isComparablePass()) {
+                it->second._kind = BinaryOpProtocolAnalysisResult::unavailable;
+                return;
+            }
+        }
+        
+        
+        
         if (ASTHelpers::getAsString(tagDecl) == "class " PXR_NS"::VdfIndexedWeightsOperand") {
             // VdfIndexedWeightsOperand derives from VdfIndexedData<float>, which has a `bool operator==(const& VdfIndexedData other)`.
             // But, VdfIndexedWeightsOperand adds a `This operator==(const& This other)`, and the compiler
@@ -151,11 +171,14 @@ public:
                 
                 BinaryOpFunctionWitnessSet::Properties properties;
                 if (_witnessSet.find(convertibleTypes[i], convertibleTypes[j], &properties)) {
-                    if (clang::dyn_cast<clang::ClassTemplateSpecializationDecl>(tagDecl)) {
-                        it->second = BinaryOpProtocolAnalysisResult(BinaryOpProtocolAnalysisResult::availableClassTemplateSpecialization);
-                    }
                     
-                    if (firstType != thisType || secondType != thisType) {
+                    
+                    if (ASTHelpers::isTemplatedOrNestedWithinTemplate(tagDecl)) {
+                        // This type could be a class template specialization liked VtArray<T>, or it could be a non-template class declaration
+                        // nested within a templated class like TfBits::View<AllSet>::const_iterator; in both cases, Swift doesn't import the operator==
+                        it->second = BinaryOpProtocolAnalysisResult(BinaryOpProtocolAnalysisResult::availableClassTemplateSpecialization);
+                        
+                    } else if (firstType != thisType || secondType != thisType) {
                         // If the argument types aren't the same as the conforming type, Swift doesn't find an
                         // ==(Self, Self)
                         if (it->second._kind == BinaryOpProtocolAnalysisResult::unknown) {
