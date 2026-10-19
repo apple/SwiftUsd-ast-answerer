@@ -288,14 +288,8 @@ class PXR_NS::HioImage::StorageSpec; importedAsValue;
 enum PXR_NS::CameraUtilConformWindowPolicy; importedAsValue;
 
 class PXR_NS::GlfSimpleLight; importedAsValue;
-class PXR_NS::GlfBindingMap; importedAsSharedReference;
-class PXR_NS::GlfDrawTarget; importedAsSharedReference;
-class PXR_NS::GlfDrawTarget::Attachment; importedAsSharedReference;
-class PXR_NS::GlfDrawTarget::AttachmentsContainer; blockedByAccess;
-class PXR_NS::GlfTexture; importedAsSharedReference;
 class PXR_NS::GlfSimpleLightingContext; importedAsSharedReference;
 class PXR_NS::GlfSimpleShadowArray; importedAsSharedReference;
-class PXR_NS::GlfUniformBlock; importedAsSharedReference;
 
 class PXR_NS::HgiBuffer; blockedByInaccessibleMove;
 class PXR_NS::HgiHandle<class PXR_NS::HgiBuffer>; importedAsValue;

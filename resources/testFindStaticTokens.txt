@@ -47,7 +47,6 @@ struct PXR_NS::HioGlslfxTokens_StaticTokenType; importedAsValue;
 struct PXR_NS::HioGlslfxResourceLayoutTokens_StaticTokenType; importedAsValue;
 struct PXR_NS::PxOsdOpenSubdivTokens_StaticTokenType; importedAsValue;
 struct PXR_NS::GeomUtilInterpolationTokens_StaticTokenType; importedAsValue;
-struct PXR_NS::GlfTextureTokens_StaticTokenType; importedAsValue;
 struct PXR_NS::HgiTokens_StaticTokenType; importedAsValue;
 struct PXR_NS::HgiShaderKeywordTokens_StaticTokenType; importedAsValue;
 struct PXR_NS::HdBasisCurvesReprDescTokens_StaticTokenType; importedAsValue;
