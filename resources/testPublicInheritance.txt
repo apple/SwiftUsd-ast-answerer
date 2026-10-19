@@ -261,15 +261,9 @@ class PXR_NS::HioFieldTextureDataFactoryBase; [class PXR_NS::TfType::FactoryBase
 class PXR_NS::HioImageRegistry; [class PXR_NS::TfSingleton<HioImageRegistry>];
 class PXR_NS::HioImageFactoryBase; [class PXR_NS::TfType::FactoryBase];
 
-class PXR_NS::GlfUniformBlock; [class PXR_NS::TfRefBase,, class PXR_NS::TfWeakBase];
-class PXR_NS::GlfDrawTarget; [class PXR_NS::TfRefBase,, class PXR_NS::TfWeakBase];
-class PXR_NS::GlfDrawTarget::Attachment; [class PXR_NS::GlfTexture];
-class PXR_NS::GlfDrawTarget::AttachmentsContainer; [class PXR_NS::TfRefBase,, class PXR_NS::TfWeakBase];
 class PXR_NS::GlfSimpleLightingContext; [class PXR_NS::TfRefBase,, class PXR_NS::TfWeakBase];
 class PXR_NS::GlfSimpleShadowArray; [class PXR_NS::TfRefBase,, class PXR_NS::TfWeakBase];
-class PXR_NS::GlfTexture; [class PXR_NS::TfRefBase,, class PXR_NS::TfWeakBase];
 class PXR_NS::GlfGLRawContext; [class PXR_NS::GlfGLContext];
-class PXR_NS::GlfBindingMap; [class PXR_NS::TfRefBase,, class PXR_NS::TfWeakBase];
 
 class PXR_NS::HgiIndirectCommandEncoder; [class PXR_NS::HgiCmds];
 class PXR_NS::HgiFactoryBase; [class PXR_NS::TfType::FactoryBase];
@@ -699,7 +693,7 @@ class PXR_NS::UsdImagingDataSourceNurbsPatchPrim; [class PXR_NS::UsdImagingDataS
 class PXR_NS::UsdImagingCylinderAdapter; [class PXR_NS::UsdImagingGprimAdapter];
 class PXR_NS::UsdImagingDataSourceAttributeColorSpace; [class PXR_NS::HdTypedSampledDataSource<class PXR_NS::TfToken>];
 class PXR_NS::UsdImagingModelSchema; [class PXR_NS::HdSchema];
-class PXR_NS::UsdImagingStageSceneIndex; [class PXR_NS::HdSceneIndexBase];
+class PXR_NS::UsdImagingStageSceneIndex; [class PXR_NS::UsdImagingStageSceneIndexInterface];
 class PXR_NS::UsdImagingStageSceneIndex::_StageGlobals; [class PXR_NS::UsdImagingDataSourceStageGlobals];
 class PXR_NS::UsdImagingCoordSysAdapter; [class PXR_NS::UsdImagingPrimAdapter];
 class PXR_NS::UsdImagingRenderVarAdapter; [class PXR_NS::UsdImagingPrimAdapter];

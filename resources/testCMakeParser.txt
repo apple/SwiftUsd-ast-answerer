@@ -476,8 +476,6 @@ pxr/imaging/glf; publicHeader; glContext.h;
 pxr/imaging/glf; sourceFile; glContext.cpp;
 pxr/imaging/glf; publicHeader; simpleLight.h;
 pxr/imaging/glf; sourceFile; simpleLight.cpp;
-pxr/imaging/glf; publicHeader; texture.h;
-pxr/imaging/glf; sourceFile; texture.cpp;
 pxr/imaging/glf; sourceFile; glContextRegistry.cpp;
 
 pxr/imaging/hgi; publicHeader; attachmentDesc.h;
