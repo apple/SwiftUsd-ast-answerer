@@ -34,6 +34,7 @@
 
 // Helper class that provides a lot of convenient functions for working with the clang AST
 struct ASTHelpers {
+    // MARK: Static members
     static clang::QualType removingRefConst(clang::QualType orig);
     static clang::QualType getQualType(const clang::TypeDecl* typeDecl);
     static std::string getAsString(const clang::NamedDecl* namedDecl);
@@ -59,12 +60,56 @@ struct ASTHelpers {
         DeclComparator();
         bool operator ()(const clang::Decl* lhs, const clang::Decl* rhs) const;
     };
+    
+    // MARK: Instance members
+    ASTHelpers() = default;
+    virtual const FileSystemInfo& getFileSystemInfo() const = 0;
+    virtual const ASTAnalysisRunner& getASTAnalysisRunner() const = 0;
+    
+    std::string makePathRelativeForUsd(const std::string& p) const;
+    std::string makePathIncludeForUsd(const std::string& p) const;
+    
+    // Given `TfRefPtr<UsdStage>`, returns `pxr/base/tf/refPtr.h`,
+    // given `shared_ptr<HdTask>`, returns a stl header for `<memory.h>`.
+    // Compare with latestDeclLocFilePath.
+    std::string earliestDeclLocFilePath(const clang::Decl* decl) const;
+    
+    // Given `TfRefPtr<UsdStage>`, returns `pxr/usd/usd/stage.h`,
+    // given `shared_ptr<HdTask>`, returns `pxr/imaging/hd/task.h`.
+    // Compare with earliestDeclLocFilePath.
+    std::string latestDeclLocFilePath(const clang::Decl* decl) const;
+    
+    std::string stmtFilePath(const clang::Stmt* stmt) const;
+    
+    unsigned expansionLineNumber(const clang::Decl* decl) const;
+    unsigned expansionLineNumber(const clang::Stmt* stmt) const;
+    
+    std::string headerPathForUsdType(const clang::Decl* decl) const;
+    std::string makePathIncludeForUsd(const clang::Decl* decl) const;
+    bool isEarliestDeclLocFromUsd(const clang::Decl* decl) const;
+    std::string getUsdLibraryForDecl(const clang::Decl* decl) const;
+    bool isFromUsdLibrary(const clang::Decl* decl, std::string lib) const;
+    bool isFromUsdLibraryStrictlyBefore(const clang::Decl* decl, std::string lib) const;
+    bool doesTypeContainUsdTypes(const clang::TypeDecl* typeDecl) const;
+    bool areAllUsdDeclsFromPublicHeaders(const clang::Decl* decl) const;
+    
+    // Finds a TagDecl with the given name, querying the FindNamedDeclsAnalysisPass
+    const clang::TagDecl* findTagDecl(const std::string& typeName) const;
+    
+    // Finds a NamedDecl with the given name, querying the FindNamedDeclsAnalysisPass
+    const clang::NamedDecl* findNamedDecl(const std::string& name) const;
+    
+    // Finds a Type with the given name, querying the FindNamedDeclsAnalysisPass
+    const clang::Type* findType(const std::string& name) const;
+    
+    // Finds a FunctionDecl with the given name, querying the FindNamedDeclsAnalysisPass
+    const clang::FunctionDecl* findFunctionDecl(const std::string& signature) const;
 };
 
 
 // Base class of all analysis passes. Inherit with CRTP, specifying the AnalysisResult type as well
 template <typename Derived, typename AnalysisResult>
-class ASTAnalysisPass: public clang::RecursiveASTVisitor<ASTAnalysisPass<Derived, AnalysisResult>> {
+class ASTAnalysisPass: public clang::RecursiveASTVisitor<ASTAnalysisPass<Derived, AnalysisResult>>, public ASTHelpers {
 public:
     typedef std::map<const clang::NamedDecl*, AnalysisResult, ASTHelpers::DeclComparator> Data;
     
@@ -97,6 +142,8 @@ public:
     virtual bool VisitUsingType(clang::UsingType* usingType) { return true; }
     
     virtual bool VisitType(clang::Type* type) { return true; }
+    
+    virtual bool VisitCallExpr(clang::CallExpr* callExpr) { return true; }
     
     virtual bool shouldVisitTemplateInstantiations() const { return true; }
     virtual bool shouldVisitImplicitCode() const { return true; }
@@ -187,173 +234,6 @@ public:
     // Returns the underlying map of TagDecls to AnalysisResults
     const Data& getData() const {
         return _data;
-    }
-    
-    std::string makePathRelativeForUsd(const std::string& p) const {
-        const FileSystemInfo& f = getFileSystemInfo();
-        std::vector<std::string> prefixes = {
-            f.usdSourceRepoPath.string(),
-            f.usdInstalledHeaderPath.string(),
-        };
-        
-        for (const auto& prefix : prefixes) {
-            if (p.starts_with(prefix)) {
-                return p.substr(prefix.size() + 1);
-            }
-        }
-        
-        return "";
-    }
-    
-    std::string makePathIncludeForUsd(const std::string& p) const {
-        static std::vector<std::filesystem::path> publicHeaders = getFileSystemInfo().getListOfPublicHeaders();
-        for (const auto& h : publicHeaders) {
-            if (h.string() == p) {
-                return makePathRelativeForUsd(p);
-            }
-        }
-        
-        return "";
-    }
-    
-    
-    // MARK: Utility
-    
-    // Given `TfRefPtr<UsdStage>`, returns `pxr/base/tf/refPtr.h`,
-    // given `shared_ptr<HdTask>`, returns a stl header for `<memory.h>`.
-    // Compare with latestDeclLocFilePath.
-    std::string earliestDeclLocFilePath(const clang::Decl* decl) const {
-        if (!decl) { return ""; }
-        
-        const clang::SourceManager& sourceManager = decl->getASTContext().getSourceManager();
-        // Using getExpansionLoc is _very_ important, because we care about where a macro expands to,
-        // and "expansion locations represent where the location is in the user's view"
-        clang::SourceLocation spellingLoc = sourceManager.getExpansionLoc(decl->getLocation());
-        
-        std::string filePath = sourceManager.getFilename(spellingLoc).str();
-        return filePath;
-    }
-    
-    // Given `TfRefPtr<UsdStage>`, returns `pxr/usd/usd/stage.h`,
-    // given `shared_ptr<HdTask>`, returns `pxr/imaging/hd/task.h`.
-    // Compare with earliestDeclLocFilePath.
-    std::string latestDeclLocFilePath(const clang::Decl* decl) const {
-        if (!decl) { return ""; }
-        
-        const clang::SourceManager& sourceManager = decl->getASTContext().getSourceManager();
-        clang::SourceLocation loc = ASTHelpers::getLatestSourceLocation(decl);
-        std::string filePath = sourceManager.getFilename(loc).str();
-        
-        return filePath;
-    }
-    
-    std::string headerPathForUsdType(const clang::Decl* decl) const {
-        return makePathRelativeForUsd(latestDeclLocFilePath(decl));
-    }
-    
-    std::string makePathIncludeForUsd(const clang::Decl* decl) const {
-        return makePathIncludeForUsd(latestDeclLocFilePath(decl));
-    }
-    
-    bool isEarliestDeclLocFromUsd(const clang::Decl* decl) const {
-        return makePathRelativeForUsd(earliestDeclLocFilePath(decl)) != "";
-    }
-    
-    std::string getUsdLibraryForDecl(const clang::Decl* decl) const {
-        std::string relative = makePathRelativeForUsd(latestDeclLocFilePath(decl));
-        if (relative == "") {
-            return "";
-        }
-        
-        // pxr/foo/result/bar.h
-        std::vector<std::string> components = splitStringByRegex(relative, std::regex("/"));
-        if (components.size() < 3) { return ""; }
-        return components[2];
-    }
-    
-    bool isFromUsdLibrary(const clang::Decl* decl, std::string lib) const {
-        return lib == getUsdLibraryForDecl(decl);
-    }
-    
-    bool isFromUsdLibraryStrictlyBefore(const clang::Decl* decl, std::string lib) const {
-        std::string declLib = getUsdLibraryForDecl(decl);
-        
-        if (lib == declLib) {
-            // Same library isn't strictly before
-            return false;
-        }
-        
-        std::vector<std::string> allLibs = getASTAnalysisRunner().getDriver()->getCMakeParser()->getNamesOfPxrLibraries();
-        for (const auto& someLib : allLibs) {
-            if (someLib == declLib) {
-                // Got to the decl's lib before the argument lib
-                return true;
-            }
-            if (someLib == lib) {
-                // Got to the argument lib before the decl's lib
-                return false;
-            }
-        }
-        
-        std::cout << "WARNING: '" << lib << "' not contained in CMakeParser.getNamesOfPxrLibraries()" << std::endl;
-        return false;
-    }
-    
-    bool doesTypeContainUsdTypes(const clang::TypeDecl* typeDecl) const {
-        if (!typeDecl) {
-            return false;
-        }
-        if (isEarliestDeclLocFromUsd(typeDecl)) {
-            return true;
-        }
-        const clang::TagDecl* tagDecl = clang::dyn_cast<clang::TagDecl>(typeDecl);
-        if (!tagDecl) {
-            return false;
-        }
-        
-        for (clang::QualType qualType : ASTHelpers::allRecursiveTypesInTag(tagDecl)) {
-            if (isEarliestDeclLocFromUsd(qualType->getAsTagDecl())) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    bool areAllUsdDeclsFromPublicHeaders(const clang::Decl* decl) const {
-        const clang::TagDecl* tagDecl = clang::dyn_cast<clang::TagDecl>(decl);
-        if (!tagDecl) {
-            return makePathIncludeForUsd(decl) != "";
-        }
-        
-        for (clang::QualType qualType : ASTHelpers::allRecursiveTypesInTag(tagDecl)) {
-            if (isEarliestDeclLocFromUsd(qualType->getAsTagDecl())) {
-                if (makePathIncludeForUsd(qualType->getAsTagDecl()) == "") {
-                    return false;
-                }
-            }
-        }
-        
-        return true;
-    }
-    
-    // Finds a TagDecl with the given name, querying the FindNamedDeclsAnalysisPass
-    const clang::TagDecl* findTagDecl(const std::string& typeName) const {
-        return getASTAnalysisRunner().findTagDecl(typeName);
-    }
-    
-    // Finds a NamedDecl with the given name, querying the FindNamedDeclsAnalysisPass
-    const clang::NamedDecl* findNamedDecl(const std::string& name) const {
-        return getASTAnalysisRunner().findNamedDecl(name);
-    }
-    
-    // Finds a Type with the given name, querying the FindNamedDeclsAnalysisPass
-    const clang::Type* findType(const std::string& name) const {
-        return getASTAnalysisRunner().findType(name);
-    }
-    
-    // Finds a FunctionDecl with the given name, querying the FindNamedDeclsAnalysisPass
-    const clang::FunctionDecl* findFunctionDecl(const std::string& signature) const {
-        return getASTAnalysisRunner().findFunctionDecl(signature);
     }
 
     // MARK: Serialization

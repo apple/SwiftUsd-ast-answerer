@@ -88,6 +88,11 @@ std::filesystem::path FileSystemInfo::getSerializedAnalysisPath(const std::strin
     return getOutputFileDirectory() / "analysis" / fileName;
 }
 
+std::filesystem::path FileSystemInfo::getSerializedLinterPath(const std::string &fileName) const {
+    return getOutputFileDirectory() / "linting" / fileName;
+}
+
+
 std::filesystem::path FileSystemInfo::getGeneratedCodeDirectory() const {
     return getOutputFileDirectory() / "codeGen";
 }

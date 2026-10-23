@@ -21,6 +21,8 @@
 #include "ASTAnalysisPass.h"
 #include <fstream>
 
+// MARK: Static members
+
 clang::QualType ASTHelpers::removingRefConst(clang::QualType orig) {
     clang::QualType result = orig;
     
@@ -515,4 +517,203 @@ bool ASTHelpers::DeclComparator::operator ()(const clang::Decl* lhs, const clang
     } else {
         return lhsSourceLoc < rhsSourceLoc;
     }
+}
+
+
+// MARK: Instance members
+
+std::string ASTHelpers::makePathRelativeForUsd(const std::string& p) const {
+    const FileSystemInfo& f = getFileSystemInfo();
+    std::vector<std::string> prefixes = {
+        f.usdSourceRepoPath.string(),
+        f.usdInstalledHeaderPath.string(),
+    };
+    
+    for (const auto& prefix : prefixes) {
+        if (p.starts_with(prefix)) {
+            return p.substr(prefix.size() + 1);
+        }
+    }
+        
+    return "";
+}
+
+std::string ASTHelpers::makePathIncludeForUsd(const std::string& p) const {
+    static std::vector<std::filesystem::path> publicHeaders = getFileSystemInfo().getListOfPublicHeaders();
+    for (const auto& h : publicHeaders) {
+        if (h.string() == p) {
+            return makePathRelativeForUsd(p);
+        }
+    }
+    
+    return "";
+}
+
+// Given `TfRefPtr<UsdStage>`, returns `pxr/base/tf/refPtr.h`,
+// given `shared_ptr<HdTask>`, returns a stl header for `<memory.h>`.
+// Compare with latestDeclLocFilePath.
+std::string ASTHelpers::earliestDeclLocFilePath(const clang::Decl* decl) const {
+    if (!decl) { return ""; }
+    
+    const clang::SourceManager& sourceManager = decl->getASTContext().getSourceManager();
+    // Using getExpansionLoc is _very_ important, because we care about where a macro expands to,
+    // and "expansion locations represent where the location is in the user's view"
+    clang::SourceLocation spellingLoc = sourceManager.getExpansionLoc(decl->getLocation());
+    
+    std::string filePath = sourceManager.getFilename(spellingLoc).str();
+    return filePath;
+}
+
+// Given `TfRefPtr<UsdStage>`, returns `pxr/usd/usd/stage.h`,
+// given `shared_ptr<HdTask>`, returns `pxr/imaging/hd/task.h`.
+// Compare with earliestDeclLocFilePath.
+std::string ASTHelpers::latestDeclLocFilePath(const clang::Decl* decl) const {
+    if (!decl) { return ""; }
+    
+    const clang::SourceManager& sourceManager = decl->getASTContext().getSourceManager();
+    clang::SourceLocation loc = ASTHelpers::getLatestSourceLocation(decl);
+    std::string filePath = sourceManager.getFilename(loc).str();
+    
+    return filePath;
+}
+
+std::string ASTHelpers::stmtFilePath(const clang::Stmt* stmt) const {
+    if (!stmt) { return ""; }
+    
+    const clang::SourceManager& sourceManager = *getASTAnalysisRunner().getSourceManager();
+    clang::SourceLocation loc = stmt->getBeginLoc();
+    loc = sourceManager.getExpansionLoc(loc);
+    std::string filePath = sourceManager.getFilename(loc).str();
+    
+    return filePath;
+}
+
+unsigned ASTHelpers::expansionLineNumber(const clang::Decl* decl) const {
+    if (!decl) { return 0; }
+    
+    const clang::SourceManager& sourceManager = decl->getASTContext().getSourceManager();
+    clang::SourceLocation loc = ASTHelpers::getLatestSourceLocation(decl);
+    unsigned lineNumber = sourceManager.getExpansionLineNumber(loc);
+    
+    return lineNumber;
+}
+
+unsigned ASTHelpers::expansionLineNumber(const clang::Stmt* stmt) const {
+    if (!stmt) { return 0; }
+    
+    const clang::SourceManager& sourceManager = *getASTAnalysisRunner().getSourceManager();
+    clang::SourceLocation loc = stmt->getBeginLoc();
+    unsigned lineNumber = sourceManager.getExpansionLineNumber(loc);
+    
+    return lineNumber;
+}
+
+
+std::string ASTHelpers::headerPathForUsdType(const clang::Decl* decl) const {
+    return makePathRelativeForUsd(latestDeclLocFilePath(decl));
+}
+
+std::string ASTHelpers::makePathIncludeForUsd(const clang::Decl* decl) const {
+    return makePathIncludeForUsd(latestDeclLocFilePath(decl));
+}
+
+bool ASTHelpers::isEarliestDeclLocFromUsd(const clang::Decl* decl) const {
+    return makePathRelativeForUsd(earliestDeclLocFilePath(decl)) != "";
+}
+
+std::string ASTHelpers::getUsdLibraryForDecl(const clang::Decl* decl) const {
+    std::string relative = makePathRelativeForUsd(latestDeclLocFilePath(decl));
+    if (relative == "") {
+        return "";
+    }
+    
+    // pxr/foo/result/bar.h
+    std::vector<std::string> components = splitStringByRegex(relative, std::regex("/"));
+    if (components.size() < 3) { return ""; }
+    return components[2];
+}
+
+bool ASTHelpers::isFromUsdLibrary(const clang::Decl* decl, std::string lib) const {
+    return lib == getUsdLibraryForDecl(decl);
+}
+
+bool ASTHelpers::isFromUsdLibraryStrictlyBefore(const clang::Decl* decl, std::string lib) const {
+    std::string declLib = getUsdLibraryForDecl(decl);
+    
+    if (lib == declLib) {
+        // Same library isn't strictly before
+        return false;
+    }
+    
+    std::vector<std::string> allLibs = getASTAnalysisRunner().getDriver()->getCMakeParser()->getNamesOfPxrLibraries();
+    for (const auto& someLib : allLibs) {
+        if (someLib == declLib) {
+            // Got to the decl's lib before the argument lib
+            return true;
+        }
+        if (someLib == lib) {
+            // Got to the argument lib before the decl's lib
+            return false;
+        }
+    }
+    
+    std::cout << "WARNING: '" << lib << "' not contained in CMakeParser.getNamesOfPxrLibraries()" << std::endl;
+    return false;
+}
+
+bool ASTHelpers::doesTypeContainUsdTypes(const clang::TypeDecl* typeDecl) const {
+    if (!typeDecl) {
+        return false;
+    }
+    if (isEarliestDeclLocFromUsd(typeDecl)) {
+        return true;
+    }
+    const clang::TagDecl* tagDecl = clang::dyn_cast<clang::TagDecl>(typeDecl);
+    if (!tagDecl) {
+        return false;
+    }
+    
+    for (clang::QualType qualType : ASTHelpers::allRecursiveTypesInTag(tagDecl)) {
+        if (isEarliestDeclLocFromUsd(qualType->getAsTagDecl())) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool ASTHelpers::areAllUsdDeclsFromPublicHeaders(const clang::Decl* decl) const {
+    const clang::TagDecl* tagDecl = clang::dyn_cast<clang::TagDecl>(decl);
+    if (!tagDecl) {
+        return makePathIncludeForUsd(decl) != "";
+    }
+    
+    for (clang::QualType qualType : ASTHelpers::allRecursiveTypesInTag(tagDecl)) {
+        if (isEarliestDeclLocFromUsd(qualType->getAsTagDecl())) {
+            if (makePathIncludeForUsd(qualType->getAsTagDecl()) == "") {
+                return false;
+            }
+        }
+    }
+    
+    return true;
+}
+
+// Finds a TagDecl with the given name, querying the FindNamedDeclsAnalysisPass
+const clang::TagDecl* ASTHelpers::findTagDecl(const std::string& typeName) const {
+    return getASTAnalysisRunner().findTagDecl(typeName);
+}
+
+// Finds a NamedDecl with the given name, querying the FindNamedDeclsAnalysisPass
+const clang::NamedDecl* ASTHelpers::findNamedDecl(const std::string& name) const {
+    return getASTAnalysisRunner().findNamedDecl(name);
+}
+
+// Finds a Type with the given name, querying the FindNamedDeclsAnalysisPass
+const clang::Type* ASTHelpers::findType(const std::string& name) const {
+    return getASTAnalysisRunner().findType(name);
+}
+
+// Finds a FunctionDecl with the given name, querying the FindNamedDeclsAnalysisPass
+const clang::FunctionDecl* ASTHelpers::findFunctionDecl(const std::string& signature) const {
+    return getASTAnalysisRunner().findFunctionDecl(signature);
 }
