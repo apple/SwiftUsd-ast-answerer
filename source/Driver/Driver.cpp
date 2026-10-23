@@ -23,6 +23,7 @@
 #include "Util/CMakeParser.h"
 #include "Util/ClangToolHelper.h"
 #include "AnalysisPass/ASTAnalysisRunner.h"
+#include "Linting/LinterRunner.h"
 #include "CodeGen/CodeGenRunner.h"
 #include "Util/Graph.h"
 
@@ -36,7 +37,9 @@ Driver::Driver(int argc, const char** argv) {
         __builtin_trap();
     }
     _astAnalysisRunner = std::make_unique<ASTAnalysisRunner>(this);
+    _linterRunner = std::make_unique<LinterRunner>(this);
     _codeGenRunner = std::make_unique<CodeGenRunner>(this);
+    _linterRunner->dumpLintingOutputs();
 }
 
 Driver::~Driver() {
@@ -56,6 +59,9 @@ const ClangToolHelper* Driver::getClangToolHelper() const {
 }
 const ASTAnalysisRunner* Driver::getASTAnalysisRunner() const {
     return _astAnalysisRunner.get();
+}
+const LinterRunner* Driver::getLinterRunner() const {
+    return _linterRunner.get();
 }
 const CodeGenRunner* Driver::getCodeGenRunner() const {
     return _codeGenRunner.get();

@@ -55,6 +55,7 @@ public:
     std::filesystem::path getOutputFileDirectory() const;
     std::filesystem::path getSerializedASTPath() const;
     std::filesystem::path getSerializedAnalysisPath(const std::string& fileName) const;
+    std::filesystem::path getSerializedLinterPath(const std::string& fileName) const;
     std::filesystem::path getGeneratedCodeDirectory() const;
     
 private:

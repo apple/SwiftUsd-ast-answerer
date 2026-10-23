@@ -1,0 +1,87 @@
+allow; pxr/base/tf/safeTypeCompare.h; 24;
+
+
+deny; pxr/base/tf/type.cpp; 150;
+
+deny; pxr/base/gf/traits.cpp; 27;
+deny; pxr/base/gf/traits.cpp; 28;
+
+deny; pxr/base/vt/value.cpp; 342;
+deny; pxr/base/vt/valueComposeOver.cpp; 38;
+deny; pxr/base/vt/valueRef.cpp; 62;
+
+deny; pxr/usd/sdf/crateFile.cpp; 4294;
+deny; pxr/usd/sdf/layer.cpp; 1393;
+deny; pxr/usd/sdf/layer.cpp; 1474;
+deny; pxr/usd/sdf/propertySpec.cpp; 214;
+
+
+
+deny; pxr/usd/usd/interpolators.cpp; 120;
+deny; pxr/usd/usd/clipSet.cpp; 918;
+
+deny; pxr/exec/vdf/executionTypeRegistry.h; 222;
+deny; pxr/exec/vdf/executionTypeRegistry.h; 241;
+
+deny; pxr/imaging/hdSt/materialNetworkShader.cpp; 237;
+deny; pxr/imaging/hdSt/primUtils.cpp; 778;
+
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 25;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 27;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 29;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 30;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 31;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 32;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 34;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 36;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 38;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 41;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 42;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 43;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 44;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 45;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 47;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 48;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 49;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 50;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 51;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 53;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 54;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 55;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 56;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 57;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 58;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 59;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 60;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 67;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 68;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 69;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 70;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 71;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 72;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 73;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 74;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 75;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 76;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 77;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 78;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 79;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 80;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 81;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 82;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 83;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 84;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 85;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 86;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 87;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 89;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 90;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 91;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 93;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 94;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 95;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 102;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 103;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 104;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 105;
+// deny; pxr/usd/plugin/usdDraco/attributeFactory.cpp; 106;

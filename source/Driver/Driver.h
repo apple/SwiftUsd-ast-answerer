@@ -27,6 +27,7 @@ struct FileSystemInfo;
 class CMakeParser;
 class ClangToolHelper;
 class ASTAnalysisRunner;
+class LinterRunner;
 class CodeGenRunner;
 
 // Driver is the overall coordinator for the project. It gets passed around
@@ -41,6 +42,7 @@ public:
     const CMakeParser* getCMakeParser() const;
     const ClangToolHelper* getClangToolHelper() const;
     const ASTAnalysisRunner* getASTAnalysisRunner() const;
+    const LinterRunner* getLinterRunner() const;
     const CodeGenRunner* getCodeGenRunner() const;
     
 private:
@@ -49,6 +51,7 @@ private:
     std::unique_ptr<CMakeParser> _cmakeParser;
     std::unique_ptr<ClangToolHelper> _clangToolHelper;
     std::unique_ptr<ASTAnalysisRunner> _astAnalysisRunner;
+    std::unique_ptr<LinterRunner> _linterRunner;
     std::unique_ptr<CodeGenRunner> _codeGenRunner;
 
 };

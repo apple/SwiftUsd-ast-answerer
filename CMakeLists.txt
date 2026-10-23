@@ -180,6 +180,13 @@ set(SOURCES
     source/AnalysisResult/APINotesAnalysisResult.h
     source/AnalysisResult/APINotesAnalysisResult.cpp
 
+    source/Linting/LinterRunner.h
+    source/Linting/LinterRunner.cpp
+    source/Linting/LinterBase.h
+    source/Linting/LinterBase.cpp
+    source/Linting/StdTypeInfoEqualsEqualsLinter.h
+    source/Linting/StdTypeInfoEqualsEqualsLinter.cpp
+
     source/CodeGen/CodeGenRunner.h
     source/CodeGen/CodeGenRunner.cpp
     source/CodeGen/CodeGenBase.h
@@ -249,6 +256,8 @@ set(RESOURCES
     resources/testFindSendableDependencies.txt
     resources/testSendable.txt
     resources/testAPINotes.txt
+
+    resources/testStdTypeInfoEqualsEqualsLinter.txt
 )
 
 # Add the resources as part of the executable, so we can do
@@ -266,6 +275,7 @@ source_group("Util" REGULAR_EXPRESSION "source/Util/.*")
 source_group("Driver" REGULAR_EXPRESSION "source/Driver/.*")
 source_group("AnalysisPass" REGULAR_EXPRESSION "source/AnalysisPass/.*")
 source_group("AnalysisResult" REGULAR_EXPRESSION "source/AnalysisResult/.*")
+source_group("Linting" REGULAR_EXPRESSION "source/Linting/.*")
 source_group("CodeGen" REGULAR_EXPRESSION "source/CodeGen/.*")
 target_include_directories(ast-answerer PUBLIC "source")
 
